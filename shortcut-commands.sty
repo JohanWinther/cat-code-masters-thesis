@@ -1,0 +1,35 @@
+\ProvidesPackage{shortcut-commands}[2019/04/11 v1.0 My own macros]
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\newcommand{\Ham}{\mathcal{H}}
+
+
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+
+\newcommand{\ex}{\mathrm{e}}
+\newcommand{\cat}[2][\phantom{i}]{\ket{C^{#2}_{#1\alpha}}}
+
+\newcommand{\au}{\hat{a}^\dagger}
+\newcommand{\ad}{\hat{a}}
+
+\newcommand{\bu}{\hat{b}^\dagger}
+\newcommand{\bd}{\hat{b}}
+\newcommand{\optimization}{optimisation}
+\newcommand{\optimize}{optimise}
+
+\newcommand{\tikzfig}[5]{
+\begin{figure}[!h]
+\centering
+	\setlength\figureheight{#5}
+	\setlength\figurewidth{#4}
+	\input{#1.tikz}
+    \caption{#2}
+    \label{#3}
+\end{figure}
+}
