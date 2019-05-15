@@ -1,23 +1,37 @@
-% Sample file on how to use subfiles.
 \documentclass[main.tex]{subfiles}
-
 \begin{document}
 
 \chapter{Method}
 In this chapter Krotov's method will be briefly introduced along with an implementation in Python. Then the numerical experiments will be presented.
 
+
+
 \section{Krotov's Method for quantum optimal control}
-Krotov's method 
+Krotov's method fundamentally relies on the variational principle to \minimize{} a functional \(J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}]\) where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}. A detailed explanation of this functional when the method is applied to quantum systems can be found in \cite{reich_monotonically_2012}. 
 
 \section{Krotov: the Python package}
 A Python implementation of the Krotov package is available at \url{https://krotov.readthedocs.io/en/latest/}. It provides simple functions and objects to
 Test
 
-\section{Experiments}
-\subsection{Dynamics simulation of a qubit evolution}
+\section{Optimisation Experiments}
+In this chapter the numerical optimisation experiments are presented and motivated.
 
-\subsection{Ground state to excited state transfer optimisation}
-\subsection{Dynamics simulation of a coupled resonator and qubit}
-\subsection{Qubit to cat code transfer}
+Optimisation will realise state transfers
+
+4 gigasamples/s
+
+Amplitude constraint (with pi pulse calibration)
+
+Guess pulses half amplitude (actually blackman pulses)
+
+convergence criteria
+fidelity \(F\)
+change between iterations falls below a certain critera \(\Delta F\)
+
+\subsection{\texorpdfstring{\boldmath\(\ket{0}\rightarrow\ket{1}\)}{0 -> 1} state transfer}
+Pulse shapes were optimised with varying lengths from \SI{4.25}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-07}\). Step size \(\lambda = \frac{1}{\frac{1}{2}A_{m}}\)
+
+\subsection{\texorpdfstring{\boldmath\(\ket{0}\rightarrow\ket{2}\)}{0 -> 2} state transfer}
+Pulse shapes were optimised with varying lengths from \SI{22}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-09}\). Step size \(\lambda = \frac{1}{2A_{m}}\)
 
 \end{document}

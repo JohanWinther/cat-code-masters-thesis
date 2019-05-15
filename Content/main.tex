@@ -40,12 +40,13 @@
 
 % Read the manuals for the respective package to see the usage;
 \usepackage{physics}
+\usepackage{cleveref}
 %\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 \usepackage{booktabs} % High quality tables.
-%\usepackage{siunitx} % For all your numerical values and units.
+\usepackage{siunitx} % For all your numerical values and units.
 \usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
 \pgfplotsset{compat=newest} 
 \pgfplotsset{plot coordinates/math parser=false}
@@ -72,12 +73,14 @@
 \coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cat_state_funny}}
 \covercaption{Some explanation}
 
-\firstabstract{\lipsum}
-\secondabstract{swedish}{\lipsum} % Optional
+\firstabstract{}
+\secondabstract{swedish}{} % Optional
 \keywords{quantum computing, quantum optimal control, cat state, cat code}
 
-\preface{\lipsum} % You can use \input to put preface and acknowledgements in another document
-\acknowledgements{\lipsum}
+\preface{} % You can use \input to put preface and acknowledgements in another document
+\acknowledgements{
+
+}
 
 % You can add extra contents such as abbreviations and nomenclature using.
 % Use \presectiontitle to render add titles to new sections.

@@ -1,18 +1,13 @@
-% Sample file on how to use subfiles.
 \documentclass[main.tex]{subfiles}
-
 \begin{document}
 
 \chapter{Introduction}
-Quantum computing has prospects
+Quantum computing is starting to appear in commercial products \cite{santos_ibm_2016}, however, despite a lot of progress \cite{preskill_quantum_2018}, there are still a lot of challenges to be solved before large scale quantum computers become commonplace. Main problem is noise and keeping quantum states. Unlike classical computers which has natural error correction due to the number of particles (electrons), quantum computers rely on single or very few number of particles which make the states very delicate \cite{gottesman_introduction_2009}.
 
-Limited by noise, QEC is important
-
-A promising QEC method is to use cat codes in resonators
-
+One of the key technologies for quantum computing is quantum error correction (QEC) \cite{gottesman_introduction_2009} which is a way to retain the quantum information in a qubit by introducing redundancy into the physical system. \citeauthor{leghtas_hardware-efficient_2013} \cite{leghtas_hardware-efficient_2013}, \citeauthor{mirrahimi_dynamically_2014} \cite{mirrahimi_dynamically_2014} propose and \citeauthor{ofek_extending_2016} \cite{ofek_extending_2016} demonstrate a method to encode the quantum information in a clever basis in quantum harmonic resonators. To further clarify, in this scheme the quantum information of a qubit is carefully encoded and decoded into a resonator by applying optimised microwave pulses to the qubit and resonator system which will realise state transfers in both these systems. This thesis will focus on how to numerically optimise encoding and decoding pulses using Krotov's method \cite{reich_monotonically_2012}, a gradient ascent based optimisation algorithm available publicly as a ready-to-use Python package \cite{goerz_krotov:_2019}.
 
 \section{Purpose}
-The purpose of this thesis is to ... quantum optimal control using Krotov's method and
+The purpose of this thesis is to numerically optimise microwave pulses to transfer the quantum information in a qubit to a resonator. This will be done using the Krotov Python package \cite{goerz_krotov:_2019}. 
 
 
 \section{Limitations of the thesis}

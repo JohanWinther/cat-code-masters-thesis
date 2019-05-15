@@ -1,23 +1,22 @@
 \documentclass[main.tex]{subfiles}
-
 \begin{document}
 
 \chapter{Theory}
 In this chapter the theoretic concepts will be explained.
-\section{Quantum computing(?)}
 
-\section{Qubits, resonators and three level lambda systems}
-Qubits are the fundamental building blocks of a quantum computer
+\section{Superconducting resonators}
+Superconducting resonators are used in quantum computing both as the basis for qubits and as readout and control components \cite{}. Although ideal resonators have equally spaced energy levels, in reality they are more or less anharmonic and the general Hamiltonian for a quantum anharmonic resonator is
+\begin{equation}
+    \Ham = \omega \au\ad - \frac{\kappa}{2} \qty(\au\ad)^2
+    \label{eq:resonator-hamiltonian}
+\end{equation}
+where \(\omega\) is the resonance frequency, \(\kappa\) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
 
-They are an abstraction
+The anharmonicity can be visualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \(\kappa\) with \(\omega=1\). A larger anharmonicity gives larger energy spacing for higher excitation states.
 
-Physical realisation span from trapped ions to superconducting circuits
+\tikzfig{../figs/energy-anharmonic}{The energy levels of a resonator for anharmonicity \(\kappa\in[0,1]\).}{fig:anharmonic-energies}{25em}{17em}
 
-Anharmonic resonator
-
-Hamiltonian
-
-Graphic of three level system energies
+\section{Jaynes-Cummings Model}
 
 
 \section{Bosonic codes}
@@ -27,18 +26,14 @@ Graphic of three level system energies
 
 
 
-\section{Rotating frame}
-
-
-
-\section{Quantum optimal control}
-Quantum optimal control is the process of controlling a quantum system
-
-Given a Hamiltonian
+\section{Quantum control}
+Quantum control is the process of controlling a quantum system by controlling the amplitude of a set of control operators in time \cite{fisher_optimal_2010}. Such a system can be described \cite{fisher_optimal_2010} by a Hamiltonian of the following form
 \begin{equation}
-    \Ham(t) = \underbrace{\Ham_d}_{\text{Drift}} + \underbrace{u_0(t)\Ham_0 + \dotsc + u_N(t)\Ham_N}_{\text{Control}}
+    \Ham(t) = \underbrace{\Ham_d}_{\text{Drift}} + \underbrace{u_0(t)\Ham_0 + \dotsc + u_N(t)\Ham_N}_{\text{Control}}.
 \end{equation}
+The controls are usually electromagnetic pulses changing in time and thus will be referred to as ''pulse shapes'' in this thesis \cite{fisher_optimal_2010}.
 
-\tikzfig{figures/test}{hej}{fig:test}{\textwidth}{1em}
+There are two main questions in quantum control: one of \emph{controllability} and one of \emph{optimal control} where the first deals with the \emph{existence} of solutions given the Hamiltonian and the second with the \emph{optimised} solutions for the pulse shapes \(\qty{u_i(t)}\) \autocite{dalessandro_introduction_2007}. The optimal solutions are generally not analytically solvable and thus the pulse shapes need to be discretised in time  and numerically optimised using algorithms. The algorithm used for this thesis will be presented in the Method chapter.
+
 
 \end{document}
