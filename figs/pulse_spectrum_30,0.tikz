@@ -6,11 +6,13 @@
 \definecolor{color2}{rgb}{0.172549019607843,0.627450980392157,0.172549019607843}
 
 \begin{axis}[
+height=\figureheight,
 legend cell align={left},
 legend style={draw=white!80.0!black},
 tick align=outside,
 tick pos=left,
 title={Spectrum of pulse (lab frame)},
+width=\figurewidth,
 x grid style={white!69.01960784313725!black},
 xlabel={f (GHz)},
 xmin=5.0252, xmax=7.5378,
