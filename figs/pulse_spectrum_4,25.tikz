@@ -1,0 +1,60 @@
+% This file was created by matplotlib2tikz v0.7.4.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+\definecolor{color1}{rgb}{1,0.498039215686275,0.0549019607843137}
+\definecolor{color2}{rgb}{0.172549019607843,0.627450980392157,0.172549019607843}
+
+\begin{axis}[
+height=\figureheight,
+legend cell align={left},
+legend style={draw=white!80.0!black},
+tick align=outside,
+tick pos=left,
+title={Spectrum of pulse (lab frame)},
+width=\figurewidth,
+x grid style={white!69.01960784313725!black},
+xlabel={f (GHz)},
+xmin=5.0252, xmax=7.5378,
+xtick style={color=black},
+y grid style={white!69.01960784313725!black},
+ymin=-0.00549078409270134, ymax=0.11855001775982,
+ytick style={color=black}
+]
+\addplot [semithick, color0]
+table {%
+5.17647058823529 0.000582451615991364
+5.41176470588235 0.00137368976143375
+5.64705882352941 0.00206347595419937
+5.88235294117647 0.0132634641027186
+6.11764705882353 0.0493954799526463
+6.35294117647059 0.112911799493796
+6.58823529411765 0.0529271454806319
+6.82352941176471 0.00667144558666703
+7.05882352941176 0.00218491978020385
+7.29411764705882 0.000459467528266039
+7.52941176470588 0.000147434173322353
+7.76470588235294 0.000147527647307735
+};
+\addlegendentry{Spec.}
+\addplot [color0, dashed]
+table {%
+6.2815 -0.00549078409270133
+6.2815 0.11855001775982
+};
+\addlegendentry{$\omega_{01}$}
+\addplot [color1, dashed]
+table {%
+5.9845 -0.00549078409270133
+5.9845 0.11855001775982
+};
+\addlegendentry{$\omega_{12}$}
+\addplot [color2, dashed]
+table {%
+6.133 -0.00549078409270133
+6.133 0.11855001775982
+};
+\addlegendentry{$\omega_{02}$}
+\end{axis}
+
+\end{tikzpicture}
