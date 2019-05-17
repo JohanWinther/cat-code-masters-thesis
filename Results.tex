@@ -8,12 +8,113 @@ Graph of final fidelities
 
 The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above while dropping 
 
+\tikzfig{figs/fidelity-length-ge}{Text}{fig:fidelity-length-ge}{15em}{15em}
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figs/3d-optim-ge.png}
     \caption{Caption}
     \label{fig:3d-optim-ge}
 \end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{10em}
+		\setlength\figurewidth{0.45\textwidth}
+		\input{figs/pulse_shape_\n_Real.tikz}
+		\input{figs/pulse_shape_\n_Imag.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Pulse shapes.}
+\label{fig:pulse_shape}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{10em}
+		\setlength\figurewidth{0.47\textwidth}
+		\input{figs/pulse_spectrum_\n.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Pulse spectrum}
+\label{fig:pulse_spectrum}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{15em}
+		\setlength\figurewidth{0.47\textwidth}
+		\input{figs/qubit_occ_\n.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Energy level occupation over time for different lengths of optimised pulses.}
+\label{fig:qubit_occupation}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{0.30\textwidth}
+		\setlength\figurewidth{0.30\textwidth}
+		\input{figs/hinton_\n.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Hinton diagram of density matrix of $\ket{\psi_\text{tar}}\bra{\psi(T)}$}
+\label{fig:hinton}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_\n.png}}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
+\label{fig:bloch_evolution}
+\end{figure}
+
+
+\section{0 to 2 transfer}
+
+\tikzfig{figs/fidelity-length-gf}{Text}{fig:fidelity-length-gf}{15em}{15em}
 
 \begin{figure}
     \centering
@@ -22,73 +123,100 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
     \label{fig:3d-optim-gf}
 \end{figure}
 
-\tikzfig{figs/fidelity-length-ge}{Text}{fig:fidelity-length-ge}{15em}{15em}
-\tikzfig{figs/fidelity-length-gf}{Text}{fig:fidelity-length-gf}{15em}{15em}
 
-\tikzfig{figs/pulse_shape_4,25_Real}{Text}{fig:pulse_shape_4,25_Real}{\textwidth}{15em}
-\tikzfig{figs/pulse_shape_4,25_Imag}{Text}{fig:pulse_shape_4,25_Real}{\textwidth}{15em}
-
-
-
-\tikzfig{figs/pulse_shape_30,0_Real}{Text}{fig:pulse_shape_30,0_Real}{\textwidth}{15em}
-\tikzfig{figs/pulse_shape_30,0_Imag}{Text}{fig:pulse_shape_30,0_Real}{\textwidth}{15em}
-
-
-\tikzfig{figs/pulse_spectrum_30,0}{Text}{fig:fidelity-length}{25em}{15em}
-\tikzfig{figs/pulse_spectrum_30,0}{Text}{fig:pulse_spectrum_30,0}{25em}{15em}
-
-\begin{figure}
+\begin{figure}[ht]
 \centering
-\foreach \n/\capn in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{9,0}/{9.0},{10,0}/{10.0},{30,0}/{30.0}}{
+\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{
 		\centering
-		\setlength\figureheight{15em}
-		\setlength\figurewidth{0.47\textwidth}
-		\input{figs/pulse_spectrum_\n.tikz}
+		\setlength\figureheight{10em}
+		\setlength\figurewidth{0.45\textwidth}
+		\input{figs/pulse_shape_gf_\n_Real.tikz}
+		\input{figs/pulse_shape_gf_\n_Imag.tikz}
 	}%
-	\hfill
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
 }
-\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
-\label{fig:pulse_spectrum}
+\caption{Pulse shapes.}
+\label{fig:pulse_shape_gf}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
-\foreach \n/\capn in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{9,0}/{9.0},{10,0}/{10.0},{30,0}/{30.0}}{
-	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_\n.png}}%
-	\hfill
-}
-\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
-\label{fig:bloch_evolution}
-\end{figure}
-
-\section{0 to 2 transfer}
-
-\begin{figure}
-\centering
-\foreach \n/\capn in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
+\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{
 		\centering
-		\setlength\figureheight{15em}
+		\setlength\figureheight{10em}
 		\setlength\figurewidth{0.47\textwidth}
 		\input{figs/pulse_spectrum_gf_\n.tikz}
 	}%
-	\hfill
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
 }
-\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
-\label{fig:pulse_spectrum}
+\caption{Pulse spectrum}
+\label{fig:pulse_spectrum_gf}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
-\foreach \n/\capn in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
-	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_gf_\n.png}}%
-	\hfill
+\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{15em}
+		\setlength\figurewidth{0.45\textwidth}
+		\input{figs/qubit_occ_gf_\n.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
 }
-\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
-\label{fig:bloch_evolution}
+\caption{Energy level occupation over time for different lengths of optimised pulses.}
+\label{fig:qubit_occupation_gf}
 \end{figure}
+
+\begin{figure}[ht]
+\centering
+\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
+	\subcaptionbox{Pulse length \capn{} ns}{
+		\centering
+		\setlength\figureheight{0.30\textwidth}
+		\setlength\figurewidth{0.30\textwidth}
+		\input{figs/hinton_gf_\n.tikz}
+	}%
+	\ifnum\ni=6%
+	        %
+	\else%
+		\hfill
+	\fi%
+}
+\caption{Hinton diagram of density matrix of $\ket{\psi_\text{tar}}\bra{\psi(T)}$}
+\label{fig:hinton_gf}
+\end{figure}
+
+
+%\begin{figure}[ht]
+%\centering
+%\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
+%	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_gf_\n.png}}%
+%	\ifnum\ni=6%
+%	        %
+%	\else%
+%		\hfill
+%	\fi%
+%}
+%\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
+%\label{fig:bloch_evolution}
+%\end{figure}
+
 
 \end{document}
