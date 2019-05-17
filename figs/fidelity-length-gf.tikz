@@ -2,12 +2,14 @@
 \begin{tikzpicture}
 
 \begin{axis}[
+height=\figureheight,
+width=\figurewidth,
 legend cell align={left},
 legend style={at={(0.03,0.03)}, anchor=south west, draw=white!80.0!black},
 tick align=outside,
 tick pos=left,
 x grid style={white!69.01960784313725!black},
-xlabel={Pulse length},
+xlabel={Pulse length (ns)},
 xmin=20.35, xmax=56.65,
 xtick style={color=black},
 y grid style={white!69.01960784313725!black},
@@ -81,6 +83,10 @@ table {%
 32 0.999990152339072
 31 0.999990082211694
 30 0.999990057544491
+};
+\addlegendentry{Last iter.}
+\addplot [semithick, black, mark=star, mark size=1, mark options={solid}, only marks]
+table {%
 29 0.999572139321342
 28 0.994390040776526
 27 0.982180936647693
@@ -90,7 +96,7 @@ table {%
 23 0.85178286817075
 22 0.804944020497381
 };
-\addlegendentry{Last iter.}
+\addlegendentry{Last iter. with fid. goal reached}
 \end{axis}
 
 \end{tikzpicture}
