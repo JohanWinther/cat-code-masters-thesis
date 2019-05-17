@@ -25,3 +25,4 @@
 *.out
 *.synctex.gz
 *.synctex(busy)
+*.auxlock
