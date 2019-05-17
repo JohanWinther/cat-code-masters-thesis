@@ -2,8 +2,8 @@
 \begin{tikzpicture}
 
 \definecolor{color0}{rgb}{0.965705497885429,0.967243367935409,0.968089196462899}
-\definecolor{color1}{rgb}{0.127258746635909,0.395847750865052,0.668742791234141}
-\definecolor{color2}{rgb}{0.969088811995386,0.966474432910419,0.964936562860438}
+\definecolor{color1}{rgb}{0.969088811995386,0.966474432910419,0.964936562860438}
+\definecolor{color2}{rgb}{0.127258746635909,0.395847750865052,0.668742791234141}
 
 \begin{axis}[
 height=\figureheight,
@@ -29,19 +29,22 @@ yticklabels={\(\displaystyle \langle2|\),\(\displaystyle \langle1|\),\(\displays
 --(axis cs:0,3)
 --cycle;
 \path [draw=color0, fill=color0]
-(axis cs:0.5,2.5)
---(axis cs:0.5,2.5)
---(axis cs:0.5,2.5)
+(axis cs:0.498816024518188,2.49881602451819)
+--(axis cs:0.501183975481812,2.49881602451819)
+--(axis cs:0.501183975481812,2.50118397548181)
+--(axis cs:0.498816024518188,2.50118397548181)
 --cycle;
 \path [draw=color0, fill=color0]
-(axis cs:0.5,1.5)
---(axis cs:0.5,1.5)
---(axis cs:0.5,1.5)
+(axis cs:0.476989351764778,1.47698935176478)
+--(axis cs:0.523010648235222,1.47698935176478)
+--(axis cs:0.523010648235222,1.52301064823522)
+--(axis cs:0.476989351764778,1.52301064823522)
 --cycle;
-\path [draw=color0, fill=color0]
-(axis cs:0.5,0.5)
---(axis cs:0.5,0.5)
---(axis cs:0.5,0.5)
+\path [draw=color1, fill=color1]
+(axis cs:0.499743253652106,0.499743253652106)
+--(axis cs:0.500256746347894,0.499743253652106)
+--(axis cs:0.500256746347894,0.500256746347894)
+--(axis cs:0.499743253652106,0.500256746347894)
 --cycle;
 \path [draw=color0, fill=color0]
 (axis cs:1.47698935176478,2.47698935176478)
@@ -49,32 +52,35 @@ yticklabels={\(\displaystyle \langle2|\),\(\displaystyle \langle1|\),\(\displays
 --(axis cs:1.52301064823522,2.52301064823522)
 --(axis cs:1.47698935176478,2.52301064823522)
 --cycle;
-\path [draw=color1, fill=color1]
+\path [draw=color2, fill=color2]
 (axis cs:1.05278640450004,1.05278640450004)
 --(axis cs:1.94721359549996,1.05278640450004)
 --(axis cs:1.94721359549996,1.94721359549996)
 --(axis cs:1.05278640450004,1.94721359549996)
 --cycle;
-\path [draw=color2, fill=color2]
+\path [draw=color1, fill=color1]
 (axis cs:1.49501011635138,0.495010116351379)
 --(axis cs:1.50498988364862,0.495010116351379)
 --(axis cs:1.50498988364862,0.504989883648621)
 --(axis cs:1.49501011635138,0.504989883648621)
 --cycle;
-\path [draw=color0, fill=color0]
-(axis cs:2.5,2.5)
---(axis cs:2.5,2.5)
---(axis cs:2.5,2.5)
+\path [draw=color1, fill=color1]
+(axis cs:2.49974325365211,2.49974325365211)
+--(axis cs:2.50025674634789,2.49974325365211)
+--(axis cs:2.50025674634789,2.50025674634789)
+--(axis cs:2.49974325365211,2.50025674634789)
+--cycle;
+\path [draw=color1, fill=color1]
+(axis cs:2.49501011635138,1.49501011635138)
+--(axis cs:2.50498988364862,1.49501011635138)
+--(axis cs:2.50498988364862,1.50498988364862)
+--(axis cs:2.49501011635138,1.50498988364862)
 --cycle;
 \path [draw=color0, fill=color0]
-(axis cs:2.5,1.5)
---(axis cs:2.5,1.5)
---(axis cs:2.5,1.5)
---cycle;
-\path [draw=color0, fill=color0]
-(axis cs:2.5,0.5)
---(axis cs:2.5,0.5)
---(axis cs:2.5,0.5)
+(axis cs:2.49994432428022,0.499944324280216)
+--(axis cs:2.50005567571978,0.499944324280216)
+--(axis cs:2.50005567571978,0.500055675719784)
+--(axis cs:2.49994432428022,0.500055675719784)
 --cycle;
 \end{axis}
 
