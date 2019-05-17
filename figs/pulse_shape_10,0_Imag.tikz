@@ -16,7 +16,7 @@ xlabel={Time (ns)},
 xmin=-0.5, xmax=10.5,
 xtick style={color=black},
 y grid style={white!69.01960784313725!black},
-ylabel={Re(\(\displaystyle \Omega\))},
+ylabel={Im(\(\displaystyle \Omega\))},
 ymin=-0.218166156499413, ymax=0.218166156499413,
 ytick style={color=black}
 ]

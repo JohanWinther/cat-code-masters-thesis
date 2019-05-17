@@ -11,7 +11,6 @@ legend cell align={left},
 legend style={draw=white!80.0!black},
 tick align=outside,
 tick pos=left,
-title={Spectrum of pulse (lab frame)},
 width=\figurewidth,
 x grid style={white!69.01960784313725!black},
 xlabel={f (GHz)},
@@ -40,25 +39,21 @@ table {%
 7.5 0.000136805313192099
 7.66666666666667 0.000154638715229407
 };
-\addlegendentry{Spec.}
 \addplot [color0, dashed]
 table {%
 6.2815 -0.0064559422175969
 6.2815 0.138584503459761
 };
-\addlegendentry{$\omega_{01}$}
 \addplot [color1, dashed]
 table {%
 5.9845 -0.0064559422175969
 5.9845 0.138584503459761
 };
-\addlegendentry{$\omega_{12}$}
 \addplot [color2, dashed]
 table {%
 6.133 -0.0064559422175969
 6.133 0.138584503459761
 };
-\addlegendentry{$\omega_{02}$}
 \end{axis}
 
 \end{tikzpicture}

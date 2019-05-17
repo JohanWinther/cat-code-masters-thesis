@@ -1,0 +1,82 @@
+% This file was created by matplotlib2tikz v0.7.4.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.965705497885429,0.967243367935409,0.968089196462899}
+\definecolor{color1}{rgb}{0.982006920415225,0.906189926951173,0.86159169550173}
+\definecolor{color2}{rgb}{0.127258746635909,0.395847750865052,0.668742791234141}
+\definecolor{color3}{rgb}{0.0196078431372549,0.188235294117647,0.380392156862745}
+
+\begin{axis}[
+height=\figureheight,
+tick align=outside,
+width=\figurewidth,
+x grid style={white!69.01960784313725!black},
+xmin=-0.15, xmax=3.15,
+xtick pos=right,
+xtick style={color=black},
+xtick={0.5,1.5,2.5,3.5},
+xticklabels={\(\displaystyle |0\rangle\),\(\displaystyle |1\rangle\),\(\displaystyle |2\rangle\),},
+y grid style={white!69.01960784313725!black},
+ymin=-0.15, ymax=3.15,
+ytick pos=left,
+ytick style={color=black},
+ytick={0.5,1.5,2.5,3.5},
+yticklabels={\(\displaystyle \langle2|\),\(\displaystyle \langle1|\),\(\displaystyle \langle0|\),}
+]
+\path [draw=color0, fill=color0]
+(axis cs:0,0)
+--(axis cs:3,0)
+--(axis cs:3,3)
+--(axis cs:0,3)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:0.5,2.5)
+--(axis cs:0.5,2.5)
+--(axis cs:0.5,2.5)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:0.5,1.5)
+--(axis cs:0.5,1.5)
+--(axis cs:0.5,1.5)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:0.5,0.5)
+--(axis cs:0.5,0.5)
+--(axis cs:0.5,0.5)
+--cycle;
+\path [draw=color1, fill=color1]
+(axis cs:1.33452895698059,2.33452895698059)
+--(axis cs:1.66547104301941,2.33452895698059)
+--(axis cs:1.66547104301941,2.66547104301941)
+--(axis cs:1.33452895698059,2.66547104301941)
+--cycle;
+\path [draw=color2, fill=color2]
+(axis cs:1.05278640450004,1.05278640450004)
+--(axis cs:1.94721359549996,1.05278640450004)
+--(axis cs:1.94721359549996,1.94721359549996)
+--(axis cs:1.05278640450004,1.94721359549996)
+--cycle;
+\path [draw=color3, fill=color3]
+(axis cs:1,0)
+--(axis cs:2,0)
+--(axis cs:2,1)
+--(axis cs:1,1)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:2.5,2.5)
+--(axis cs:2.5,2.5)
+--(axis cs:2.5,2.5)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:2.5,1.5)
+--(axis cs:2.5,1.5)
+--(axis cs:2.5,1.5)
+--cycle;
+\path [draw=color0, fill=color0]
+(axis cs:2.5,0.5)
+--(axis cs:2.5,0.5)
+--(axis cs:2.5,0.5)
+--cycle;
+\end{axis}
+
+\end{tikzpicture}

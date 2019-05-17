@@ -11,7 +11,6 @@ legend cell align={left},
 legend style={draw=white!80.0!black},
 tick align=outside,
 tick pos=left,
-title={Spectrum of pulse (lab frame)},
 width=\figurewidth,
 x grid style={white!69.01960784313725!black},
 xlabel={f (GHz)},
@@ -19,7 +18,13 @@ xmin=5.0252, xmax=7.5378,
 xtick style={color=black},
 y grid style={white!69.01960784313725!black},
 ymin=-0.00229299000386072, ymax=0.0481532197572675,
-ytick style={color=black}
+ytick style={color=black},
+yticklabel style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=2,
+        /pgf/number format/fixed zerofill
+    },
+scaled y ticks=false
 ]
 \addplot [semithick, color0]
 table {%
@@ -101,25 +106,21 @@ table {%
 7.53333333333333 7.94686082666693e-08
 7.56666666666667 1.84025770356985e-07
 };
-\addlegendentry{Spec.}
 \addplot [color0, dashed]
 table {%
 6.2815 -0.00229299000386072
 6.2815 0.0481532197572675
 };
-\addlegendentry{$\omega_{01}$}
 \addplot [color1, dashed]
 table {%
 5.9845 -0.00229299000386072
 5.9845 0.0481532197572675
 };
-\addlegendentry{$\omega_{12}$}
 \addplot [color2, dashed]
 table {%
 6.133 -0.00229299000386072
 6.133 0.0481532197572675
 };
-\addlegendentry{$\omega_{02}$}
 \end{axis}
 
 \end{tikzpicture}
