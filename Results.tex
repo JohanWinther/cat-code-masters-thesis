@@ -2,27 +2,38 @@
 \begin{document}
 
 \chapter{Results}
+The results of the numerical experiments will be presented in this chapter. For both optimisation targets the optimised pulses, their properties and the final evolved state will be presented.
 
-\section{0 to 1 transfer}
-Graph of final fidelities
 
-The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above while dropping 
+\section{\texorpdfstring{\boldmath\(\ket{0}\rightarrow\ket{1}\)}{0 -> 1} state transfer}
+In \cref{fig:3d-optim-ge} the fidelity during all optimisation runs are plotted.
+For pulse lengths longer than \SI{15}{\nano\second} the fidelity starts at values close to the goal (\(F>0.9\)) and the number of iterations is low (less than 85 iterations).
+In contrast, pulses shorter than \SI{15}{\nano\second} start at lower fidelities while the number of iterations are roughly one order of magnitude larger with no clear pattern.
 
-\tikzfig{figs/fidelity-length-ge}{Text}{fig:fidelity-length-ge}{15em}{15em}
+To give more detail, the start and end fidelity over pulse length is plotted in \cref{fig:fidelity-length-ge}.
+The optimisations where the fidelity goal was not reached are marked with stars which is all pulse lengths equal to and below \SI{10.50}{\nano\second}. The drop-off in fidelity for shorter pulses is linear.
+
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figs/3d-optim-ge.png}
-    \caption{Caption}
+    \caption{Fidelity during optimisations for every pulse length (ns). The different colors help distinguish the lines.}
     \label{fig:3d-optim-ge}
 \end{figure}
 
+\tikzfig{figs/fidelity-length-ge}{%
+Fidelity of first and last iteration of every pulse length.
+The stable region above 
+}{fig:fidelity-length-ge}{\textwidth}{15em}
+
+Further analysis is done on pulses with lengths \SI{4.25}{\nano\second}, \SI{6.0}{\nano\second}, \SI{8.0}{\nano\second}, \SI{10.0}{\nano\second}, \SI{20.0}{\nano\second} and \SI{30.0}{\nano\second}.
+The optimised pulse shapes \(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) are plotted in \cref{fig:pulse_shape} together with the guess pulses. Pulses longer than \ns{20} require only fine adjustments to the Blackman guess pulse while shorter pulses have an imaginary part which is maximised for the whole duration of the pulse.
 
 \begin{figure}[ht]
 \centering
 \foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{
 		\centering
-		\setlength\figureheight{10em}
+		\setlength\figureheight{9.75em}
 		\setlength\figurewidth{0.45\textwidth}
 		\input{figs/pulse_shape_\n_Real.tikz}
 		\input{figs/pulse_shape_\n_Imag.tikz}
@@ -33,10 +44,18 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
 		\hfill
 	\fi%
 }
-\caption{Pulse shapes.}
+\caption{Optimised pulse shapes and guess pulses for pulse lengths 
+\textbf{(a)} \SI{4.25}{\nano\second}, 
+\textbf{(b)} \SI{6.0}{\nano\second}, 
+\textbf{(c)} \SI{8.0}{\nano\second}, 
+\textbf{(d)} \SI{10.0}{\nano\second}, 
+\textbf{(e)} \SI{20.0}{\nano\second}, 
+and \textbf{(f)} \SI{30.0}{\nano\second}.
+Short pulses (\(<\)\ns{10}) change substantially from the starting Blackman shape while long pulses (\(>\)\ns{20}) only require fine adjustments.}
 \label{fig:pulse_shape}
 \end{figure}
 
+The spectrum of \(\Omega(t)\) in the lab frame \(\Omega(t)\ex^{i\omega_{01} t}\) is shown in \cref{fig:pulse_spectrum}. For all pulse lengths there is a peak centered roughly at \(\omega_{01}\) and the width of the peak becomes narrower for longer pulses. For the pulse length \ns{30} there is almost no support at \(\omega_{02}\) and \(\omega_{12}\).
 
 \begin{figure}[ht]
 \centering
@@ -53,7 +72,7 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
 		\hfill
 	\fi%
 }
-\caption{Pulse spectrum}
+\caption{Pulse spectrum of the complex pulses in \cref{fig:pulse_shape}. The vertical lines indicate (from left to right) \(\omega_{02}\), \(\omega_{12}\), \(\omega_{01}\).}
 \label{fig:pulse_spectrum}
 \end{figure}
 
@@ -92,7 +111,7 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
 		\hfill
 	\fi%
 }
-\caption{Hinton diagram of density matrix of $\ket{\psi_\text{tar}}\bra{\psi(T)}$}
+\caption{Hinton diagram of \(\op{\psi(T)}\)}
 \label{fig:hinton}
 \end{figure}
 
@@ -112,17 +131,18 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
 \end{figure}
 
 
-\section{0 to 2 transfer}
-
-\tikzfig{figs/fidelity-length-gf}{Text}{fig:fidelity-length-gf}{15em}{15em}
+\section{\texorpdfstring{\boldmath\(\ket{0}\rightarrow\ket{2}\)}{0 -> 2} state transfer}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{figs/3d-optim-gf.png}
-    \caption{Caption}
+    \caption{Fidelity during optimisations for every pulse length (ns).}
     \label{fig:3d-optim-gf}
 \end{figure}
 
+\tikzfig{figs/fidelity-length-gf}{
+Fidelity of first and last iteration of every pulse length.
+}{fig:fidelity-length-gf}{0.8\textwidth}{15em}
 
 \begin{figure}[ht]
 \centering
@@ -199,24 +219,9 @@ The optimisation converges for pulse lengths \SI{10}{\nano\second}? and above wh
 		\hfill
 	\fi%
 }
-\caption{Hinton diagram of density matrix of $\ket{\psi_\text{tar}}\bra{\psi(T)}$}
+\caption{Hinton diagram of \(\op{\psi(T)}\)}
 \label{fig:hinton_gf}
 \end{figure}
-
-
-%\begin{figure}[ht]
-%\centering
-%\foreach \n/\capn [count=\ni] in {{22,0}/{22.0},{24,0}/{24.0},{26,0}/{26.0},{28,0}/{28.0},{29,0}/{29.0},{55,0}/{55.0}}{
-%	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_gf_\n.png}}%
-%	\ifnum\ni=6%
-%	        %
-%	\else%
-%		\hfill
-%	\fi%
-%}
-%\caption{Time dynamics on the Bloch sphere for different lengths of optimised pulses.}
-%\label{fig:bloch_evolution}
-%\end{figure}
 
 
 \end{document}
