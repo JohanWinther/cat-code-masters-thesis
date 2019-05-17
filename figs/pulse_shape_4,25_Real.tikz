@@ -13,14 +13,14 @@ tick pos=left,
 width=\figurewidth,
 x grid style={white!69.01960784313725!black},
 xlabel={Time (ns)},
-xmin=-0.2125, xmax=4.4625,
+xmin=-0.2125, xmax=31.5,
 xtick style={color=black},
 y grid style={white!69.01960784313725!black},
 ylabel={Re(\(\displaystyle \Omega\))},
 ymin=-0.218166156499413, ymax=0.218166156499413,
 ytick style={color=black}
 ]
-\addplot [semithick, color0]
+\addplot [semithick, color0, dashed]
 table {%
 0 0
 0.223684210526316 0
@@ -43,7 +43,6 @@ table {%
 4.02631578947368 0
 4.25 0
 };
-\addlegendentry{Guess}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -67,7 +66,6 @@ table {%
 4.02631578947368 -0.00392554086381932
 4.25 0
 };
-\addlegendentry{Optim.}
 \end{axis}
 
 \end{tikzpicture}

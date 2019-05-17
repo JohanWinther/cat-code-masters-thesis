@@ -20,7 +20,7 @@ ylabel={Im(\(\displaystyle \Omega\))},
 ymin=-0.218166156499413, ymax=0.218166156499413,
 ytick style={color=black}
 ]
-\addplot [semithick, color0]
+\addplot [semithick, color0, dashed]
 table {%
 0 -1.66093089449301e-18
 0.252100840336134 3.00591291596618e-05
@@ -143,7 +143,6 @@ table {%
 29.7478991596639 3.00591291596601e-05
 30 -1.66093089449301e-18
 };
-\addlegendentry{Guess}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -267,7 +266,6 @@ table {%
 29.7478991596639 0.000139635966631647
 30 0
 };
-\addlegendentry{Optim.}
 \end{axis}
 
 \end{tikzpicture}

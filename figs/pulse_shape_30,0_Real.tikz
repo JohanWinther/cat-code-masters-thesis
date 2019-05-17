@@ -20,7 +20,7 @@ ylabel={Re(\(\displaystyle \Omega\))},
 ymin=-0.218166156499413, ymax=0.218166156499413,
 ytick style={color=black}
 ]
-\addplot [semithick, color0]
+\addplot [semithick, color0, dashed]
 table {%
 0 0
 0.252100840336134 0
@@ -143,7 +143,6 @@ table {%
 29.7478991596639 0
 30 0
 };
-\addlegendentry{Guess}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -267,7 +266,6 @@ table {%
 29.7478991596639 -8.16406315732033e-05
 30 0
 };
-\addlegendentry{Optim.}
 \end{axis}
 
 \end{tikzpicture}
