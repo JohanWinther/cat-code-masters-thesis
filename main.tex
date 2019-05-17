@@ -41,6 +41,15 @@
 % Read the manuals for the respective package to see the usage;
 \usepackage{physics}
 \usepackage{cleveref}
+\usepackage[%
+    font={small,sf},
+    labelfont=bf,
+    format=hang,    
+    format=plain,
+    margin=0pt,
+    width=\textwidth,
+]{caption}
+\usepackage[list=true]{subcaption}
 %\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
@@ -48,8 +57,13 @@
 \usepackage{booktabs} % High quality tables.
 \usepackage{siunitx} % For all your numerical values and units.
 \usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
+\usepackage{pgffor}
 \pgfplotsset{compat=newest} 
 \pgfplotsset{plot coordinates/math parser=false}
+\pgfplotsset{
+	tick align = outside,
+	yticklabel style={/pgf/number format/fixed}
+}
 \newlength\figureheight
 \newlength\figurewidth
 
