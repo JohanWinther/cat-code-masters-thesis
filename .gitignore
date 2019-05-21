@@ -26,3 +26,5 @@
 *.synctex.gz
 *.synctex(busy)
 *.auxlock
+*.fls
+*.fdb_latexmk
