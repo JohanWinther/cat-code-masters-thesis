@@ -2,16 +2,16 @@
 \begin{document}
 
 \chapter{Method}
-In this chapter Krotov's method will be briefly introduced along with an implementation in Python. Then the numerical experiments will be presented.
-
-
+In this chapter Krotov's method for quantum optimal control will be briefly introduced and an implementation as a Python package.
+Then the numerical experiments will be explained.
 
 \section{Krotov's Method for quantum optimal control}
-Krotov's method fundamentally relies on the variational principle to \minimize{} a functional \(J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}]\) where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}. A detailed explanation of this functional when the method is applied to quantum systems can be found in \cite{reich_monotonically_2012}. 
+Krotov's method fundamentally relies on the variational principle to \minimize{} a functional \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}] \] where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}.
+A detailed explanation of this functional when the method is applied to quantum systems can be found in \autocite{reich_monotonically_2012}. 
 
 \section{Krotov: the Python package}
 A Python implementation of the Krotov package is available at \url{https://krotov.readthedocs.io/en/latest/}. It provides simple functions and objects to
-Test
+
 
 \section{Optimisation Experiments}
 In this chapter the numerical optimisation experiments are presented and motivated.
