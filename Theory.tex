@@ -4,6 +4,12 @@
 \chapter{Theory}
 In this chapter the theoretic concepts will be explained.
 
+\section{Visualization of quantum states}
+
+\subsection{Bloch sphere}
+
+\subsection{Hinton }
+
 \section{Superconducting resonators}
 Superconducting resonators are used in quantum computing both as the basis for qubits and as readout and control components \cite{}. Although ideal resonators have equally spaced energy levels, in reality they are more or less anharmonic and the general Hamiltonian for a quantum anharmonic resonator is
 \begin{equation}
@@ -12,7 +18,7 @@ Superconducting resonators are used in quantum computing both as the basis for q
 \end{equation}
 where \(\omega\) is the resonance frequency, \(\kappa\) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
 
-The anharmonicity can be visualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \(\kappa\) with \(\omega=1\). A larger anharmonicity gives larger energy spacing for higher excitation states.
+The anharmonicity can be vizualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \(\kappa\) with \(\omega=1\). A larger anharmonicity gives larger energy spacing for higher excitation states.
 
 \tikzfig{figs/energy-anharmonic}{The energy levels of a resonator for anharmonicity \(\kappa\in[0,1]\).}{fig:anharmonic-energies}{25em}{17em}
 
@@ -33,7 +39,7 @@ Quantum control is the process of controlling a quantum system by controlling th
 \end{equation}
 The controls are usually electromagnetic pulses changing in time and thus will be referred to as ''pulse shapes'' in this thesis \cite{fisher_optimal_2010}.
 
-There are two main questions in quantum control: one of \emph{controllability} and one of \emph{optimal control} where the first deals with the \emph{existence} of solutions given the Hamiltonian and the second with the \emph{optimised} solutions for the pulse shapes \(\qty{u_i(t)}\) \autocite{dalessandro_introduction_2007}. The optimal solutions are generally not analytically solvable and thus the pulse shapes need to be discretised in time  and numerically optimised using algorithms. The algorithm used for this thesis will be presented in the Method chapter.
+There are two main questions in quantum control: one of \emph{controllability} and one of \emph{optimal control} where the first deals with the \emph{existence} of solutions given the Hamiltonian and the second with the \emph{optimized} solutions for the pulse shapes \(\qty{u_i(t)}\) \autocite{dalessandro_introduction_2007}. The optimal solutions are generally not analytically solvable and thus the pulse shapes need to be discretised in time  and numerically optimized using algorithms. The algorithm used for this thesis will be presented in the Method chapter.
 
 
 \(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) drive rotations around the x-axis and y-axis respectively (in the Bloch sphere). 
