@@ -42,14 +42,18 @@
 \usepackage{physics}
 \usepackage{cleveref}
 \usepackage[%
-    font={small,sf},
+    font={small,normalfont},
     labelfont=bf,
     format=hang,    
     format=plain,
     margin=0pt,
     width=\textwidth,
 ]{caption}
-\usepackage[list=true]{subcaption}
+\usepackage[%
+  list=true,
+  font={small,normalfont},
+  labelfont=bf
+]{subcaption}
 \usepackage{float}
 %\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
@@ -88,7 +92,9 @@
 \coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cat_state_funny}}
 \covercaption{Some explanation}
 
-\firstabstract{}
+\firstabstract{
+  \subfile{Abstract.tex}
+}
 \secondabstract{swedish}{} % Optional
 \keywords{quantum computing, quantum optimal control, cat state, cat code}
 
@@ -148,8 +154,8 @@
 \subfile{Discussion}
 \subfile{Conclusion}
 
-\nocite{*} % Cites everything from the bibliography
-\printbibliography % This command is new in biblatex. Do not attempt to use style files as with old latex.
+%\nocite{*} % Cites everything from the bibliography
+\printbibliography{} % This command is new in biblatex. Do not attempt to use style files as with old latex.
 
 \end{document}
 
