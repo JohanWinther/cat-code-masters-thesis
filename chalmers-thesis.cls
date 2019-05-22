@@ -195,11 +195,11 @@
 
  % Figure captions
  \@ifpackageloaded{subfig}{
-  \captionsetup[subfigure]{textfont=it}
+  \captionsetup[subfigure]{textfont=normalfont}
  }{\ClassWarning{chalmers-thesis}{Package 'subfig' strongly recommended}}
 
  \@ifpackageloaded{caption}{
-  \captionsetup[figure]{textfont=it}
+  \captionsetup[figure]{textfont=normalfont}
  }{\ClassWarning{chalmers-thesis}{Package 'caption' required}}
 
 
