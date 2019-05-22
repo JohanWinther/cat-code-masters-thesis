@@ -1,0 +1,17 @@
+\documentclass[main.tex]{subfiles}
+\begin{document}
+Quantum computing has gained a lot of interest in recent years and commercial products are just now entering the market.
+However one of the main challenges in realising a quantum computer is noise and one key technology to remedy this is quantum error correction (QEC).
+One way of performing QEC is to store the quantum information of a qubit, while it's idle, as special basis states in a resonator.
+To do this one needs to apply encoding and decoding pulses to the coupled qubit-resonator system to do a state transfer.
+These pulses are hard or perhaps impossible to solve for analytically, which means they need to be numerically obtained by simulation.
+
+This thesis studies the prospects of using Krotov's method (gradient ascent) to numerically optimize encoding pulses for state transfer.
+The Python package Krotov, a package for quantum optimal control using Krotov's method, is used to perform state transfers |0> to |1> and |0> to |2> of an anharmonic resonator.
+It is shown that, assuming a maximum drive amplitude and no dissipation, the method can realise a |0> to |1> transfer with fidelity F > 0.99999 with a total pulse length of only 10.75 ns.
+For the |0> to |2> transfer a total pulse length of 30 ns is needed to reach the same fidelity.
+Thus it is concluded that state transfers using Krotov for non-coupled systems is viable.
+
+However for coupled systems there is great difficulty in using Krotov, as the package assumes a time-independent control Hamiltonian.
+A potential workaround for this problem is also presented.
+\end{document}
