@@ -19,27 +19,38 @@ In this chapter the numerical optimization experiments are presented and motivat
 To test the method, the anharmonic oscillator in~\cref{eq:resonator-hamiltonian} will be chosen as it is often used as the physical realisation of a qubit.
 Throughout this thesis, such a system will be referred to as a qubit even though it has more than two energy levels.
 Consequently, the resonance frequency of the qubit \( \omega_{01} \) refers to the transition between \( \ket{0} \) and \( \ket{1} \).
-To induce transitions between these states, control terms are added to~\cref{eq:resonator-hamiltonian}
+To induce transitions between these states, control pulse terms are added to~\cref{eq:resonator-hamiltonian}
 \begin{equation}
     \Ham = \omega_{01} \au\ad - \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{i\omega_{01}t}\ad + \Omega^*(t)\ex^{-i\omega_{01}t}\au
     \label{eq:system-hamiltonian}
 \end{equation}
-where \( \Omega(t) \) is the complex amplitude of the driving pulse.
-Looking at the Hamiltonian above it can be argued that it can be written in the form in \cref{eq:optimal-control-hamiltonian} with \( u_0(t) = \Omega(t)\ex^{i\omega_{01}t}, u_1(t) = \Omega^*(t)\ex^{-i\omega_{01}t} \).
+where \( \Omega(t) \) is the complex amplitude of the control pulse.
+Looking at the Hamiltonian above it can be argued that it can be written in the form in \cref{eq:optimal-control-hamiltonian} with \( u_0(t) = \Omega(t)\ex^{i\omega_{01}t} \) and \( u_1(t) = \Omega^*(t)\ex^{-i\omega_{01}t} \).
 However, there are two problems that need to be adressed.
 Firstly, the oscillating factors will require an unnecessarily fine time discretization of the pulses.
-Secondly, the Krotov package expects real-valued pulse amplitudes as inputs.
+Secondly, the Krotov package expects real-valued pulse amplitudes \( \qty{u_i(t)} \) as inputs.
 The first problem can be avoided by transforming the Hamiltonian into the interaction picture.
-Choosing \( H_0 = \omega_{01} \au\ad \), \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
+Choosing \( H_A = \omega_{01} \au\ad \), \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
 \begin{equation}
-    \Ham \rightarrow~ \Ham_R =  -\frac{\kappa}{2}\qty(\au\ad)^2 + \Omega(t)\ad + \Omega^*(t)\au.
+    \Ham \rightarrow~ -\frac{\kappa}{2}\qty(\au\ad)^2 + \Omega(t)\ad + \Omega^*(t)\au.
+\end{equation}
+Now the pulse amplitudes are \( u_0(t) = \Omega(t) \) and \( u_1(t) = \Omega^*(t) \), i.e. the envelope of the physical driving pulse which varies significantly slower.
+The second problem can now be easily fixed with a rearrangment of the terms
+\[ \Omega(t)\ad + \Omega^*(t)\au = \bigg[\text{Re}\qty[\Omega(t)]+i\text{Im}\qty[\Omega(t)]\bigg]\ad + \bigg[\text{Re}\qty[\Omega(t)]-i\text{Im}\qty[\Omega(t)]\bigg]\au = \]
+\[ = \text{Re}\qty[\Omega(t)]\qty(\ad + \au) + \text{Im}\qty[\Omega(t)]i\qty(\ad - \au). \]
+For intuition, \( \qty(\ad + \au) \) and \( i\qty(\ad - \au) \) correspond to Bloch sphere rotations around the x-axis and y-axis respectively. 
+This leaves us with the final Hamiltonian
+\begin{equation}
+    \Ham = \underbrace{-\kappa/2\qty(\au\ad)^2}_{\Ham_d} + \underbrace{\text{Re}\qty[\Omega(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} .
     \label{eq:system-hamiltonian-rotating}
 \end{equation}
 
-
 \subsection{Optimization Setup}
-Optimization will realise state transfers
-\(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) drive rotations around the x-axis and y-axis respectively (in the Bloch sphere). 
+The system Hamiltonian~\eqref{eq:system-hamiltonian-rotating} is simulated using its matrix representation and a chosen Hilbert space size, which in this case is conveniently chosen to be \( L = 3 \).
+A smaller Hilbert space, and consequently smaller matrices, requires less computations however could possibly be a poor approximation of the Hamiltonian.
+This, however, is not a problem in this case as we can neglect % TODO why can we neglect?
+
+The goal of the optimization is to realise state transfers
 Rotating frame
 
 4 gigasamples/s

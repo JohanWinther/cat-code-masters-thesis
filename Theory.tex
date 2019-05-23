@@ -79,13 +79,13 @@ A unitary transformation can significantly simplify systems that are hard to sim
 This idea will be conceptually presented here and then implemented in the Method chapter.
 The unitary transformation that is used is a special case of transformations called the \emph{interaction picture} where the Hamiltonian is split up into a time-independent and time-dependent part
 \begin{equation}
-    \Ham(t) = \Ham_0 + \Ham_1(t).
+    \Ham(t) = \Ham_A + \Ham_B(t).
 \end{equation}
-By choosing the unitary operator \( \hat{U} = \ex^{i \Ham_0 t} \) the unitary transformation takes us into the interaction picture
+By choosing the unitary operator \( \hat{U} = \ex^{i \Ham_A t} \) the unitary transformation takes us into the interaction picture
 \begin{align*}
-    \Ham &\rightarrow~ \hat{U}\qty[ \Ham_0  + \Ham_1(t)]\hat{U}^\dagger + i\dv{\hat{U}}{t}\hat{U}^\dagger =\\
-    &=~ \hat{U}\Ham_0\hat{U}^\dagger + \hat{U}\Ham_1\hat{U}^\dagger + i\qty(i\Ham_0 t)\ex^{i \Ham_0 t}\ex^{-i\Ham_0 t}=\\
-    &=~ \Ham_0 + \hat{U}\Ham_1\hat{U}^\dagger - \Ham_0 = \hat{U}\Ham_1\hat{U}^\dagger
+    \Ham &\rightarrow~ \hat{U}\qty[ \Ham_A  + \Ham_B(t)]\hat{U}^\dagger + i\dv{\hat{U}}{t}\hat{U}^\dagger =\\
+    &=~ \hat{U}\Ham_A\hat{U}^\dagger + \hat{U}\Ham_B\hat{U}^\dagger + i\qty(i\Ham_A t)\ex^{i \Ham_A t}\ex^{-i\Ham_A t}=\\
+    &=~ \Ham_A + \hat{U}\Ham_B\hat{U}^\dagger - \Ham_A = \hat{U}\Ham_B\hat{U}^\dagger
 \end{align*}
 
 
