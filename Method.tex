@@ -6,7 +6,7 @@ In this chapter Krotov's method for quantum optimal control will be briefly intr
 Then the numerical experiments will be explained.
 
 \section{Krotov's Method for quantum optimal control}
-Krotov's method fundamentally relies on the variational principle to \minimize{} a functional \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}] \] where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}.
+Krotov's method fundamentally relies on the variational principle to minimize a functional \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}] \] where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}.
 A detailed explanation of this functional when the method is applied to quantum systems can be found in \autocite{reich_monotonically_2012}. 
 
 \section{Krotov: the Python package}
@@ -15,8 +15,32 @@ A Python implementation of the Krotov package is available at \url{https://kroto
 
 \section{Optimization Experiments}
 In this chapter the numerical optimization experiments are presented and motivated.
+\subsection{Hamiltonian}
+To test the method, the anharmonic oscillator in~\cref{eq:resonator-hamiltonian} will be chosen as it is often used as the physical realisation of a qubit.
+Throughout this thesis, such a system will be referred to as a qubit even though it has more than two energy levels.
+Consequently, the resonance frequency of the qubit \( \omega_{01} \) refers to the transition between \( \ket{0} \) and \( \ket{1} \).
+To induce transitions between these states, control terms are added to~\cref{eq:resonator-hamiltonian}
+\begin{equation}
+    \Ham = \omega_{01} \au\ad - \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{i\omega_{01}t}\ad + \Omega^*(t)\ex^{-i\omega_{01}t}\au
+    \label{eq:system-hamiltonian}
+\end{equation}
+where \( \Omega(t) \) is the complex amplitude of the driving pulse.
+Looking at the Hamiltonian above it can be argued that it can be written in the form in \cref{eq:optimal-control-hamiltonian} with \( u_0(t) = \Omega(t)\ex^{i\omega_{01}t}, u_1(t) = \Omega^*(t)\ex^{-i\omega_{01}t} \).
+However, there are two problems that need to be adressed.
+Firstly, the oscillating factors will require an unnecessarily fine time discretization of the pulses.
+Secondly, the Krotov package expects real-valued pulse amplitudes as inputs.
+The first problem can be avoided by transforming the Hamiltonian into the interaction picture.
+Choosing \( H_0 = \omega_{01} \au\ad \), \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
+\begin{equation}
+    \Ham \rightarrow~ \Ham_R =  -\frac{\kappa}{2}\qty(\au\ad)^2 + \Omega(t)\ad + \Omega^*(t)\au.
+    \label{eq:system-hamiltonian-rotating}
+\end{equation}
 
+
+\subsection{Optimization Setup}
 Optimization will realise state transfers
+\(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) drive rotations around the x-axis and y-axis respectively (in the Bloch sphere). 
+Rotating frame
 
 4 gigasamples/s
 

@@ -7,9 +7,9 @@ To do this one needs to apply encoding and decoding pulses to the coupled qubit-
 These pulses are hard or perhaps impossible to solve for analytically, which means they need to be numerically obtained by simulation.
 
 This thesis studies the prospects of using Krotov's method (gradient ascent) to numerically optimize encoding pulses for state transfer.
-The Python package Krotov, a package for quantum optimal control using Krotov's method, is used to perform state transfers |0> to |1> and |0> to |2> of an anharmonic resonator.
-It is shown that, assuming a maximum drive amplitude and no dissipation, the method can realise a |0> to |1> transfer with fidelity F > 0.99999 with a total pulse length of only 10.75 ns.
-For the |0> to |2> transfer a total pulse length of 30 ns is needed to reach the same fidelity.
+The Python package Krotov, a package for quantum optimal control using Krotov's method, is used to perform state transfers \(\ket{0}\) to \(\ket{1}\) and \(\ket{0}\) to \(\ket{2}\) of an anharmonic resonator.
+It is shown that, assuming a maximum drive amplitude and no dissipation, the method can realise a \(\ket{0}\) to \(\ket{1}\) transfer with fidelity \( F > 0.99999\) with a total pulse length of only \ns{10.75}.
+For the \(\ket{0}\) to \(\ket{2}\) transfer a total pulse length of \ns{30} is needed to reach the same fidelity.
 Thus it is concluded that state transfers using Krotov for non-coupled systems is viable.
 
 However for coupled systems there is great difficulty in using Krotov, as the package assumes a time-independent control Hamiltonian.
