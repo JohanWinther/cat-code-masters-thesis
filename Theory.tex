@@ -9,7 +9,7 @@ However it is assumed that the reader has a basic understanding of quantum mecha
 Superconducting resonators are used in quantum computing both as the basis for qubits and as readout and control components \cite{}.
 Although ideal resonators have equally spaced energy levels, in reality they are more or less anharmonic and the general Hamiltonian for a quantum anharmonic resonator is
 \begin{equation}
-    \Ham = \omega \au\ad - \frac{\kappa}{2} \qty(\au\ad)^2
+    \Ham = \omega \au\ad + \frac{\kappa}{2} \qty(\au\ad)^2
     \label{eq:resonator-hamiltonian}
 \end{equation}
 where \( \omega \) is the resonance frequency, \( \kappa \) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
@@ -17,9 +17,8 @@ where \( \omega \) is the resonance frequency, \( \kappa \) is the anharmonic (s
 The anharmonicity can be vizualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \( \kappa \).
 A larger (negative) anharmonicity makes the energy spacing smaller for higher excitation states.
 This anharmonicity is what permits a resonator to act as a qubit, as it is possible to adress only the \( \ket{0} \) to \( \ket{1} \) level \( \omega_{01} \).
-In reality one cannot usually ignore 
 
-\tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(\kappa\in[0,1]\) and \(\omega=1\).}{fig:anharmonic-energies}{25em}{17em}
+\tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(\kappa\in[-0.5,0]\) and \(\omega=1\). Note that the x-axis is reversed.}{fig:anharmonic-energies}{25em}{17em}
 
 \section{Jaynes-Cummings Model}
 

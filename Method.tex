@@ -9,7 +9,7 @@ Then the numerical experiments will be explained.
 Krotov's method fundamentally relies on the variational principle to minimize a functional \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}] \] where the constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}.
 A detailed explanation of this functional when the method is applied to quantum systems can be found in \autocite{reich_monotonically_2012}. 
 
-\section{Krotov: the Python package}
+\subsection{Krotov: the Python package}
 A Python implementation of the Krotov package is available at \url{https://krotov.readthedocs.io/en/latest/}. It provides simple functions and objects to
 
 
@@ -21,7 +21,7 @@ Throughout this thesis, such a system will be referred to as a qubit even though
 Consequently, the resonance frequency of the qubit \( \omega_{01} \) refers to the transition between \( \ket{0} \) and \( \ket{1} \).
 To induce transitions between these states, control pulse terms are added to~\cref{eq:resonator-hamiltonian}
 \begin{equation}
-    \Ham = \omega_{01} \au\ad - \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{i\omega_{01}t}\ad + \Omega^*(t)\ex^{-i\omega_{01}t}\au
+    \Ham = \omega_{01} \au\ad + \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{i\omega_{01}t}\ad + \Omega^*(t)\ex^{-i\omega_{01}t}\au
     \label{eq:system-hamiltonian}
 \end{equation}
 where \( \Omega(t) \) is the complex amplitude of the control pulse.
@@ -32,30 +32,35 @@ Secondly, the Krotov package expects real-valued pulse amplitudes \( \qty{u_i(t)
 The first problem can be avoided by transforming the Hamiltonian into the interaction picture.
 Choosing \( H_A = \omega_{01} \au\ad \), \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
 \begin{equation}
-    \Ham \rightarrow~ -\frac{\kappa}{2}\qty(\au\ad)^2 + \Omega(t)\ad + \Omega^*(t)\au.
+    \Ham \rightarrow~ \frac{\kappa}{2}\qty(\au\ad)^2 + \Omega(t)\ad + \Omega^*(t)\au.
 \end{equation}
-Now the pulse amplitudes are \( u_0(t) = \Omega(t) \) and \( u_1(t) = \Omega^*(t) \), i.e. the envelope of the physical driving pulse which varies significantly slower.
+Now the pulse amplitudes are \( u_0(t) = \Omega(t) \) and \( u_1(t) = \Omega^*(t) \), i.e.\ the envelope of the physical control pulse which varies significantly slower than the actual pulse.
 The second problem can now be easily fixed with a rearrangment of the terms
 \[ \Omega(t)\ad + \Omega^*(t)\au = \bigg[\text{Re}\qty[\Omega(t)]+i\text{Im}\qty[\Omega(t)]\bigg]\ad + \bigg[\text{Re}\qty[\Omega(t)]-i\text{Im}\qty[\Omega(t)]\bigg]\au = \]
 \[ = \text{Re}\qty[\Omega(t)]\qty(\ad + \au) + \text{Im}\qty[\Omega(t)]i\qty(\ad - \au). \]
 For intuition, \( \qty(\ad + \au) \) and \( i\qty(\ad - \au) \) correspond to Bloch sphere rotations around the x-axis and y-axis respectively. 
 This leaves us with the final Hamiltonian
 \begin{equation}
-    \Ham = \underbrace{-\kappa/2\qty(\au\ad)^2}_{\Ham_d} + \underbrace{\text{Re}\qty[\Omega(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} .
+    \Ham = \underbrace{\kappa/2\qty(\au\ad)^2}_{\Ham_d} + \underbrace{\text{Re}\qty[\Omega(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} .
     \label{eq:system-hamiltonian-rotating}
 \end{equation}
 
-\subsection{Optimization Setup}
-The system Hamiltonian~\eqref{eq:system-hamiltonian-rotating} is simulated using its matrix representation and a chosen Hilbert space size, which in this case is conveniently chosen to be \( L = 3 \).
-A smaller Hilbert space, and consequently smaller matrices, requires less computations however could possibly be a poor approximation of the Hamiltonian.
+The parameters of the qubit are chosen to model real superconducting qubits with \( \kappa = -2\pi\times\SI{297}{\mega\hertz} \) (and \( \omega_{01} = 2\pi\times\SI{6.2815}{\giga\hertz} \)).
+The system Hamiltonian~\eqref{eq:system-hamiltonian-rotating} is simulated with a Hilbert space size conveniently chosen to be \( L = 3 \).
+A smaller Hilbert space, and consequently smaller matrices, requires less computations but could possibly be a poor approximation of the Hamiltonian.
 This, however, is not a problem in this case as we can neglect % TODO why can we neglect?
 
-The goal of the optimization is to realise state transfers
-Rotating frame
+\subsection{Optimization Setup}
+The goal of the optimization is to realise state transfers which will be presented in their own respective sections below.
+Before that, the common setup configurations will be presented.
 
-4 gigasamples/s
 
-Amplitude constraint (with pi pulse calibration)
+
+
+To simulate the constraints of physical \textbf{a}rbitrary \textbf{w}aveform \textbf{g}enerators a maximum sample rate of 4 gigasamples per seconds and an amplitude constraint is added.
+One might recall that the actual pulse needs to oscillate at the qubit resonance frequency, but due to the rotating frame transformation we can mix the pulse envelopes \( \Omega(t) \) with a carrier signal at the resonance frequency.
+This permits us to use an AWG to generate the envelopes and a pulse 
+
 
 Guess pulses half amplitude (actually blackman pulses)
 
@@ -68,5 +73,8 @@ Pulse shapes were optimized with varying lengths from \SI{4.25}{\nano\second} to
 
 \subsection{\texorpdfstring{\boldmath\(\ket{0}\rightarrow\ket{2}\)}{0 -> 2} state transfer}
 Pulse shapes were optimized with varying lengths from \SI{22}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-09}\). Step size \(\lambda = \frac{1}{2A_{m}}\)
+
+\subsection{\texorpdfstring{\boldmath\( \ket{1}_q\ket{0}_r\rightarrow\ket{0}_q\ket{C_1}_r \)}{10 -> 0C1} state transfer}
+
 
 \end{document}
