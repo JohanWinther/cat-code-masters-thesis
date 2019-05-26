@@ -52,15 +52,29 @@ This, however, is not a problem in this case as we can neglect % TODO why can we
 
 \subsection{Optimization Setup}
 The goal of the optimization is to realise state transfers which will be presented in their own respective sections below.
-Before that, the common setup configurations will be presented.
+However the common setup options will be presented here.
 
+To simulate the constraints of physical \textbf{a}rbitrary \textbf{w}aveform \textbf{g}enerators a maximum sample rate of \SI{4}{\giga\samples\per\second} is added.
+Recall that the physcal pulses oscillate at \( \omega_{01} = \SI{6.2815}{\giga\hertz} \), a rate which \SI{4}{\giga\samples\per\second} can never resolve.
+AWGs with higher sample rates than \SI{4}{\giga\samples\per\second} are costly, but the rotating frame transformation permits the use of an AWG to generate the pulse envelopes \( \Omega(t) \) and a tone generator to create a carrier signal at \( \omega_{01} \).
+These signals can then be combined in a mixer.
+Thus the generated pulses can (eventually) be used in experimental settings.
+Further, due to the noise sensitivity of superconducting systems an amplitude constraint is needed to keep the system cool.
+Some derivation is required to set a realistic maximum amplitude \( A_m \).
+First the maximum amplitude is chosen with the assumption that a truncated gaussian pulse
+\begin{equation}
+    g(t) = \frac{1}{\sigma\sqrt{2\pi}} \ex^{-\frac{1}{2}\qty(\frac{t}{\sigma})^2}
+\end{equation}
+with \( \sigma = \ns{3} \) can physically realise a \(\pi\)-rotation \( \ket{0} \rightarrow \ket{1} \) in a planar transmon qubit.
 
+Krotov gives a Blackman pulse
+Blackman pulses are a window function 
+A Blackman pulse with a total length of \(6\sigma\) is a good approximation of a Gaussian pulse.
 
-
-To simulate the constraints of physical \textbf{a}rbitrary \textbf{w}aveform \textbf{g}enerators a maximum sample rate of 4 gigasamples per seconds and an amplitude constraint is added.
-One might recall that the actual pulse needs to oscillate at the qubit resonance frequency, but due to the rotating frame transformation we can mix the pulse envelopes \( \Omega(t) \) with a carrier signal at the resonance frequency.
-This permits us to use an AWG to generate the envelopes and a pulse 
-
+\begin{equation}
+    A(\sigma) = \frac{C}{\text{max}(\sigma,3)\sqrt{2\pi}}
+\end{equation}
+we can use this to determine the maximum amplitude and 
 
 Guess pulses half amplitude (actually blackman pulses)
 
