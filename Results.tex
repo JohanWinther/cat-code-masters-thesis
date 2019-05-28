@@ -58,7 +58,7 @@ Short pulses (\(<\)\ns{10}) change substantially from the starting Blackman shap
 
 The spectrum of \(\Omega(t)\) in the lab frame (\(\Omega(t)\ex^{i\omega_{01} t}\)) is shown in \cref{fig:pulse_spectrum}.
 For all pulse lengths there is a peak centered roughly at \(\omega_{01}\) and the width of the peak becomes narrower for longer pulses.
-For the (maximum) pulse length \ns{30} there is almost no support at \(\omega_{02}\) and \(\omega_{12}\).
+For the highest pulse length \ns{30} there is almost no support at \(\omega_{02}\) and \(\omega_{12}\).
 
 \begin{figure}[H]
 \centering
@@ -233,5 +233,21 @@ Fidelity of first and last iteration of every pulse length.
 \label{fig:hinton_gf}
 \end{figure}
 
+\clearpage{}
+\subsection{\texorpdfstring{\boldmath\( \ket{1}_q\ket{0}_r\rightarrow\ket{0}_q\ket{C_1}_r \)}{10 -> 0C1} state transfer}
+In this composite system it can be hard to see
+
+
+\tikzfig{figs/cat_qubit_occ_80,0}{Occupation probability of the qubit over time.}{fig:cat_qubit_occ}{\textwidth}{15em}
+
+\tikzfig{figs/cat_res_occ_80,0}{Occupation probability of the resonator over time.}{fig:cat_res_occ}{\textwidth}{15em}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{figs/cat_wigner_comparison.png}
+	\caption{Comparison of the Fock distribution and Wigner function of \( \ket{\psi(T)} \) and \( \ket{\psi_{\text{tar}}} \).}
+	\label{fig:fock_comparison}
+\end{figure}
 
 \end{document}

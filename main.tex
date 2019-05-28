@@ -55,14 +55,23 @@
   labelfont=bf
 ]{subcaption}
 \usepackage{float}
+\usepackage{shellesc}
 %\usepackage{pdfpages} % For included other pdf files (like articles).
 %\usepackage{thmtools} % For theorems.
 %\usepackage{algorithms} % For algorithms.
 %\usepackage{listings} % For source code.
 \usepackage{booktabs} % High quality tables.
+\usepackage{etoolbox}
+\usepackage{currfile}
 \usepackage{siunitx} % For all your numerical values and units.
 \DeclareSIUnit\samples{Sa}
 \usepackage{pgfplots} % Make plots directly in latex. Also tables. Excellent package.
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz_fig/,optimize=false]
+\newcommand*\setmyname{%\
+  \expandafter\tikzsetfigurename\expandafter{\currfilebase-}%
+}
+\AtBeginEnvironment{tikzpicture}{\setmyname}
 \usepackage{pgffor}
 \pgfplotsset{compat=newest} 
 \pgfplotsset{plot coordinates/math parser=false}
