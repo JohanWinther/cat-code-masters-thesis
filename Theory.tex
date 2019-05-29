@@ -13,15 +13,26 @@ Although ideal resonators have equally spaced energy levels, in reality they are
     \label{eq:resonator-hamiltonian}
 \end{equation}
 where \( \omega \) is the resonance frequency, \( \kappa \) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
+Note that this is still an approximation as higher order terms have been neglected.
 
 The anharmonicity can be vizualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \( \kappa \).
 A larger (negative) anharmonicity makes the energy spacing smaller for higher excitation states.
-This anharmonicity is what permits a resonator to act as a qubit, as it is possible to adress only the \( \ket{0} \) to \( \ket{1} \) level \( \omega_{01} \).
+This anharmonicity is what permits a resonator to act as a qubit, as it is possible to adress only the first two states \( \ket{0} \) and \( \ket{1} \).
+Throughout this thesis, a qubit will be used to refer to an anharmonic resonator even though it has more than two energy levels.
+Further, the energy spacing between states \( \ket{i} \) and \( \ket{j} \) will be referred to as \( \omega_{ij} \) and the ``resonance frequency of the qubit'' as \( \omega_{01} \).
 
 \tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(\kappa\in[-0.5,0]\) and \(\omega=1\). Note that the x-axis is reversed.}{fig:anharmonic-energies}{25em}{17em}
 
-\section{Jaynes-Cummings Model}
-
+\section{Coupled Qubit-Resonator System}
+The Hamiltonian for a coupled qubit and resonator is chosen as
+\begin{equation}
+    \Ham(t) = \underbrace{\omega_r\au\ad + \frac{\kappa_r}{2}\qty(\au\ad)^2}_{\text{Resonator}} + \underbrace{\omega_{q}\bu\bd + \frac{\kappa_q}{2}\qty(\bu\bd)^2}_{\text{Qubit}} + \underbrace{g\qty(\au\bd+\ad\bu)}_{\text{Coupling}}
+\end{equation}
+where \( \bd \) is the destruction operator for the qubit and \( \omega_q = \omega_{01} \).
+There is now a coupling term with the coupling strength \(g\) which means that the resonator and the qubit can exchange excitations between each other.
+This is similar to the Jaynes-Cummings Hamiltonian, but now there are added self-Kerr terms for both the qubit and the resonator.
+Another difference is that the Jaynes-Cummings model explicitly deals with a two-level qubit or atom, while this model has a ``qubit'' with arbitrary levels.
+Note that the rotating wave approximation has been applied to the coupling term.
 
 \section{Visualization of quantum states}
 In order to understand the results presented later in this thesis, some visualization techniques of quantum states are shown and explained.
