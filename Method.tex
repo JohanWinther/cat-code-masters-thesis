@@ -13,14 +13,16 @@ The underlying principles of the Krotov's method will not be adressed in the the
 Thus the method will be treated as a black box function provided by the Python package which will be presented in the next section.
 
 \subsection{Krotov: the Python package}
-A Python implementation of the Krotov's method is available at \url{https://krotov.readthedocs.io/en/latest/} which provides
-an abstraction for doing optimizations.
-It is built on top of QuTiP, a popular software package for simulating the dynamics of quantum systems~\cite{}.
+A Python implementation of the Krotov's method is available at~\cite{goerz_krotov:_2019} which provides an abstraction layer for doing optimizations.
+The reason this package was chosen is primarily because it allows for optimization of multiple objectives.
+This is necessary in order to create a single encoding pulse which will realise the state transfer into the cat code basis for any arbitrary state.
+
+It is built on top of QuTiP, a popular software package for simulating the dynamics of quantum systems~\cite{johansson_qutip_2013}.
 
 \section{Optimization Experiments}
 In this chapter the numerical optimization experiments are presented and motivated.
 \subsection{Hamiltonian}
-To test the method, the anharmonic oscillator in~\cref{eq:resonator-hamiltonian} will be chosen as it is often used as the physical realisation of a qubit.
+To test the method, the anharmonic oscillator in~\cref{eq:resonator-hamiltonian} will be chosen as it can be used to model the physical realisation of a (transmon) qubit.
 Throughout this thesis, such a system will be referred to as a qubit even though it has more than two energy levels.
 Consequently, the resonance frequency of the qubit \( \omega_{01} \) refers to the transition between \( \ket{0} \) and \( \ket{1} \).
 To induce transitions between these states, control pulse terms are added to~\cref{eq:resonator-hamiltonian}
@@ -94,5 +96,6 @@ Pulse shapes were optimized with varying lengths from \SI{22}{\nano\second} to \
 
 \subsection{\texorpdfstring{\boldmath\( \ket{1}_q\ket{0}_r\rightarrow\ket{0}_q\ket{C_1}_r \)}{10 -> 0C1} state transfer}
 
+Start with maximum pulse amplitude
 
 \end{document}

@@ -527,6 +527,7 @@
 \@ifpackageloaded{tikz}{
 \newcommand{\makecoverpage}{
  \pagestyle{empty}
+ \tikzexternaldisable
  \begin{tikzpicture}[remember picture,overlay]
   \node[yshift=-\headerheight] at (current page.north west)
    {\begin{tikzpicture}[remember picture, overlay]
@@ -542,7 +543,7 @@
    % \node[anchor=south east,xshift=-0.1\paperwidth,yshift=0.1\paperheight,inner sep=0] at (current page.south east)
    %  {\includegraphics[width=0.171\paperwidth]{figures/\titlepage@logotype}};
    %\fi
- \end{tikzpicture}
+ \end{tikzpicture}\tikzexternalenable
  \ \vfill\vfill\vfill
  \begin{center}
   \@ifundefined{@coverfigure}{}{\@coverfigure}
@@ -872,6 +873,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHALMERS logo below. Note that tt is trademarked!
 \newcommand{\chalmerslogo}[2]{
+\tikzexternaldisable
 \resizebox{#2}{!}{
 \begin{tikzpicture}[fill=#1] % This is 11.994 in width, 1.341 in height
 % C
@@ -950,4 +952,5 @@
  -- cycle;
 \end{tikzpicture}
 }
+\tikzexternalenable
 }
