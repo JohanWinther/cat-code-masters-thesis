@@ -6,7 +6,8 @@ The results of the numerical experiments will be presented in this chapter.
 For both optimization targets the optimized pulses, their properties and the final evolved state will be presented.
 
 
-\section{\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer}
+\section{Qubit state transfers}
+\subsection{\texorpdfstring{\boldmath\( \ket{1}_q\ket{0}_r\rightarrow\ket{0}_q\ket{C_1}_r \)}{10 -> 0C1} state transfer}
 In \cref{fig:3d-optim-ge} the fidelity during all optimization runs are plotted.
 For pulse lengths longer than \SI{15}{\nano\second} the fidelity starts at values close to the goal (\(F>0.9\)) and the number of iterations is relatively low (less than 85 iterations).
 In contrast, pulses shorter than \SI{15}{\nano\second} start at lower fidelities while the number of iterations are roughly one order of magnitude larger with no clear pattern.
@@ -56,8 +57,8 @@ Short pulses (\(<\)\ns{10}) change substantially from the starting Blackman shap
 \label{fig:pulse_shape}
 \end{figure}
 
-The spectrum of \(\Omega(t)\) in the lab frame (\(\Omega(t)\ex^{i\omega_{01} t}\)) is shown in \cref{fig:pulse_spectrum}.
-For all pulse lengths there is a peak centered roughly at \(\omega_{01}\) and the width of the peak becomes narrower for longer pulses.
+The spectrum of \(\Omega(t)\) in the lab frame (\(\Omega(t)\ex^{i\omega_q t}\)) is shown in \cref{fig:pulse_spectrum}.
+For all pulse lengths there is a peak centered roughly at \(\omega_q\) and the width of the peak becomes narrower for longer pulses.
 For the highest pulse length \ns{30} there is almost no support at \(\omega_{02}\) and \(\omega_{12}\).
 
 \begin{figure}[H]
@@ -75,7 +76,7 @@ For the highest pulse length \ns{30} there is almost no support at \(\omega_{02}
 		\hfill
 	\fi%
 }
-\caption{Pulse spectrum of the complex pulses in \cref{fig:pulse_shape}. The vertical lines indicate (from left to right) \(\omega_{02}\), \(\omega_{12}\), \(\omega_{01}\).}\label{fig:pulse_spectrum}
+\caption{Pulse spectrum of the complex pulses in \cref{fig:pulse_shape}. The vertical lines indicate (from left to right) \(\omega_{02}\), \(\omega_{12}\), \(\omega_q\).}\label{fig:pulse_spectrum}
 \end{figure}
 
 The time evolution of the system under the optimized pulses are visualized by plotting the occupation of the states over time, \cref{fig:qubit_occupation},

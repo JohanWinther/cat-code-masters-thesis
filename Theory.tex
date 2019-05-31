@@ -19,7 +19,7 @@ The anharmonicity can be vizualised, see \cref{fig:anharmonic-energies}, by plot
 A larger (negative) anharmonicity makes the energy spacing smaller for higher excitation states.
 This anharmonicity is what permits a resonator to act as a qubit, as it is possible to adress only the first two states \( \ket{0} \) and \( \ket{1} \).
 Throughout this thesis, a qubit will be used to refer to an anharmonic resonator even though it has more than two energy levels.
-Further, the energy spacing between states \( \ket{i} \) and \( \ket{j} \) will be referred to as \( \omega_{ij} \) and the ``resonance frequency of the qubit'' as \( \omega_{01} \).
+Further, the energy spacing between states \( \ket{i} \) and \( \ket{j} \) will be referred to as \( \omega_{ij} \) and the ``resonance frequency of the qubit'' as \( \omega_q \).
 
 \tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(\kappa\in[-0.5,0]\) and \(\omega=1\). Note that the x-axis is reversed.}{fig:anharmonic-energies}{25em}{17em}
 
@@ -27,22 +27,44 @@ Further, the energy spacing between states \( \ket{i} \) and \( \ket{j} \) will 
 The Hamiltonian for a coupled qubit and resonator is chosen as
 \begin{equation}
     \Ham(t) = \underbrace{\omega_r\au\ad + \frac{\kappa_r}{2}\qty(\au\ad)^2}_{\text{Resonator}} + \underbrace{\omega_{q}\bu\bd + \frac{\kappa_q}{2}\qty(\bu\bd)^2}_{\text{Qubit}} + \underbrace{g\qty(\au\bd+\ad\bu)}_{\text{Coupling}}
+    \label{eq:hamiltonian-coupled}
 \end{equation}
-where \( \bd \) is the destruction operator for the qubit and \( \omega_q = \omega_{01} \).
+where \( \bd \) is the destruction operator for the qubit and \( \omega_q = \omega_q \).
 There is now a coupling term with the coupling strength \(g\) which means that the resonator and the qubit can exchange excitations between each other.
+\(g\) will be assumed to be real for simplicity.
 This is similar to the Jaynes-Cummings Hamiltonian, but now there are added self-Kerr terms for both the qubit and the resonator.
 Another difference is that the Jaynes-Cummings model explicitly deals with a two-level qubit or atom, while this model has a ``qubit'' with arbitrary levels.
-Note that the rotating wave approximation has been applied to the coupling term.
+Note that the rotating wave approximation has been applied to the coupling term~\cite{wu_strong-coupling_2007}.
+
+\section{Cat code}
+The cat code is a logical basis for quantum information stored in resonators.
+The basis states are
+\begin{equation}
+    \ket{0_L} = \cat{},\quad \ket{1_L} = \cat[i]{}
+\end{equation}
+where 
+\begin{equation}
+    \cat[(i)]{} = \frac{1}{\sqrt{2}}\qty(\ket{(i)\alpha} + \ket{-(i)\alpha}).
+\end{equation}
+That is the each basis state \( \ket{0(1)_L} \) in the cat code consists of a cat state \(\cat[(i)]{}\), which is a superposition of a coherent state \(\ket{(i)\alpha}\) and its negative counterpart \(\ket{-(i)\alpha}\).
+A coherent state can be represented in the Fock basis as
+\begin{equation}
+    \ket{(i)\alpha} =\ex^{-{\frac{|(i)\alpha|^2}{2}}}\sum_{n=0}^{\infty}{\frac{\qty((i)\alpha)^n}{\sqrt{n!}}}\ket{n}.
+\end{equation}
+The basis can also be in an odd parity where the two coherent states are subtracted instead of added, however only the even parity basis will be used in this thesis.
+A more detailed review of the cat code can be found in the supplementary information of~\cite{ofek_extending_2016}.
+% TODO Explain what the cat code basis is and why it can be used for QEC.
+
 
 \section{Visualization of quantum states}
 In order to understand the results presented later in this thesis, some visualization techniques of quantum states are shown and explained.
 
 \subsection{Bloch sphere}
-\begin{figure}[t]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{figs/bloch_sphere.png}
     \caption{Representation of an abritrary pure quantum state on the Bloch sphere.
-    \\ Source:~\cite{noauthor_file:bloch_nodate} (CC BY-SA 3.0).
+    \\ Source:~\cite{glosser.ca_english:_2012} (CC BY-SA 3.0).
     }%
     \label{fig:bloch_sphere}
 \end{figure}
@@ -54,24 +76,24 @@ The pure state of a qubit can be visualized on the surface of a unit sphere with
 where \( \theta \) and \( \phi \) are angles which are shown in \cref{fig:bloch_sphere}.
 The ground state \(\ket{0}\) is located on the ``north pole'' and the excited state \(\ket{1}\) on the ``south pole''.
 
-% TODO Briefly explain the Bloch sphere representation and give some examples
+Further, a handy trick to visualize the qubit when it has more levels than three is to ``project'' the state to the \(\qty{\ket{0},\ket{1}}\) basis with \( \op{0} + \op{1} \) and then plot it on the Bloch sphere.
+This means that the subspace which is not spanned by the first two levels will be represented by the inside of the sphere.
+To make an example, \(\ket{2}\) will lie right in the center of the sphere while \(\qty(\ket{1}+\ket{2})/\sqrt{2}\) will lie halfway between the center and the south pole.
 
 \subsection{Density matrices and Hinton diagrams}
-
+Even tough this thesis will only deal with pure quantum states \(\ket{\Psi}\) it can be interesting to look at the density matrix \(\op{\Psi}\).
+This density matrix can be visualized in a Hinton diagram which exposes the coefficients of the basis states of \(\ket{\Psi}\) in a visual way.
+This is a good way for quickly judging the quality of a quantum state.
 % TODO Explain the Hinton diagram and density matrix
 
 \subsection{Wigner function}
+The wigner function can be used to visualize quantum states and processes.
+It is a quasiprobability distribution where typically quantum states will have negative values, impossible for classical states.
+
 % TODO Explain why the wigner function is good for visualization.
 
-\section{Bosonic codes}
-% TODO Explain what bosonic codes are
-
-\subsection{Cat codes}
-% TODO Explain what the cat code basis is and why it can be used for QEC.
-
-
 \section{Quantum optimal control}
-Quantum control is the process of controlling a quantum system by controlling the amplitude of a set of control operators in time~\cite{fisher_optimal_2010}.
+Quantum control is the process of controlling a quantum system by controlling the amplitude of a set of control operators~\cite{fisher_optimal_2010}.
 Such a system can be described~\cite{fisher_optimal_2010} by a Hamiltonian of the following form
 \begin{equation}
     \Ham(t) = \underbrace{\Ham_d}_{\text{Drift}} + \underbrace{u_0(t)\Ham_0 + \dotsc + u_N(t)\Ham_N}_{\text{Control}}.
@@ -85,9 +107,9 @@ The optimal solutions are generally not analytically solvable and thus the pulse
 The algorithm used for this thesis is called Krotov's method and will be presented in the Method chapter.
 
 \subsection{Unitary transformation}
-A unitary transformation can significantly simplify systems that are hard to simulate.
+A unitary transformation can drastically simplify systems that are hard to simulate.
 This idea will be conceptually presented here and then implemented in the Method chapter.
-The unitary transformation that is used is a special case of transformations called the \emph{interaction picture} where the Hamiltonian is split up into a time-independent and time-dependent part
+The transformation that is used is a special case of unitary transformations called the \emph{interaction picture} where the Hamiltonian is split up into a time-independent and time-dependent part
 \begin{equation}
     \Ham(t) = \Ham_A + \Ham_B(t).
 \end{equation}
@@ -97,7 +119,5 @@ By choosing the unitary operator \( \hat{U} = \ex^{i \Ham_A t} \) the unitary tr
     &=~ \hat{U}\Ham_A\hat{U}^\dagger + \hat{U}\Ham_B\hat{U}^\dagger + i\qty(i\Ham_A t)\ex^{i \Ham_A t}\ex^{-i\Ham_A t}=\\
     &=~ \Ham_A + \hat{U}\Ham_B\hat{U}^\dagger - \Ham_A = \hat{U}\Ham_B\hat{U}^\dagger
 \end{align*}
-
-
 
 \end{document}
