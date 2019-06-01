@@ -1,0 +1,113 @@
+% This file was created by matplotlib2tikz v0.7.4.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+\definecolor{color1}{rgb}{1,0.498039215686275,0.0549019607843137}
+\definecolor{color2}{rgb}{0.172549019607843,0.627450980392157,0.172549019607843}
+\definecolor{color3}{rgb}{0.83921568627451,0.152941176470588,0.156862745098039}
+\definecolor{color4}{rgb}{0.580392156862745,0.403921568627451,0.741176470588235}
+\definecolor{color5}{rgb}{0.549019607843137,0.337254901960784,0.294117647058824}
+
+\begin{axis}[
+height=\figureheight,
+legend cell align={left},
+legend style={draw=white!80.0!black},
+tick align=outside,
+tick pos=left,
+width=\figurewidth,
+x grid style={white!69.01960784313725!black},
+xlabel={Resonator fock state},
+xmin=-0.35, xmax=7.35,
+xtick style={color=black},
+xtick={0,1,2,3,4,5,6,7},
+xtick={0,1,2,3,4,5,6,7},
+xtick={0,1,2,3,4,5,6,7},
+xtick={0,1,2,3,4,5,6,7},
+xtick={0,1,2,3,4,5,6,7},
+xtick={0,1,2,3,4,5,6,7},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+xticklabels={$|0\rangle$,$|1\rangle$,$|2\rangle$,$|3\rangle$,$|4\rangle$,$|5\rangle$,$|6\rangle$,$|7\rangle$},
+y grid style={white!69.01960784313725!black},
+ylabel={Maximum occupation},
+ymin=0.0291646536759453, ymax=1.04623025458686,
+ytick style={color=black}
+]
+\addplot [semithick, color0, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.376558327519355
+2 0.443423776358088
+3 0.301673476288835
+4 0.453617748312716
+5 0.22968704492691
+6 0.299087100656753
+7 0.212125738162022
+};
+\addlegendentry{\(\ket{0}\)}
+\addplot [semithick, color1, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.503275015559448
+2 0.348055162953879
+3 0.342903252233741
+4 0.454380355197419
+5 0.3191350626341
+6 0.216824933128045
+7 0.168194841008394
+};
+\addlegendentry{\(\ket{1}\)}
+\addplot [semithick, color2, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.423743872388737
+2 0.413272753322802
+3 0.437810711414165
+4 0.907883839463063
+5 0.299533162906917
+6 0.28368163636753
+7 0.0753949082628051
+};
+\addlegendentry{\((\ket{0}+\ket{1})/\sqrt{2}\)}
+\addplot [semithick, color3, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.386708053020352
+2 0.690987406925794
+3 0.231415034761671
+4 0.242545843799474
+5 0.152427700662833
+6 0.308606227797993
+7 0.196379024826859
+};
+\addlegendentry{\((\ket{0}-\ket{1})/\sqrt{2}\)}
+\addplot [semithick, color4, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.420799497637089
+2 0.428139612425514
+3 0.453384815564454
+4 0.453625819634714
+5 0.338545931419106
+6 0.222936067396907
+7 0.125647608397117
+};
+\addlegendentry{\((\ket{0}+i\ket{1})/\sqrt{2}\)}
+\addplot [semithick, color5, mark=*, mark size=1, mark options={solid}, only marks]
+table {%
+0 1
+1 0.44269675143367
+2 0.372497935105092
+3 0.411661688912878
+4 0.454372283875332
+5 0.346989815022736
+6 0.284697032385135
+7 0.197791937467528
+};
+\addlegendentry{\((\ket{0}-i\ket{1})/\sqrt{2}\)}
+\end{axis}
+
+\end{tikzpicture}

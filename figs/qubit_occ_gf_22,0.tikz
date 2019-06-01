@@ -112,6 +112,7 @@ table {%
 21.7471264367816 0.205919685630306
 22 0.206028494318621
 };
+\addlegendentry{\(\ket{0}\)}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -203,6 +204,7 @@ table {%
 21.7471264367816 0.138903210380646
 22 0.138580016547672
 };
+\addlegendentry{\(\ket{1}\)}
 \addplot [very thick, color2]
 table {%
 0 0
@@ -294,6 +296,7 @@ table {%
 21.7471264367816 0.655177103989048
 22 0.655391489133707
 };
+\addlegendentry{\(\ket{2}\)}
 \end{axis}
 
 \end{tikzpicture}

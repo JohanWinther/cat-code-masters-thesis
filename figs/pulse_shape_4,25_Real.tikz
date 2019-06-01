@@ -43,6 +43,7 @@ table {%
 4.02631578947368 0
 4.25 0
 };
+\addlegendentry{(Guess)}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -66,6 +67,7 @@ table {%
 4.02631578947368 -0.00392554086381932
 4.25 0
 };
+\addlegendentry{(Optim.)}
 \end{axis}
 
 \end{tikzpicture}
