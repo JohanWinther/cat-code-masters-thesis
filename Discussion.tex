@@ -4,10 +4,10 @@
 \chapter{Discussion}
 In this chapter the methods, results and analyses will be discussed, first for the qubit state transfers and secondly for the cat code encodings.
 
-\section{Qubit State Transfers and Performance of Krotov's Method}
-\subsection{%
-	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer
-}
+\section{Qubit State Transfers}
+%\subsection{%
+%	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer
+%}
 We start by looking at the \(\ket{0}\rightarrow\ket{1}\) transfer.
 As the system was set up to realise a \(\pi\)-rotation for a Blackman pulse with length \(T=6\sigma = 6\times\ns{3} = \ns{18}\), it is no suprise that the starting fidelity is almost unity down to pulse lengths of \ns{18}.
 Shorter than that, the amplitude constraint affects the starting pulse; it is maximised but starts to become shorter.
@@ -35,9 +35,9 @@ As the pulses become shorter the peak becomes wider, but the solutions try to ke
 Eventually for short enough pulses this level becomes a little bit occupied, as stated before, but then drops to zero.
 Perhaps the solution tries to ``take a shortcut'' through \(\ket{2}\), which may be a viable strategy, but if that is the case then one needs to set \(N_q = 4\) and penalize \(\ket{3}\) to make sure that the truncation is a valid approximation.
 
-\subsection{%
-	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{2}\)}}{0 -> 2} state transfer
-}
+%\subsection{%
+%	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{2}\)}}{0 -> 2} state transfer
+%}
 Now we continue with the \(\ket{0}\rightarrow\ket{2}\) transfer.
 The ``strategy'' for all pulse lengths in this case is to first invert the population and then at the halfway point start simultaneously driving the second transition level to start pumping to \(\ket{2}\).
 The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(\kappa_q\), which is also visible in the frequency spectrum.
@@ -56,11 +56,15 @@ The number of iterations also fluctuate for pulse lengths which don't reach the 
 
 Interestingly, for both transfers the optimization converges quickly to a relatively high fidelity while the majority of the time is spent fine-tuning the pulse shapes.
 This could be a side-effect of the static step size.
-
+While the number of iterations were large, each iteration step was faster than 1 second, so the total optimization might not be a problem.
+This optimization time could potentially grow exponentially for larger Hilbert spaces though.
 
 \section{Cat code encoding}
 
+
 %qubit oscillations are not stable at such a high coupling
 %therefore final fidelity is not that robust
+
+
 
 \end{document}
