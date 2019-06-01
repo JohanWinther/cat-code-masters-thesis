@@ -7,8 +7,10 @@ In this chapter Krotov's method for quantum optimal control will be briefly intr
 Then the numerical experiments will be explained.
 
 \section{Krotov's Method for quantum optimal control}
-Krotov's method fundamentally relies on the variational principle to minimize a functional \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\epsilon_l^{(i)}(t)}] \] where constraints are included as Lagrange multipliers \cite{goerz_krotov:_2019}.
-A detailed explanation of this functional when the method is applied to quantum systems can be found in \cite{reich_monotonically_2012}.
+Krotov's method for quantum control fundamentally relies on the variational principle to minimize a functional
+\[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{\u_l^{(i)}(t)}] \]
+that depends on the pulse shapes and the quantum states of the system evolved under these pulse shapes \cite{goerz_krotov:_2019}.
+A detailed explanation of this functional can be found in \cite{reich_monotonically_2012}.
 However a quick summary of how the method works will be presented here.
 Starting with some guess pulse shapes, the initial state is forward propagated in time using a Hamiltonian of the same form as \cref{eq:optimal-control-hamiltonian} and the value of the functional is calculated.
 Then changes to the pulse shapes which will decrease the value of the functional are calculated, by propagating states with these new pulse shapes, and these updates become the new pulse shapes.

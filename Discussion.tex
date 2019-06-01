@@ -60,7 +60,17 @@ While the number of iterations were large, each iteration step was faster than 1
 This optimization time could potentially grow exponentially for larger Hilbert spaces though.
 
 \section{Cat code encoding}
+The 6 simultaneous objective optimization ended with a total fidelity of \(F = 0.999380\) and the individual fidelities all over \(F > 0.999000\).
+This supports the validity of the method as a means to obtain one pulse to encode all 6 states.
+Even though the fidelity goal of \(F > 0.999999\) was not reached it could be possible to reach by decreasing \(\Delta F\).
+Note however that there is no guarantee that such a solution exists.
+To continue, the differences in the individual fidelities are most probably due to numerical instability as they are very small.
 
+Looking at the pulse shapes, \cref{fig:cat-pulse-shape}, doesn't give much insight however the spectrum shows some interesting phenomena.
+The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
+However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
+The width of the resonance peaks for both qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state.
+So during different times of of the evolution the system is driven at a range of frequencies.
 
 %qubit oscillations are not stable at such a high coupling
 %therefore final fidelity is not that robust

@@ -232,7 +232,7 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 
 \clearpage{}
 \section{Cat code encoding}
-The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999380\), recall the fidelity measure in \cref{eq:total-fidelity}.
+The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999380\), (recall the fidelity measure for multiple objectives in \cref{eq:total-fidelity}).
 The individual fidelities for the 6 initial states are shown in \cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
 
 \begin{table}[H]
@@ -324,12 +324,13 @@ Looking at the dynamical behaviour one can see that common for all transfers is 
 	\label{fig:cat-qubit-occupation}
 \end{figure}
 
-The dynamics of the resonator are shown in \cref{app:resonator-occupation} as there are too many states for one plot, however one interesting measure we can look at is the maximum occupation of the 8 resonator states.
+One interesting measure we can look at is the maximum occupation of the 8 resonator states.
 This can give us information about the the validity of the Hilbert space truncation.
 In \cref{fig:cat-max-occ} the maximum reached occupation probability are plotted for all states.
 This is done for all the 6 state transfers.
 Looking only at the odd states there is a clear downward trend for higher states, with \(\ket{7}\) only reaching circa 0.2 of occupation probability during the \(\ket{0}\) transfer.
 \(\ket{6}\) is in the 0.2–0.3 occupation range for all transfers.
+The dynamics of the resonator are provided in \cref{app:resonator-occupation} for further analysis.
 
 \tikzfig{figs/cat_max_occ}{asda}{fig:cat-max-occ}{0.8\textwidth}{20em}
 
