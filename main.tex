@@ -35,6 +35,11 @@
 \usepackage{csquotes} % Needed for biblatex
 % Biblatex allows you to choose backend, either the old "bibtex", or the new "biber".
 \usepackage[giveninits=true, style=ieee, backend=biber]{biblatex} % Modern bibliography facilities (you may change style to numeric)
+\AtEveryBibitem{%
+  \clearfield{note}%
+  \clearfield{issn}%
+  \clearfield{issn}%
+}
 \usepackage{mathtools} % All your math related needs
 \usepackage{tikz} % Draw figures. Required for cover page
 
@@ -159,14 +164,23 @@ I would like to thank
 % Highly recommended to put contents into subfiles, or use \input.
 %\subfile{ExampleIntroduction}
 \subfile{Introduction}
+\clearpage{}
 \subfile{Theory}
+\clearpage{}
 \subfile{Method}
+\clearpage{}
 \subfile{Results}
+\clearpage{}
 \subfile{Discussion}
+\clearpage{}
 \subfile{Conclusion}
 
-%\nocite{*} % Cites everything from the bibliography
+\clearpage{}
 \printbibliography{} % This command is new in biblatex. Do not attempt to use style files as with old latex.
+
+\clearpage{}
+\appendix
+\subfile{Appendix}
 
 \end{document}
 

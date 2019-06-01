@@ -38,9 +38,10 @@ In the \texttt{convergence} module, help functions for the stopping criteria are
 It exposes values such as the overlap of the forward propagated state and target state \(\braket{\psi(T)}{\psi_{\text{tar}}}\) during the optimization which can be used to check when convergence is reached.
 The stopping criteria chosen for this thesis is either a minimum fidelity
 \begin{equation}
-    F = \frac{1}{N}\sum_{k=1}^{N} |\braket{\psi(T)}{\psi_{\text{tar}}}|^2,
+    F = \frac{1}{N}\sum_{k=1}^{S} |\braket{\psi(T)}{\psi_{\text{tar}}}|^2,
+    \label{eq:total-fidelity}
 \end{equation}
-where \(N\) is the number of (simultaneous) state transfers we want to realise, or when the change in fidelity between iterations \(\Delta F\) falls below a specified value (a local minimum can be assumed to have been reached).
+where \(S\) is the number of (simultaneous) state transfers we want to realise, or when the change in fidelity between iterations \(\Delta F\) falls below a specified value (where a local minimum can be assumed to have been reached).
 The values of these will be specified in~\cref{sec:optimization-experiments}
 
 Finally, the \texttt{optimization} module is used to setup the whole optimization.
@@ -63,7 +64,7 @@ The anharmonic oscillator (qubit) in~\cref{eq:resonator-hamiltonian} was chosen 
 As stated earlier such a system will be referred to as a qubit even though it has more than two energy levels.
 To induce transitions between the states of the qubit, control pulse terms were added to~\cref{eq:resonator-hamiltonian}
 \begin{equation}
-    \Ham = \omega_{q} \au\ad + \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{i\omega_{q}t}\ad + \Omega^*(t)\ex^{-i\omega_{q}t}\au
+    \Ham = \omega_{q} \au\ad + \frac{\kappa}{2} \qty(\au\ad)^2 + \Omega(t)\ex^{-i\omega_{q}t}\ad + \Omega^*(t)\ex^{i\omega_{q}t}\au
     \label{eq:system-hamiltonian}
 \end{equation}
 where \( \Omega(t) \) is the complex amplitude of the control pulse.
@@ -89,7 +90,7 @@ Thus the final Hamiltonian became
 \end{equation}
 
 The parameters of the qubit were chosen to model real superconducting qubits with \( \kappa = -2\pi\times\SI{297}{\mega\hertz} \) (and \( \omega_{q} = 2\pi\times\SI{6.2815}{\giga\hertz} \)).
-The system Hamiltonian~\eqref{eq:system-hamiltonian-rotating} was simulated with a Hilbert space size conveniently chosen to be \( N_q = 3 \).
+The system Hamiltonian in \cref{eq:system-hamiltonian-rotating} was simulated with a Hilbert space size conveniently chosen to be \( N_q = 3 \).
 A smaller Hilbert space, and consequently smaller matrices, requires less computations but could possibly be a poor approximation of the Hamiltonian.
 Thus the solutions of the optimization were analysed with this in mind.
 
@@ -134,6 +135,7 @@ Therefore the optimization needs to find a solution which circumvents this probl
 Lastly, for the \(\ket{0}\rightarrow\ket{2}\) state transfer pulse shapes were optimized with varying lengths from \SI{22}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-09}\).
 The low \(\Delta F\) was needed because the changes were very small in the beginning of the optimization.
 The step size was chosen as \(\lambda = \frac{1}{2A_{m}}\) due to slow convergence.
+In contrast to the \(\ket{0}\rightarrow\ket{1}\) state transfer both initial guess pulses were chosen to be Blackman pulses \(u_0(t) = u_1(t) = A(T/6)B(T)\).
 
 \subsection{Cat code encoding}
 For the cat code encoding, 6 simultaneous objectives were chosen to give encoding pulses which maps the 6 furthest states on the Bloch sphere to the corresponding resonator states.
