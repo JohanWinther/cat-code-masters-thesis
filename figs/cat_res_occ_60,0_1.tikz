@@ -1468,7 +1468,6 @@ table {%
 59.9583043780403 5.09728667681319e-05
 60 5.17568591388937e-05
 };
-\addlegendentry{$|0\rangle$}
 \addplot [semithick, color1]
 table {%
 0 0
@@ -2912,7 +2911,6 @@ table {%
 59.9583043780403 0.00435558774678356
 60 1.81565167149287e-05
 };
-\addlegendentry{$|1\rangle$}
 \addplot [semithick, color2]
 table {%
 0 0
@@ -4356,7 +4354,6 @@ table {%
 59.9583043780403 0.686649168914728
 60 0.690987406925794
 };
-\addlegendentry{$|2\rangle$}
 \addplot [semithick, color3]
 table {%
 0 0
@@ -5800,7 +5797,6 @@ table {%
 59.9583043780403 0.000144349792310524
 60 0.00014506590981132
 };
-\addlegendentry{$|3\rangle$}
 \addplot [semithick, color4]
 table {%
 0 0
@@ -7244,7 +7240,6 @@ table {%
 59.9583043780403 9.92659174810367e-05
 60 0.000114264047108016
 };
-\addlegendentry{$|4\rangle$}
 \addplot [semithick, color5]
 table {%
 0 0
@@ -8688,7 +8683,6 @@ table {%
 59.9583043780403 0.00636899632912598
 60 6.62349817547596e-05
 };
-\addlegendentry{$|5\rangle$}
 \addplot [semithick, color6]
 table {%
 0 0
@@ -10132,7 +10126,6 @@ table {%
 59.9583043780403 0.302318691531304
 60 0.308606227797993
 };
-\addlegendentry{$|6\rangle$}
 \addplot [semithick, white!49.80392156862745!black]
 table {%
 0 0
@@ -11576,7 +11569,6 @@ table {%
 59.9583043780403 1.29669252288235e-05
 60 1.08869854143761e-05
 };
-\addlegendentry{$|7\rangle$}
 \end{axis}
 
 \end{tikzpicture}
