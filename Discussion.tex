@@ -35,6 +35,7 @@ As the pulses become shorter the peak becomes wider, but the solutions try to ke
 Eventually for short enough pulses this level becomes a little bit occupied, as stated before, but then drops to zero.
 Perhaps the solution tries to ``take a shortcut'' through \(\ket{2}\), which may be a viable strategy, but if that is the case then one needs to set \(N_q = 4\) and penalize \(\ket{3}\) to make sure that the truncation is a valid approximation.
 
+In conclusion, \krotov{} has no problem finding a solution to this simple state transformation.
 %\subsection{%
 %	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{2}\)}}{0 -> 2} state transfer
 %}
@@ -59,6 +60,8 @@ This could be a side-effect of the static step size.
 While the number of iterations were large, each iteration step was faster than 1 second, so the total optimization might not be a problem.
 This optimization time could potentially grow exponentially for larger Hilbert spaces though.
 
+To conclude, \krotov{} can also be used to optimize for somewhat more complicated transfers than the simple qubit rotation.
+
 \section{Cat code encoding}
 The 6 simultaneous objective optimization ended with a total fidelity of \(F = 0.999380\) and the individual fidelities all over \(F > 0.999000\).
 This supports the validity of the method as a means to obtain one pulse to encode all 6 states.
@@ -69,12 +72,41 @@ To continue, the differences in the individual fidelities are most probably due 
 Looking at the pulse shapes, \cref{fig:cat-pulse-shape}, doesn't give much insight however the spectrum shows some interesting phenomena.
 The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
 However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
-The width of the resonance peaks for both qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state.
-So during different times of of the evolution the system is driven at a range of frequencies.
+The width of the resonance peaks for the qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state of the qubit (resonator).
+Consequently, during different times of the pulse the system needs to be driven at a range of frequencies.
+Further research is needed to explain the characteristics of the solution.
 
-%qubit oscillations are not stable at such a high coupling
-%therefore final fidelity is not that robust
+The only discernable ``strategy'' found, judging by the qubit dynamics in \cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
+This is in line with the strategy presented in \cite{quantum dynamics}.
+However, further analysis of the resonator and qubit dynamics and interactions could bring a further understanding.
 
+One significant issue with the final state is that it is not that robust with respect to small changes in the pulses, as can be seen from the fact that the fidelity goal is reached in the last fraction of a nanosecond.
+This could be due to the relatively large coupling factor \(g\) which was chosen as to allow for a shorter total pulse length.
+The large coupling will force the qubit and resonator to induce oscillations in each other.
+However even though decreasing this would help mitigate the problem this would require a longer pulse length and therefore longer computation times (as the time step is fixed).
+The proposed solution is to add a mechanism for optimizing pulse shapes with points sparser than the time grid, and also enable time-dependent Hamiltonians to be used, with arbitrary initial phase shifts.
+As the \krotov{} package already provides a way to optimize ensemble objectives with different parameters in each Hamiltonian \cite{goerz_robustness_2014} for robustness, this could be used to optimize for the average of the added phase shift.
+This should give more robust pulses.
 
+As the previous experiments showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
+Even though the underlying theory of the solution is not understood at this moment, Krotov's method proves itself to be able to optimize a state transfer in a qubit-resonator coupled system to a fidelity \(F > 0.9990\).
+Further experiments need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
+
+\section{General discussion of \krotov{}}
+\label{sec:general}
+\krotov{} provides an easy-to-use interface for setting up the optimization problem.
+This is the strongest argument for using this package as the features are unrivaled compared to other optimization packages.
+Firstly, QuTiP~\cite{johansson_qutip_2013} can optimize with the GRAPE and CRAB algorithms, but there are no provided interfaces for
+(1) saving optimizations to a file,
+(2) continuing optimization efter they are stopped,
+(3) optimizing for multiple control fields and objectives,
+(4) using custom convergence criteria and 
+(5) modifying the pulses after every iteration (for amplitude constraints).
+These are critical features which \krotov{} has.
+Secondly, GOAT~\cite{machnes_gradient_2015} is a new promising algorithm for quantum optimal control, but has no Python package available yet and the MATLAB implementation has a steep learning curve.
+If or when the GOAT Python implementation becomes available it would be interesting to compare the feature set and the actual algorithm by testing comparing the performance on the same optimization objective.
+
+The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which will be presented in \cref{sec:future-work}.
+If all else fails one could always throw more compute at it.
 
 \end{document}

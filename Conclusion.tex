@@ -7,7 +7,20 @@ In conclusion, Krotov's method efficiently realises the \(\ket{0}\rightarrow\ket
 It can also find non-trivial solutions for shorter pulse lengths, when an amplitude constraints is present,
 
 
+\section{Using \krotov{} For Cat Code Encoding Pulse Generation}
+
+Together with improvements in the model and techniques for speeding up the optimization this could be a valid tool in realising QEC with cat codes as the pulses only need to be found once in order to be used for encoding.
+
 \section{Future work}
+\label{sec:future-work}
+
+Improving the speed of the optimizations in this thesis could be done by
+\begin{itemize}
+    \item parallelizing the simultaneous objectives (\krotov{} provides an interface for this),
+    \item using the dispersive regime approximation and
+    \item implement a problem-specific system propagator using Cython.
+\end{itemize}
+
 Dispersive regime
 Penalize higher states
 Include dissipation (Liouvillian)
