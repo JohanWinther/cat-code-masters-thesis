@@ -59,67 +59,6 @@ The basis can also be in an odd parity where the two coherent states are subtrac
 A more detailed review of the cat code can be found in the supplementary information of~\cite{ofek_extending_2016}.
 % TODO Explain what the cat code basis is and why it can be used for QEC.
 
-
-\section{Visualization of quantum states}
-In order to understand the results presented later in this thesis, some visualization techniques of quantum states are shown and explained.
-
-\subsection{Bloch sphere}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.3\textwidth]{figs/bloch_sphere.png}
-    \caption{Representation of an abritrary pure quantum state on the Bloch sphere.
-    \\ Source:~\cite{glosser.ca_english:_2012} (CC BY-SA 3.0).
-    }%
-    \label{fig:bloch_sphere}
-\end{figure}
-
-The pure state of a qubit can be visualized on the surface of a unit sphere with the following parametrization
-\begin{equation}
-    \ket{\psi} = \cos(\frac{\theta}{2})\ket{0} + \ex^{i\phi}\sin(\frac{\theta}{2})\ket{1}
-\end{equation}
-where \( \theta \) and \( \phi \) are angles which are shown in \cref{fig:bloch_sphere}.
-The ground state \(\ket{0}\) is located on the ``north pole'' and the excited state \(\ket{1}\) on the ``south pole''.
-
-Further, a handy trick to visualize the qubit when it has more levels than three is to ``project'' the state to the \(\qty{\ket{0},\ket{1}}\) basis with \( \op{0} + \op{1} \) and then plot it on the Bloch sphere.
-This means that the subspace which is not spanned by the first two levels will be represented by the inside of the sphere.
-To make an example, \(\ket{2}\) will lie right in the center of the sphere while \(\qty(\ket{1}+\ket{2})/\sqrt{2}\) will lie halfway between the center and the south pole.
-
-%\subsection{Density matrices and Hinton diagrams}
-%Even tough this thesis will only deal with pure quantum states \(\ket{\Psi}\) it can be interesting to look at the density matrix \(\op{\Psi}\).
-%This density matrix can be visualized in a Hinton diagram which exposes the coefficients of the basis states of \(\ket{\Psi}\) in a visual way.
-%This is a good way for quickly judging the quality of a quantum state.
-% TODO Explain the Hinton diagram and density matrix
-
-\subsection{Wigner function}
-The wigner function can be used to visualize quantum states and processes.
-It is a quasiprobability distribution where states exhibiting quantum phenomena will have negative values, impossible for classical states.
-
-To give a visual example, 6 example states in the cat code basis are shown in \cref{fig:cat-resonator-wigner-targets} with \(\alpha=2\) and a Hilbert space size of \(N_r=8\).
-Looking at \(\ket{0}\) we can see two lobes with an interference fringe in between them.
-For large enough \(N_r\) there will be no truncation of the Hilbert space and the lobes will appear circular.
-Compared to the basis states, the superposition states exhibit even more complex shapes.
-
-\begin{figure}[ht]
-	\centering
-	\foreach \n/\capn [count=\ni] in {{0}/{\ket{0}},{5}/{\ket{1}},{3}/{(\ket{0}+\ket{1})/\sqrt{2}},{1}/{(\ket{0}-\ket{1})/\sqrt{2}},{2}/{(\ket{0}+i\ket{1})/\sqrt{2}},{4}/{(\ket{0}-i\ket{1})/\sqrt{2}}}{
-		\subcaptionbox{\(\capn{}\)}{
-			\centering
-			\includegraphics[width=0.30\textwidth]{figs/cat_wigner_targets_\n.png}
-		}%
-		\ifnum\ni=6%
-				%
-		\else%
-			\hfill
-		\fi%
-	}
-	\caption{%
-	Wigner function of some example states in the cat code basis with \(\alpha = 2\) and \(N_r=8\).
-	}%
-	\label{fig:cat-resonator-wigner-targets}
-\end{figure}
-
-% TODO Explain why the wigner function is good for visualization.
-
 \section{Quantum optimal control}
 Quantum control is the process of controlling a quantum system by controlling the amplitude of a set of control operators~\cite{fisher_optimal_2010}.
 Such a system can be described~\cite{fisher_optimal_2010} by a Hamiltonian of the following form

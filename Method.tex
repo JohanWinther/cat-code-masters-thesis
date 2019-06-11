@@ -3,6 +3,9 @@
 \begin{document}
 
 \chapter{Method}
+The pulses will be optimized using Krotov's method~\cite{reich_monotonically_2012}, a gradient-based optimization algorithm available publicly as a ready-to-use Python package~\cite{goerz_krotov:_2019}.
+
+The algorithm used for this thesis is called Krotov's method and will be presented in the Method chapter.
 In this chapter Krotov's method for quantum optimal control will be briefly introduced and an implementation as a Python package.
 Then the numerical experiments will be explained.
 
@@ -40,7 +43,7 @@ In the \texttt{convergence} module, help functions for the stopping criteria are
 It exposes values such as the overlap of the forward propagated state and target state \(\braket{\psi(T)}{\psi^{\text{tar}}}\) during the optimization which can be used to check when convergence is reached.
 The stopping criteria chosen for this thesis is either a minimum fidelity
 \begin{equation}
-    F = \frac{1}{S}\sum_{k=1}^{S} |\braket{\psi_k(T)}{\psi_{k}^{\text{tar}}}|^2,
+    F = \frac{1}{S}|\sum_{k=1}^{S} \braket{\psi_k(T)}{\psi_{k}^{\text{tar}}}|^2,
     \label{eq:total-fidelity}
 \end{equation}
 where \(S\) is the number of (simultaneous) state transfers we want to realise, or when the change in fidelity between iterations \(\Delta F\) falls below a specified value (where a local minimum can be assumed to have been reached).
@@ -151,10 +154,7 @@ and the resonator initial state is \(\ket{0}\) with target states
 \[ \cat{}, \cat[i]{},\]
 \[ \cat{}+\cat[i]{}, \cat{}-\cat[i]{},\]
 \[ \cat{}+i\cat[i]{}, \cat{}-i\cat[i]{}. \]
-In summary the pulse shapes will realise the unitary
-\begin{equation}
-    \hat{U}(T) \qty(c_0\ket{0}+c_1\ket{0})\otimes\ket{0} = \ket{0}\otimes\qty(c_0\cat{}+c_1\cat[i]{}).
-\end{equation}
+In summary the pulse shapes will realise the unitary in \cref{eq:cat-code-unitary}.
 
 \subsubsection{Hamiltonian}
 In this experiment the coupled qubit-resonator system in \cref{eq:hamiltonian-coupled} was used.
@@ -189,7 +189,7 @@ The parameters of this system is presented in \cref{tab:ham-params}.
     \(\kappa_q/(2\pi)\) & \SI{297}{\mega\hertz} \\
     \(\omega_r/(2\pi)\) & \SI{8.3056}{\giga\hertz} \\
     \(\kappa_r/(2\pi)\) & \SI{4.5}{\kilo\hertz} \\
-    \(g/(2\pi)\) & \SI{1.413}{\giga\hertz} \\
+    \(g/(2\pi)\) & \SI{0.225}{\giga\hertz} \\
     \bottomrule
     \end{tabular}
 \end{table}

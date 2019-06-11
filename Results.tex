@@ -232,7 +232,7 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 
 \clearpage{}
 \section{Cat code encoding}
-The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999380\), (recall the fidelity measure for multiple objectives in \cref{eq:total-fidelity}).
+The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \cref{eq:total-fidelity}).
 The individual fidelities for the 6 initial states are shown in \cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
 
 \begin{table}[H]
@@ -242,15 +242,34 @@ The individual fidelities for the 6 initial states are shown in \cref{tab:cat-fi
     \begin{tabular}{@{}ll@{}}
     \toprule
     State & \(F\)\\ \midrule
-	\((\ket{0}-\ket{1})/\sqrt{2}\) & 0.999553 \\
-	\((\ket{0}+i\ket{1})/\sqrt{2}\) & 0.999411 \\
-	\((\ket{0}+\ket{1})/\sqrt{2}\) & 0.999363 \\
-    \(\ket{0}\) & 0.999362 \\
-	\(\ket{1}\) & 0.999320 \\
-	\((\ket{0}-i\ket{1})/\sqrt{2}\) & 0.999272 \\
+	\((\ket{0}+i\ket{1})/\sqrt{2}\) & 0.99939453 \\
+	\((\ket{0}-\ket{1})/\sqrt{2}\) & 0.99932348 \\
+	\((\ket{0}+\ket{1})/\sqrt{2}\) & 0.99930147 \\
+    \(\ket{0}\) & 0.99920509 \\
+	\(\ket{1}\) & 0.99918837 \\
+	\((\ket{0}-i\ket{1})/\sqrt{2}\) & 0.99899637 \\
     \bottomrule
     \end{tabular}
 \end{table}
+
+
+\begin{figure}[ht]
+	\centering
+	\subcaptionbox{Side view of Bloch sphere.}{
+		\centering
+		\includegraphics[width=0.45\textwidth]{figs/bloch_fid_low.png}
+	}%
+	\subcaptionbox{Top view of Bloch sphere.}{
+		\centering
+		\includegraphics[width=0.45\textwidth]{figs/bloch_fid_high.png}
+	}
+	\caption{%
+	The fidelities of many simulated state transfers shown on the Bloch sphere.
+	There is an asymmetry in the fidelity with higher fidelity towards the state \((\ket{0}+i\ket{1})/\sqrt{2}\).
+	}%
+	\label{fig:bloch-fid}
+\end{figure}
+
 
 The pulse shapes of the qubit and resonator are shown in \cref{fig:cat-pulse-shape}.
 Comparing the resonator and qubit we can see that the resonator pulse has rapid oscillations throughout the whole pulse while the qubit exhibits some small quick oscillation at sparse times.
@@ -357,7 +376,6 @@ As is evident from the plots they are close to the target states shown in \cref{
 	}%
 	\label{fig:cat-resonator-wigner}
 \end{figure}
-
 
 
 \end{document}
