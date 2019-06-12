@@ -7,21 +7,21 @@ For both optimization targets the optimized pulses, their properties and the fin
 
 
 \section{Qubit state transfers}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figs/3d-optim-ge.png}
+    \caption{Fidelity during optimizations for every pulse length (ns). The different colors help distinguish the lines.}\label{fig:3d-optim-ge}
+\end{figure}
 \subsection{%
 	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer
 }
+
 In \cref{fig:3d-optim-ge} the fidelity during all optimization runs are plotted.
 For pulse lengths longer than \SI{15}{\nano\second} the fidelity starts at values close to the goal (\(F>0.9\)) and the number of iterations is relatively low (less than 85 iterations).
 In contrast, pulses shorter than \SI{15}{\nano\second} start at lower fidelities while the number of iterations are roughly one order of magnitude larger with no clear pattern with respect to the pulse length.
 
 To give a more detailed picture, the starting fidelity and optimized fidelity is plotted over pulse length in \cref{fig:fidelity-length-ge}.
 The optimizations where the fidelity goal was not reached, pulse lengths equal to and below \SI{10.50}{\nano\second}, are marked with stars.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{figs/3d-optim-ge.png}
-    \caption{Fidelity during optimizations for every pulse length (ns). The different colors help distinguish the lines.}\label{fig:3d-optim-ge}
-\end{figure}
 
 \tikzfig{figs/fidelity-length-ge}{%
 Fidelity of first and last iteration of every pulse length.
@@ -30,7 +30,7 @@ Fidelity of first and last iteration of every pulse length.
 Further analysis is done on pulses with lengths \SI{4.25}{\nano\second}, \SI{6.0}{\nano\second}, \SI{8.0}{\nano\second}, \SI{10.0}{\nano\second}, \SI{20.0}{\nano\second} and \SI{30.0}{\nano\second}.
 The optimized pulse shapes \(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) are plotted in \cref{fig:pulse_shape} together with the guess pulses. Pulses longer than \ns{20} require only fine adjustments to the Blackman guess pulse while shorter pulses have an imaginary part which is maximized for the whole duration of the pulse.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{
@@ -70,7 +70,7 @@ The time evolution of the system under the optimized pulses are visualized by pl
 and the projection of the state on the Bloch sphere over time, \cref{fig:bloch_evolution}.
 %, and a Hinton diagram of the final state, \cref{fig:hinton}.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{
@@ -91,7 +91,7 @@ and the projection of the state on the Bloch sphere over time, \cref{fig:bloch_e
 For short pulse lengths there is not enough time for the transfer from \(\ket{0}\) to \(\ket{1}\),
 but for a pulse length of roughly \ns{10.0} the goal is reached.
 \Cref{fig:qubit_occupation} \textbf{(b)} shows a little rise in occupation of \(\ket{2}\) around \ns{7.5}. 
-\begin{figure}[H]
+\begin{figure}[ht]
 \centering
 \foreach \n/\capn [count=\ni] in {{4,25}/{4.25},{6,0}/{6.0},{8,0}/{8.0},{10,0}/{10.0},{20,0}/{20.0},{30,0}/{30.0}}{
 	\subcaptionbox{Pulse length \capn{} ns}{\includegraphics[width=0.3\linewidth]{figs/bloch_evolution_\n.png}}%
@@ -235,7 +235,7 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \cref{eq:total-fidelity}).
 The individual fidelities for the 6 initial states are shown in \cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
 
-\begin{table}[H]
+\begin{table}[ht]
     \caption{Fidelities for the individual state transfers (ordered from highest to lowest).}%
     \label{tab:cat-fidelities}
     \centering
@@ -252,6 +252,9 @@ The individual fidelities for the 6 initial states are shown in \cref{tab:cat-fi
     \end{tabular}
 \end{table}
 
+Further to see how well the qubit was mapped to the cat code basis, multiple states spread around the Bloch sphere were transferred with the pulse.
+The corresponding fidelities are shown on the Bloch sphere in \cref{fig:bloch-fid} where we can se an asymmetry with larger fidelities toward \((\ket{0}+i\ket{1})/\sqrt{2}\).
+All in all the minimum fidelity of any of the states is 0.998996.
 
 \begin{figure}[ht]
 	\centering

@@ -2,30 +2,28 @@
 \begin{document}
 
 \chapter{Conclusion}
+In this chapter some concluding remarks will be presented.
+Krotov's method efficiently realises the \(\ket{0}\rightarrow\ket{1}\) transfer for various pulse lengths when supplying guess pulses close to \(\pi\)-pulses.
+It can also find non-trivial solutions for shorter pulse lengths, when an amplitude constraints is present.
+This proves that \krotov{} has potential to be used for non-trivial systems.
 
-In conclusion, Krotov's method efficiently realises the \(\ket{0}\rightarrow\ket{1}\) transfer for various pulse lengths when supplying guess pulses close to \(\pi\)-pulses.
-It can also find non-trivial solutions for shorter pulse lengths, when an amplitude constraints is present,
-
-
-\section{Using \krotov{} For Cat Code Encoding Pulse Generation}
-
-Together with improvements in the model and techniques for speeding up the optimization this could be a valid tool in realising QEC with cat codes as the pulses only need to be found once in order to be used for encoding.
+As the method could realise the transfer for arbitrary qubit states, there is good reason to conclude that \krotov{} has the potential to be a valid tool in realising QEC with cat codes.
+Even though it can be slow the pulses only need to be found once in order to be used for encoding.
+Although many challenges are still unsolved, this proof of concept gives confidence for further research into using \krotov{} for encoding pulse optimization.
 
 \section{Future work}
 \label{sec:future-work}
-
-Improving the speed of the optimizations in this thesis could be done by
+As stated in the previous chapter, there are many ways to extend this work and solve these problems.
+Suggestions for future work are to:
 \begin{itemize}
-    \item parallelizing the simultaneous objectives (\krotov{} provides an interface for this),
-    \item using the dispersive regime approximation and
-    \item implement a problem-specific system propagator using Cython.
+    \item fix the unrealistic sample rate,
+    \item include dissipation/noise,
+    \item penalize undesired states,
+    \item perform ensemble optimization for different phases of the coupling pulses
+    \item use the dispersive regime coupling term,
+    \item implement a problem-specific system propagator using Cython for speedup and
+    \item find pulses for other bosonic codes.
 \end{itemize}
-
-Dispersive regime
-Penalize higher states
-Include dissipation (Liouvillian)
-Ensemble optimization for different phases of the coupling pulses
-
-Perhaps one could find an optimization method that is faster at fine-tuning and combine this with Krotov's method.
+To encourage the reproduction of these results and further research a link to the source code is given in \cref{sec:jupyter}.
 
 \end{document}

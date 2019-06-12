@@ -41,7 +41,7 @@ In this work the functional \texttt{chis\_ss} has been chosen for all optimizati
 
 In the \texttt{convergence} module, help functions for the stopping criteria are provided for the optimization.
 It exposes values such as the overlap of the forward propagated state and target state \(\braket{\psi(T)}{\psi^{\text{tar}}}\) during the optimization which can be used to check when convergence is reached.
-The stopping criteria chosen for this thesis is either a minimum fidelity
+The stopping criteria chosen for this thesis is either a minimum fidelity~\cite{ofek_extending_2016}
 \begin{equation}
     F = \frac{1}{S}|\sum_{k=1}^{S} \braket{\psi_k(T)}{\psi_{k}^{\text{tar}}}|^2,
     \label{eq:total-fidelity}
@@ -78,8 +78,8 @@ Looking at the Hamiltonian above it can be argued that it can be written in the 
 However, there are two problems that need to be adressed.
 Firstly, the oscillating factors require an unnecessarily fine time discretization of the pulses.
 Secondly, the Krotov package expects real-valued pulse amplitudes \( \qty{u_i(t)} \) as inputs.
-The first problem was avoided by transforming the Hamiltonian into the interaction picture.
-Choosing \( H_A = \omega_{q} \au\ad \), \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
+The first problem was avoided by transforming the Hamiltonian into the interaction picture with respect to \(\omega_{q} \au\ad \)
+%Now \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
 \begin{equation}
     \Ham \rightarrow~ \frac{\kappa_q}{2}(\au)^2\ad^2 + \Omega(t)\ad + \Omega^*(t)\au.
     \label{eq:krotov-hamiltonian-rotating}
@@ -96,8 +96,8 @@ Thus the final Hamiltonian became
 \end{equation}
 
 The parameters of the qubit were chosen to model real superconducting qubits with \( \kappa_q = 2\pi\times\SI{297}{\mega\hertz} \) (and \( \omega_{q} = 2\pi\times\SI{6.2815}{\giga\hertz} \)).
-The system Hamiltonian in \cref{eq:system-hamiltonian-rotating} was simulated with a Hilbert space size conveniently chosen to be \( N_q = 3 \).
-A smaller Hilbert space, and consequently smaller matrices, requires less computations but could possibly be a poor approximation of the Hamiltonian.
+The system Hamiltonian in \cref{eq:system-hamiltonian-rotating} was simulated with a truncated Hilbert space size conveniently chosen to be \( N_q = 3 \).
+A smaller truncated Hilbert space, and consequently smaller matrices, requires less computations but could possibly be a poor approximation of the Hamiltonian.
 Thus the solutions of the optimization were analysed with this in mind.
 
 \subsubsection{Optimization Setup}
@@ -128,9 +128,10 @@ This is now used to determine the maximum amplitude
 \end{equation}
 with \(A_m = A(\sigma = 3)\). 
 This axmplitude constraint is enforced by calling a function after every iteration which limits all pulse shape values \(|\Omega| < A_m\).
-Conveniently, the Blackman pulse was also used as the initial guess pulse with \(u_0(t) = A(T/6)B(t)\).
+Conveniently, the Blackman pulse was also used as the initial guess pulse with \(u_0(t) = A(T/6)B(t),\, u_1(t)=0\).
 
-Another constraint is that the edges of the pulses should always be zero with a switch-on/switch-off of \ns{2}.
+Another constraint was added so that the edges of the pulses were always zero.
+This was done with a switch-on/switch-off of \ns{2}.
 This ramp shape is half a Blackman pulse and is provided by \krotov{}'s \texttt{flattop} function.
 
 For the \(\ket{0}\rightarrow\ket{1}\) state transfer pulse shapes were optimized with varying lengths from \SI{4.25}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-07}\).
@@ -144,22 +145,22 @@ The step size was chosen as \(\lambda = \frac{1}{2A_{m}}\) due to slow convergen
 In contrast to the \(\ket{0}\rightarrow\ket{1}\) state transfer both initial guess pulses were chosen to be Blackman pulses \(u_0(t) = u_1(t) = A(T/6)B(T)\).
 
 \subsection{Cat code encoding}
-For the cat code encoding, 6 simultaneous objectives were chosen to give encoding pulses which maps the 6 furthest states on the Bloch sphere to the corresponding resonator states.
-These initial qubit states are (omitting normalization)
+For the cat code encoding, six simultaneous objectives were chosen to give encoding pulses which maps the six ``cardinal'' states on the Bloch sphere to the corresponding resonator states.
+These initial qubit states are
 \[ \ket{0}, \ket{1},\]
-\[ \ket{0}+\ket{1}, \ket{0}-\ket{1},\]
-\[ \ket{0}+i\ket{1}, \ket{0}-i\ket{1} \]
+\[ \frac{\ket{0}+\ket{1}}{\sqrt{2}}, \frac{\ket{0}-\ket{1}}{\sqrt{2}},\]
+\[ \frac{\ket{0}+i\ket{1}}{\sqrt{2}}, \frac{\ket{0}-i\ket{1}}{\sqrt{2}} \]
 with target state \(\ket{0}\),
-and the resonator initial state is \(\ket{0}\) with target states
+and the resonator initial state is \(\ket{0}\) (in the Fock basis) with target states
 \[ \cat{}, \cat[i]{},\]
-\[ \cat{}+\cat[i]{}, \cat{}-\cat[i]{},\]
-\[ \cat{}+i\cat[i]{}, \cat{}-i\cat[i]{}. \]
-In summary the pulse shapes will realise the unitary in \cref{eq:cat-code-unitary}.
+\[ \frac{\cat{}+\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-\cat[i]{}}{\sqrt{2}},\]
+\[ \frac{\cat{}+i\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-i\cat[i]{}}{\sqrt{2}}. \]
+The hope is that by optimizing these six states the pulse shapes will approximate the unitary in \cref{eq:cat-code-unitary}.
 
 \subsubsection{Hamiltonian}
 In this experiment the coupled qubit-resonator system in \cref{eq:hamiltonian-coupled} was used.
-As the operators \(\ad\) and \(\bd\) commute, \cref{eq:system-hamiltonian-rotating} was also used for the extra resonator.
-The rotating frame transformation is done with respect to \( H_A = \omega_{r} \au\ad + \omega_{q} \bu\bd \).
+As the operators \(\ad\) and \(\bd\) commute, the rewrite used in \cref{eq:system-hamiltonian-rotating} was also used for the resonator.
+The rotating frame transformation is done with respect to \(\omega_{r} \au\ad + \omega_{q} \bu\bd \).
 However as the coupling term has no time dependence and does not commute with the operators there will still be a time dependence in the rotating frame
 \begin{equation}
     g(\ad\bu + \au\bd) \rightarrow g(\ad\bu\ex^{i(\omega_q-\omega_r)t} + \au\bd\ex^{-i(\omega_q-\omega_r)t}).
@@ -178,6 +179,7 @@ The final Hamiltonian provided to \krotov{} was then
     \end{split}
 \end{equation}
 The parameters of this system is presented in \cref{tab:ham-params}.
+These were chosen to resemble the physical values measured in~\cite{ofek_extending_2016} except for \(g\) which was chosen at relatively large value to reduce the pulse length needed to realise the transfer.
 \begin{table}[H]
     \caption{Hamiltonian parameters}%
     \label{tab:ham-params}
@@ -193,15 +195,14 @@ The parameters of this system is presented in \cref{tab:ham-params}.
     \bottomrule
     \end{tabular}
 \end{table}
-The Hilbert space size for the resonator was chosen to be \( N_r = 8 \) with the mean photon number \(\alpha = 2\).
-Due to the large system size, the qubit Hilbert space size was set to \(N_q = 2\).
+The truncated Hilbert space size for the resonator was chosen to be \( N_r = 8 \) with the mean photon number \(\alpha = 2\).
+Due to the large system size, the qubit's truncated Hilbert space size was set to \(N_q = 2\).
 
 \subsubsection{Optimization setup}
 The optimization was setup in the same way as the previous experiment, however due to the rapid oscillations at \(|\omega_q-\omega_r|\) a finer time discretization of \SI{24}{\giga\samples\per\second} was chosen.
 The step size was chosen as \(\lambda = \frac{1}{\frac{1}{2}A_{m}}\) and the pulse length \(T = \ns{60}\) to allow the coupling to affect the system.
 Further, convergence criteria was chosen as \(F>0.999999\) or \(\Delta F < \num{e-06}\).
-Another important step in optimizing in the rotating frame was to convert the target states into the rotating frame by multiplying with \(U^\dagger = \ex^{i\Ham_A T}\).
-This was needed for the final states to be correct in the lab frame.
+Another important step in optimizing in the rotating frame was to convert the target states into the rotating frame in order for the final states to be correct in the lab frame.
 Initial guess pulses were chosen to be a Blackman pulse corresponding to a \(\pi\)-rotation of the qubit in the previous experiment.
 
 \end{document}

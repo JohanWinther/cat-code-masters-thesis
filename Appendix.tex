@@ -65,22 +65,36 @@ Compared to the basis states, the superposition states exhibit even more complex
 	\label{fig:cat-resonator-wigner-targets}
 \end{figure}
 
-\newpage
 \subsection{Occupation Dynamics of Resonator}%
 \label{sec:resonator-occupation}
 The occupation dynamics for the resonator are plotted in \cref{fig:cat-resonator-occupation}.
-Although they are hard to read and no conclusions are drawn from them in the thesis they are included in the appendix as reference for further analysis.
-
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
-	\foreach \n/\capn [count=\ni] in {{0}/{\ket{0}},{5}/{\ket{1}},{3}/{(\ket{0}+\ket{1})/\sqrt{2}},{1}/{(\ket{0}-\ket{1})/\sqrt{2}},{2}/{(\ket{0}+i\ket{1})/\sqrt{2}},{4}/{(\ket{0}-i\ket{1})/\sqrt{2}}}{
+	\foreach \n/\capn [count=\ni] in {{0}/{\ket{0}},{5}/{\ket{1}},{3}/{(\ket{0}+\ket{1})/\sqrt{2}}}{
 		\subcaptionbox{Transfer of \(\capn{}\)}{
 			\centering
 			\setlength\figureheight{20em}
-			\setlength\figurewidth{0.45\textwidth}
+			\setlength\figurewidth{\textwidth}
 			\input{figs/cat_res_occ_60,0_\n.tikz}
 		}%
-		\ifnum\ni=6%
+		\ifnum\ni=3%
+				%
+		\else%
+			\hfill
+		\fi%
+	}
+	\caption{Resonator level occupation over time for the 6 state transfers.}%
+\end{figure}
+\begin{figure}[H]\ContinuedFloat{}
+	\centering
+	\foreach \n/\capn [count=\ni] in {{1}/{(\ket{0}-\ket{1})/\sqrt{2}},{2}/{(\ket{0}+i\ket{1})/\sqrt{2}},{4}/{(\ket{0}-i\ket{1})/\sqrt{2}}}{
+		\subcaptionbox{Transfer of \(\capn{}\)}{
+			\centering
+			\setlength\figureheight{20em}
+			\setlength\figurewidth{\textwidth}
+			\input{figs/cat_res_occ_60,0_\n.tikz}
+		}%
+		\ifnum\ni=3%
 				%
 		\else%
 			\hfill
@@ -90,10 +104,10 @@ Although they are hard to read and no conclusions are drawn from them in the the
 	\label{fig:cat-resonator-occupation}
 \end{figure}
 
-
 \newpage
 \section{Jupyter Notebooks and Optimization Data}
+\label{serc:jupyter}
 To ease the reproducibility of the experiments the Jupyter notebooks used in this thesis and majority of resulting data are available at \url{https://github.com/JohanWinther/cat-state-encoding}.
-Although the project
+Even though the code isn't provided in a structured fashion it will still be provided publicly so as to encourage code and data sharing.
 
 \end{document}
