@@ -551,7 +551,7 @@
  {\raggedright\Huge\bfseries\sffamily\noindent\@title\par} % title, 21
  \@ifundefined{@subtitle}{\vspace{1em}}{{\raggedright\huge\sffamily\noindent\@subtitle\par}} % subtitle, 16
  \if@bachelorsormasters
- {\large\noindent{\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
+ {\large\noindent{\\\sffamily\thesisname\ \inname\ \@thesisin}\par} % 14 thesis in programmename (only bachelor's and master's)
  \fi
  \vskip 1.5em
  {\renewcommand{\and}{\\}\Large\sffamily\noindent \MakeUppercase{\@author}\par}% 18
@@ -624,12 +624,17 @@
   \renewcommand{\and}{\\}\MakeUppercase{\@author}
   \@ifundefined{@ISBN}{}{\\ISBN \@ISBN}
   \par}
- \vskip 2em
+  \vskip 2em
  {\noindent \copyright\ {\renewcommand{\and}{, }\MakeUppercase{\@author}}, \@copyrightyear\par}
+ \vskip 2em
+ {\noindent
+ Supervisor: Giulia Ferrini and Simone Gasparinetti, Department of Microtechnology and Nanoscience\\
+ Examiner: Göran Johansson, Department of Microtechnology and Nanoscience
+ \par}
  \vskip 2em
  {\noindent% 
   \ifdefempty{\@reportno}{}{\@reportseries\ \@reportno\\}%
-  \ifdefempty{\@ISSN}{}{ISSN \@ISSN\\}%
+  %\ifdefempty{\@ISSN}{}{ISSN \@ISSN\\}%
   \@department\\
   \@ifundefined{@division}{}{\@division\\}
   \universityname\\

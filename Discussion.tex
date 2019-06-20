@@ -31,7 +31,7 @@ However this also increases the computation time as the Hamiltonian needs to eit
 
 The spectrum of the pulse shapes somewhat explains the ``strategy'' of the optimization.
 For the longer pulse lengths there is no problem in keeping the pulse frequency mostly around the first transition frequency, only driving the qubit to \(\ket{0}\).
-As the pulses become shorter the peak becomes wider, but the solutions try to keep the amplitude at the second transition frequency \(\omega_r+\kappa_q\) low to keep the qubit from going into \(\ket{2}\).
+As the pulses become shorter the peak becomes wider, but the solutions try to keep the amplitude at the second transition frequency \(\omega_r+K_q\) low to keep the qubit from going into \(\ket{2}\).
 Eventually for short enough pulses this level becomes a little bit occupied, as stated before, but then drops to zero.
 Perhaps the solution tries to ``take a shortcut'' through \(\ket{2}\), which may be a viable strategy, but if that is the case then one needs to set \(N_q = 4\) and penalize \(\ket{3}\) to make sure that the truncation is a valid approximation.
 
@@ -41,8 +41,8 @@ In conclusion, \krotov{} has no problem finding a solution to this simple state 
 %}
 Now we continue with the \(\ket{0}\rightarrow\ket{2}\) transfer.
 The ``strategy'' for all pulse lengths in this case is to first invert the population and then at the halfway point start simultaneously driving the second transition level to start pumping to \(\ket{2}\).
-The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(\kappa_q\), which is also visible in the frequency spectrum.
-While the peak at \(\omega_q+\kappa_q\) was expected, the peak at \(\omega_q-\kappa_q\) for pulse lengths shorter than \ns{29} is a suprise with no clear explanation as to why.
+The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(K_q\), which is also visible in the frequency spectrum.
+While the peak at \(\omega_q+K_q\) was expected, the peak at \(\omega_q-K_q\) for pulse lengths shorter than \ns{29} is a suprise with no clear explanation as to why.
 It is also not clear why the solutions drive harder at this frequency the shorter the pulse length.
 
 For this optimization the initial guess pulses were very far from any solution, with the fidelity almost starting at zero for all pulse lengths.
@@ -62,7 +62,7 @@ This optimization time could potentially grow exponentially for larger Hilbert s
 
 To conclude, \krotov{} can also be used to optimize for somewhat more complicated transfers than the simple qubit rotation.
 
-\section{Cat code encoding}
+\section{Cat Code Encoding}
 The six simultaneous objective optimization ended with a total fidelity of \(F = 0.999234\) and the individual fidelities all over \(0.9989000\).
 The simulations also showed that a spread of states around the Bloch sphere also were larger than this latter fidelity.
 This supports the validity of the method as a means to obtain one pulse to encode all six states.
@@ -72,14 +72,14 @@ One reason could be that the guess pulses introduce a bias and this bias is stil
 Even though the fidelity goal of \(F > 0.999999\) was not reached it could be possible to reach by decreasing \(\Delta F\).
 Note however that there is no guarantee that such a solution exists.
 
-Looking at the pulse shapes, \cref{fig:cat-pulse-shape}, doesn't give much insight however the spectrum shows some interesting phenomena.
+Looking at the pulse shapes, \Cref{fig:cat-pulse-shape}, doesn't give much insight however the spectrum shows some interesting phenomena.
 The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
 However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
 The width of the resonance peaks for the qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state of the qubit (resonator).
 Consequently, during different times of the pulse the system needs to be driven at a range of frequencies.
 Further research is needed to explain the characteristics of the solution.
 
-The only discernable ``strategy'' found, judging by the qubit dynamics in \cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
+The only discernable ``strategy'' found, judging by the qubit dynamics in \Cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
 This is in the same essence as the cat state generation strategy presented in~\cite{haroche_exploring_2006}.
 However, further analysis of the resonator and qubit dynamics and interactions could bring a further understanding.
 
@@ -98,9 +98,9 @@ One way could be to add a mechanism for optimizing pulse shapes with points spar
 Thus one could implement the time-dependent coupling terms separately from the control terms.
 However if the forward propagation simulation is the most computationally intensive part this would not really help.
 
-As the previous experiments showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
+As the qubit transfer simulations showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
 Even though the underlying theory of the solution is not understood at this moment, Krotov's method proves itself to be able to optimize a state transfer in a qubit-resonator coupled system to a fidelity \(F > 0.9990\).
-Further experiments need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
+Further research need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
 
 \section{General discussion of \krotov{}}
 \label{sec:general}
@@ -116,7 +116,7 @@ These are all critical features which \krotov{} has.
 Secondly, GOAT~\cite{machnes_gradient_2015} is a new promising algorithm for quantum optimal control, but has no Python package available yet and the MATLAB implementation has a steep learning curve.
 If or when the GOAT Python implementation becomes available it would be interesting to compare the feature set and the actual algorithm by testing comparing the performance on the same optimization objective.
 
-The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which will be presented in \cref{sec:future-work}.
+The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which will be presented in \Cref{sec:future-work}.
 If all else fails one could always throw more compute at it.
 
 \end{document}

@@ -12,24 +12,24 @@ Note however that it is assumed that the reader has at least a basic understandi
 Superconducting resonators are used in quantum computing both as the basis for qubits and as readout and control components \cite{}.
 Although ideal resonators have equally spaced energy levels, in reality they are more or less anharmonic and the general Hamiltonian for a quantum anharmonic resonator is
 \begin{equation}
-    \Ham = \omega_{q} \au\ad + \frac{\kappa_q}{2} (\au)^2\ad^2
+    \Ham = \omega_{q} \au\ad + \frac{K_q}{2} (\au)^2\ad^2
     \label{eq:resonator-hamiltonian}
 \end{equation}
-where \( \omega_{q} \) is the resonance frequency, \( \kappa_q \) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
+where \( \omega_{q} \) is the resonance frequency, \( K_q \) is the anharmonic (self-Kerr) term and \(\ad\) is the destruction operator which removes an excitation from the resonator.
 Note that this is still an approximation as higher order terms have been neglected.
 
-The anharmonicity can be vizualised, see \cref{fig:anharmonic-energies}, by plotting the eigenenergies of \cref{eq:resonator-hamiltonian} as a function of \( \kappa \).
+The anharmonicity can be vizualised, see \Cref{fig:anharmonic-energies}, by plotting the eigenenergies of \Cref{eq:resonator-hamiltonian} as a function of \( K \).
 A larger anharmonicity makes the energy spacing larger for excitation states higher than \(\ket{1}\).
 This anharmonicity is what permits a resonator to act as a qubit, as it is possible to adress only the first two states \( \ket{0} \) and \( \ket{1} \) due to the frequency difference.
 Throughout this thesis, the term ``qubit'' will be used to refer to an anharmonic resonator even though it has more than two energy levels.
 Further, the ``resonance frequency of the qubit'' which correspond to the energy spacing between the first two levels, will be referred to as \( \omega_{q} \).
 
-\tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(\kappa\in[0,1]\) and \(\omega_{q}=1\).}{fig:anharmonic-energies}{25em}{20em}
+\tikzfig{figs/energy-anharmonic}{The energy levels of a three-level resonator for anharmonicity \(K\in[0,1]\) and \(\omega_{q}=1\).}{fig:anharmonic-energies}{25em}{20em}
 
 \section{Coupled Qubit-Resonator System}
 The Hamiltonian for a coupled qubit and resonator is chosen as
 \begin{equation}
-    \Ham(t) = \underbrace{\omega_{r}\au\ad + \frac{\kappa_r}{2}(\au)^2\ad^2}_{\text{Resonator}} + \underbrace{\omega_{q}\bu\bd + \frac{\kappa_q}{2}(\bu)^2\bd^2}_{\text{Qubit}} + \underbrace{g\qty(\au\bd+\ad\bu)}_{\text{Coupling}}
+    \Ham(t) = \underbrace{\omega_{r}\au\ad + \frac{K_r}{2}(\au)^2\ad^2}_{\text{Resonator}} + \underbrace{\omega_{q}\bu\bd + \frac{K_q}{2}(\bu)^2\bd^2}_{\text{Qubit}} + \underbrace{g\qty(\au\bd+\ad\bu)}_{\text{Coupling}}
     \label{eq:hamiltonian-coupled}
 \end{equation}
 where \( \bd \) is the destruction operator for the qubit.
