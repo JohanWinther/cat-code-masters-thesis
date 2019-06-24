@@ -4,14 +4,24 @@
 
 \chapter{Method}
 The pulses will be optimized using Krotov's method~\cite{reich_monotonically_2012}, a gradient-based optimization algorithm available publicly as a ready-to-use Python package~\cite{goerz_krotov:_2019}.
+<<<<<<< HEAD
 In this chapter Krotov's method for quantum optimal control and an implementation as a Python package will be briefly introduced.
+=======
+In this chapter Krotov's method for quantum optimal control will be briefly introduced and an implementation as a Python package.
+Then the numerical simulatons will be explained.
+>>>>>>> 6c1a82a808dc0e478a16825331eafd7fb9cf7fbc
 
 \section{Krotov's Method for Quantum Optimal Control}
 Krotov's method for quantum control fundamentally relies on the variational principle to minimize a functional
 \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{u_l^{(i)}(t)}] \]
 that depends on the pulse shapes and the quantum states of the system evolved under these pulse shapes \cite{goerz_krotov:_2019}.
+<<<<<<< HEAD
 A detailed explanation of this functional can be found in~\cite{reich_monotonically_2012}.
 However, a quick summary of how the method works will be presented here.
+=======
+A detailed explanation of this functional can be found in \cite{reich_monotonically_2012}.
+However a quick summary of how the method works will be presented here.
+>>>>>>> 6c1a82a808dc0e478a16825331eafd7fb9cf7fbc
 Starting with some guess pulse shapes, the initial state is forward propagated in time using a Hamiltonian of the same form as \Cref{eq:optimal-control-hamiltonian}, and the value of the functional is calculated.
 Then changes to the pulse shapes which will decrease the value of the functional are calculated, by propagating states with these new pulse shapes, and these updates become the new pulse shapes.
 This continues until convergence is reached.
