@@ -13,7 +13,7 @@ The resonator initial state is \(\ket{0}\) (in the Fock basis) and the correspon
 \[ \cat{}, \cat[i]{},\]
 \[ \frac{\cat{}+\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-\cat[i]{}}{\sqrt{2}},\]
 \[ \frac{\cat{}+i\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-i\cat[i]{}}{\sqrt{2}}. \]
-The hope is that by optimizing these six states the pulse shapes will approximate the unitary in \Cref{eq:cat-code-unitary}.
+The hope is that by optimizing these six states simultaneously the pulse shapes will approximate the unitary in \Cref{eq:cat-code-unitary}.
 
 \section{Simulation Setup}
 In this section the Hamiltonian and the optimization parameters will be presented.
@@ -69,7 +69,7 @@ Initial guess pulses were chosen to be the same Blackman pulses in the setup for
 
 \section{Results}
 We now present the main results of this thesis: the optimization of pulses for encoding a cat state in a resonator from a coupled qubit.
-The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (corressponding to roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \Cref{eq:total-fidelity}).
+The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (corresponding to roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \Cref{eq:total-fidelity}).
 The individual fidelities for the 6 initial states are shown in \Cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
 
 \begin{table}[ht]
@@ -91,7 +91,7 @@ The individual fidelities for the 6 initial states are shown in \Cref{tab:cat-fi
 
 To corroborate how well the qubit was mapped to the cat code basis, multiple states spread around the Bloch sphere were transferred with the pulse solution.
 The corresponding fidelities are shown on the Bloch sphere in \Cref{fig:bloch-fid}, where we can see an asymmetry with larger fidelities toward \((\ket{0}+i\ket{1})/\sqrt{2}\).
-All in all the minimum fidelity among all of the transferred states is 0.998996.
+All in all the minimum fidelity among all the transferred states is 0.998996.
 
 \begin{figure}[ht]
 	\centering
@@ -114,7 +114,7 @@ All in all the minimum fidelity among all of the transferred states is 0.998996.
 The pulse shapes of the qubit and resonator are shown in \Cref{fig:cat-pulse-shape}.
 Comparing the resonator and qubit, we can see that the resonator pulse has rapid oscillations throughout the whole pulse while the qubit exhibits some small quick oscillation at sparse times.
 The spectrum of the pulse is shown in \Cref{fig:cat-pulse-spectrum} and gives us some insight into the pulse shapes.
-The qubit control pulse shows a wide peak at \(\omega_q\), two small peaks at \(\omega_r\) and \(2\omega_r-\omega_q\) and two barely noticable peaks at \(\frac{1}{4}\omega_r\) and \(\frac{1}{2}\omega_r\). 
+We can see that the qubit control pulse shows a wide peak at \(\omega_q\), two small peaks at \(\omega_r\) and \(2\omega_r-\omega_q\) and two barely noticeable peaks at \(\frac{1}{4}\omega_r\) and \(\frac{1}{2}\omega_r\). 
 The resonator pulse has one wide peak at \(\omega_r\), a smaller one at \(\omega_q\) and an even smaller peak at \(2\omega_r-\omega_q\).
 
 \begin{figure}[ht]
@@ -179,17 +179,17 @@ Looking at the dynamical behaviour one can see that common for all transfers is 
 			\hfill
 		\fi%
 	}
-	\caption{Qubit level occupation over time for the 6 state transfers. \(\ket{0}\) and \(\ket{1}\) are shown in blue and orange respectively.}%
+	\caption{Qubit level occupation over time for the six state transfers. \(\ket{0}\) and \(\ket{1}\) are shown in blue and orange respectively.}%
 	\label{fig:cat-qubit-occupation}
 \end{figure}
 
 One interesting measure we can look at is the maximum occupation of the 8 resonator states, to which the resonator Hilbert space was truncated.
 This can give us information about the validity of the Hilbert space truncation.
 In \Cref{fig:cat-max-occ} the maximum reached occupation probability are plotted for all states.
-This is done for all the 6 state transfers.
+This is done for all the six state transfers.
 Looking only at the odd states there is a clear downward trend for higher states, with \(\ket{7}\) only reaching circa 0.2 of occupation probability during the \(\ket{0}\) transfer.
 \(\ket{6}\) is in the 0.2–0.3 occupation range for all transfers.
-This shows that the chosen truncation is appriopriate, but ideally a somewhat larger space should be used.
+This shows that the chosen truncation is appropriate, but ideally a somewhat larger space should be used.
 The dynamics of the resonator level occupation are provided in \Cref{sec:resonator-occupation} for further analysis.
 
 \tikzfig{figs/cat_max_occ}{%
@@ -232,13 +232,13 @@ Even though the fidelity goal of \(F > 0.999999\) was not reached it could be po
 Note however that there is no guarantee that such a solution exists.
 
 Looking at the pulse shapes, \Cref{fig:cat-pulse-shape}, does not give much insight. However, the spectrum shows some interesting phenomena.
-The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
-However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
+The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its resonance frequency \(\omega_r\).
+However, there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
 The width of the resonance peaks for the qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state of the qubit (resonator).
 Consequently, during different times of the pulse the system needs to be driven at a range of frequencies.
 Further research is needed to explain the characteristics of the solution.
 
-The only discernable ``strategy'' found, judging by the qubit dynamics in \Cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
+The only discernible ``strategy'' found, judging by the qubit dynamics in \Cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
 This is in the same essence as the cat state generation strategy presented in~\cite{haroche_exploring_2006}.
 However, further analysis of the resonator and qubit dynamics and interactions could bring a deeper understanding.
 
@@ -255,8 +255,8 @@ As the \krotov{} package already provides a way to optimize ensemble objectives 
 Lowering the coupling factor could help mitigate both these issues, however, as stated earlier it is a trade-off.
 We can perhaps try to speed up the optimization.
 One way could be to add a mechanism for optimizing pulse shapes with points sparser than the simulation time grid.
-Thus one could implement the time-dependent coupling terms separately from the control terms.
-However if the forward propagation simulation is the most computationally intensive part this would not really help.
+Thus, one could implement the time-dependent coupling terms separately from the control terms.
+However, if the forward propagation simulation is the most computationally intensive part this would not really help.
 
 In conclusion, as the qubit transfer simulations showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
 Even though the underlying theory of the solution is not understood at this moment, Krotov's method proves itself to be able to optimize a state transfer in a qubit-resonator coupled system to a fidelity \(F > 0.9990\).

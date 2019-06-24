@@ -4,21 +4,20 @@
 
 \chapter{Method}
 The pulses will be optimized using Krotov's method~\cite{reich_monotonically_2012}, a gradient-based optimization algorithm available publicly as a ready-to-use Python package~\cite{goerz_krotov:_2019}.
-In this chapter Krotov's method for quantum optimal control will be briefly introduced and an implementation as a Python package.
-Then the numerical simulatons will be explained.
+In this chapter Krotov's method for quantum optimal control and an implementation as a Python package will be briefly introduced.
 
 \section{Krotov's Method for Quantum Optimal Control}
 Krotov's method for quantum control fundamentally relies on the variational principle to minimize a functional
 \[ J\qty[\qty{\ket{\phi^{(i)}_k(t)}},\qty{u_l^{(i)}(t)}] \]
 that depends on the pulse shapes and the quantum states of the system evolved under these pulse shapes \cite{goerz_krotov:_2019}.
-A detailed explanation of this functional can be found in \cite{reich_monotonically_2012}.
-However a quick summary of how the method works will be presented here.
+A detailed explanation of this functional can be found in~\cite{reich_monotonically_2012}.
+However, a quick summary of how the method works will be presented here.
 Starting with some guess pulse shapes, the initial state is forward propagated in time using a Hamiltonian of the same form as \Cref{eq:optimal-control-hamiltonian}, and the value of the functional is calculated.
 Then changes to the pulse shapes which will decrease the value of the functional are calculated, by propagating states with these new pulse shapes, and these updates become the new pulse shapes.
 This continues until convergence is reached.
 
 The underlying mathematical principles of Krotov's method will not be adressed in the thesis, as that is outside the scope.
-Therefore the method will be treated as a black box function provided by the Python package which will be presented in the next section.
+Therefore, the method will be treated as a black box function provided by the Python package which will be presented in the next section.
 
 \section{Krotov: the Python Package}
 A Python implementation of the Krotov's method is available at~\cite{goerz_krotov:_2019}, where an abstraction layer for doing optimizations is provided.
@@ -28,7 +27,7 @@ This is necessary in order to create a single encoding pulse which will realise 
 
 The package is built on top of QuTiP, a popular software package for simulating the dynamics of quantum systems~\cite{johansson_qutip_2013}.
 That means it can leverage all the useful features of that package, which is also another reason this method was chosen.
-The package provides a set of submodules which are used to setup the optimization problem.
+The package provides a set of submodules which are used to set up the optimization problem.
 The important modules will be presented here.
 
 The \texttt{objectives} module describes the goal of the optimization, be it a state-to-state evolution or a quantum gate.
@@ -39,17 +38,17 @@ In this work the functional \texttt{chis\_ss} has been chosen for all optimizati
 
 In the \texttt{convergence} module, help functions for the stopping criteria are provided for the optimization.
 It exposes values such as the overlap of the forward propagated state and target state \(\braket{\psi(T)}{\psi^{\text{tar}}}\) during the optimization which can be used to check when convergence is reached.
-The stopping criteria chosen for this thesis is either when a minimum fidelity is obtained, the fiedlity being given by~\cite{ofek_extending_2016}
+The stopping criteria chosen for this thesis is either when a minimum fidelity is obtained, the fidelity being given by~\cite{ofek_extending_2016}
 \begin{equation}
     F = \frac{1}{S}|\sum_{k=1}^{S} \braket{\psi_k(T)}{\psi_{k}^{\text{tar}}}|^2,
     \label{eq:total-fidelity}
 \end{equation}
 where \(S\) is the number of (simultaneous) state transfers we want to realise, or when the change in fidelity between iterations \(\Delta F\) falls below a specified value (where a local minimum can be assumed to have been reached).
-The values of these will be specified in~\Cref{sec:optimization-simulations}
+The values of these will be specified in the respective chapters of the simulations.
 
-Finally, the \texttt{optimization} module is used to setup the whole optimization.
+Finally, the \texttt{optimization} module is used to set up the whole optimization.
 It is possible to choose the time discretization, convergence criteria, optimization functional, and a function which will run after every iteration.
-Also the step size \(1/\lambda\) of the pulse updates can be chosen, which is further explained in~\cite{goerz_krotov:_2019}.
+Also, the step size \(1/\lambda\) of the pulse updates can be chosen, which is further explained in~\cite{goerz_krotov:_2019}.
 Note however that although a large step size could achieve faster convergence, it can also lead to numerical instability.
 
 \section{Hardware and Operating System}

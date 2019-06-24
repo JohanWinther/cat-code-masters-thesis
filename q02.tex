@@ -24,7 +24,7 @@ In contrast to the \(\ket{0}\rightarrow\ket{1}\) state evolution both initial gu
 Once again all optimization runs are shown in \Cref{fig:3d-optim-gf}.
 All runs start at almost zero fidelity while pulse lengths longer than \ns{30} reach the fidelity goal of \(F > 0.99999\).
 The number of iterations is relatively low for pulses longer than \ns{30} while for shorter pulses the iterations fluctuate.
-Note that for pulse lengths shorter than \ns{22} the optimization stopped after the first iteration due to \(\Delta F < \num{e-09}\), therefore those results have been ommitted.
+Note that for pulse lengths shorter than \ns{22} the optimization stopped after the first iteration due to \(\Delta F < \num{e-09}\), therefore those results have been omitted.
 
 \begin{figure}
     \centering
@@ -103,7 +103,7 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 \section{Discussion}
 The ``strategy'' for all pulse lengths in this case is to first invert the population and then at the halfway point start simultaneously driving the second transition level to start pumping to \(\ket{2}\).
 The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(K_q\), which is also visible in the frequency spectrum.
-While the peak at \(\omega_q+K_q\) was expected, the peak at \(\omega_q-K_q\) for pulse lengths shorter than \ns{29} is a suprise with no clear explanation.
+While the peak at \(\omega_q+K_q\) was expected, the peak at \(\omega_q-K_q\) for pulse lengths shorter than \ns{29} is a surprise with no clear explanation.
 It is also not clear why the solutions drive harder at this frequency the shorter the pulse length.
 
 For this optimization the initial guess pulses were very far from any solution, with the fidelity almost starting at zero for all pulse lengths.
@@ -111,13 +111,13 @@ The fidelity goal \(F > 0.99999\) was reached down to \(T = \ns{30}\), which is 
 Looking at the occupation dynamics and pulse shapes could give hints as to why this is the case.
 One reason could be that there needs to be enough periods of oscillations to drive to \(\ket{2}\), which is not the case for the \(\ket{0}\rightarrow\ket{1}\) evolution where the integral of the pulse shape is of importance.
 Further, it appears that the fidelity drops in the same way as for the \(\ket{0}\rightarrow\ket{1}\) evolution for shorter pulse lengths.
-However we cannot draw any conclusions for pulse lenghts shorter than \ns{22}.
+However, we cannot draw any conclusions for pulse lengths shorter than \ns{22}.
 Perhaps with a low \(\Delta F\) one might reach a solution that follows the trend, but this is only speculation.
 
 The number of iterations also fluctuates for pulse lengths which do not reach the fidelity goal, just as for the \(\ket{0}\rightarrow\ket{1}\) evolution.
 
-Interestingly, for both transfers the optimization converges quickly to a relatively high fidelity, while the majority of the time is spent fine-tuning the pulse shapes.
-This could be a side-effect of the static step size, which could be dynamically changed for faster convergence.
+Interestingly, the optimization converges quickly to a relatively high fidelity, while the majority of the time is spent fine-tuning the pulse shapes.
+This could be a side effect of the static step size, which could be dynamically changed during optimization for faster convergence.
 
 To conclude, \krotov{} can also be successfully used to optimize for somewhat more complicated transfers than the simple qubit rotation.
 

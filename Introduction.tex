@@ -17,7 +17,7 @@ The reader will be assumed to have basic knowledge of quantum mechanics, quantum
 Quantum computers are thought to solve problems which are not possible with classical computers~\cite{preskill_quantum_2018}.
 Perhaps the most famous example is using \emph{Shor's algorithm} for prime factorization~\cite{shor_polynomial-time_1997} which could break some public key cryptographic algorithms.
 Aside from quantum algorithms, there is also the prospect of using quantum computers to simulate quantum systems, which Feynman famously proposed~\cite{feynman_simulating_1982} back in 1982.
-Since quantum systems form the basis of chemistry, particle physics and consensed matter physics, to name a few, we hope that quantum simulation can help these sciences with discoveries such as new medicine, collider dynamics and materials.  
+Since quantum systems form the basis of chemistry, particle physics and condensed matter physics, to name a few, we hope that quantum simulation can help these sciences with discoveries such as new medicine, collider dynamics and materials.  
 
 While quantum computers are starting to appear as commercial products~\cite{santos_ibm_2016}, there are still a lot of challenges to be solved before large scale quantum computers can become commonplace.
 
@@ -25,7 +25,7 @@ While quantum computers are starting to appear as commercial products~\cite{sant
 One of the main challenges in building a quantum computer is combating decoherence, the process in which the quantum information of a quantum system leaks out into the environment~\cite{gottesman_introduction_2009}.
 To solve this one can perform quantum error correction (QEC).
 This can be done by introducing redundancy into the physical system and ``spread'' the quantum information to highly entangled states using quantum error correcting codes (QECC)~\cite{gottesman_introduction_2009}.
-The two prevaling methods are to either (1) encode a logical qubit into many physical qubits, or (2) encode a logical qubit into a bosonic mode in quantum harmonic resonators~\cite{}.
+The two prevailing methods are to either (1) encode a logical qubit into many physical qubits, or (2) encode a logical qubit into a bosonic mode in quantum harmonic resonators~\cite{}.
 Method (2) permits us to use a single physical system to store the information, which makes it a good candidate for a QECC.
 \citeauthor{leghtas_hardware-efficient_2013}~\cite{leghtas_hardware-efficient_2013},~\citeauthor{mirrahimi_dynamically_2014}~\cite{mirrahimi_dynamically_2014} propose and~\citeauthor{ofek_extending_2016}~\cite{ofek_extending_2016} demonstrate a QECC called the ``cat code'', which will be the focus of this thesis.
 The motivation for using the cat code for QEC is that the logical basis states are eigenstates of photon-number parity, which means that the cat code requires just a single ancilla qubit in order to monitor the dominant
@@ -42,14 +42,14 @@ are built up of \emph{cat states}: superpositions of coherent states
 	\cat[]{} = \frac{1}{\sqrt{2}}\qty(\ket{\alpha} + \ket{-\alpha}),\quad 
 	\cat[i]{} = \frac{1}{\sqrt{2}}\qty(\ket{i\alpha} + \ket{-i\alpha}).
 \end{equation}
-That is the each basis state \( \ket{0(1)_L} \) in the cat code consists of a cat state \(\cat[(i)]{}\), which is a superposition of a coherent state \(\ket{(i)\alpha}\) and its negative counterpart \(\ket{-(i)\alpha}\). \(|\alpha|^2\) is the mean photon number of the coherent state.
+That is each basis state \( \ket{0(1)_L} \) in the cat code consists of a cat state \(\cat[(i)]{}\), which is a superposition of a coherent state \(\ket{(i)\alpha}\) and its negative counterpart \(\ket{-(i)\alpha}\). \(|\alpha|^2\) is the mean photon number of the coherent state.
 %A coherent state can be represented in the Fock basis as
 %\begin{equation}
 %    \ket{(i)\alpha} =\ex^{-{\frac{|(i)\alpha|^2}{2}}}\sum_{n=0}^{\infty}{\frac{\qty((i)\alpha)^n}{\sqrt{n!}}}\ket{n}.
 %\end{equation}
 The basis can also be in an odd parity where the two coherent states are subtracted instead of added, however only the even parity basis will be used in this thesis for simplicity.
 
-These basis states can be visualized by plotting the Wigner function which is done in \Cref{fig:cat-code-basis-wigner}. The characteristic features of a cat state in the Wigner plot are two lobes with inteference fringes in between them~\cite{girvin_schrodinger_2017}.
+These basis states can be visualized by plotting the Wigner function which is done in \Cref{fig:cat-code-basis-wigner}. The characteristic features of a cat state in the Wigner plot are two lobes with interference fringes in between them~\cite{girvin_schrodinger_2017}.
 
 \begin{figure}[H]
 	\centering
@@ -79,7 +79,7 @@ Although ideal harmonic resonators have equally spaced energy levels, in reality
 where \( \omega \) is the resonance frequency, \( K \) is the anharmonic (self-Kerr) term and \(\ad\) is the annihilation operator which removes an excitation from the resonator.
 Note that this is an approximate model as higher order terms have been neglected.
 
-The anharmonicity can be vizualised, see \Cref{fig:anharmonic-energies}, by plotting the eigenenergies of \Cref{eq:resonator-hamiltonian} as a function of \( K \).
+The anharmonicity can be visualized, see \Cref{fig:anharmonic-energies}, by plotting the eigenenergies of \Cref{eq:resonator-hamiltonian} as a function of \( K \).
 A larger anharmonicity makes the energy spacing larger for excitation states higher than \(\ket{1}\).
 This anharmonicity allows us treat the resonator as a qubit, by only driving at the frequency specified by the energy spacing between the first two states \( \ket{0} \) and \( \ket{1} \).
 Throughout this thesis, the term ``qubit'' will be used to refer to an anharmonic resonator even though it has more than two energy levels.
