@@ -1,27 +1,48 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
 
-\chapter{Conclusion}
+\chapter{Conclusions}
 In this chapter some concluding remarks will be presented.
-Krotov's method efficiently realises the \(\ket{0}\rightarrow\ket{1}\) transfer for various pulse lengths when supplying guess pulses close to \(\pi\)-pulses.
-It can also find non-trivial solutions for shorter pulse lengths, when an amplitude constraints is present.
+
+\section{Conclusive Discussion of the Use of \krotov{}}
+\label{sec:general}
+\krotov{} provides an easy-to-use interface for setting up optimization problems.
+This is the strongest argument for using this package as the features are unrivaled compared to other optimization packages.
+Firstly, QuTiP~\cite{johansson_qutip_2013} can optimize with the GRAPE and CRAB algorithms, but there are no provided interfaces for
+(1) saving optimizations to a file,
+(2) continuing optimization after they are stopped,
+(3) optimizing for multiple control fields and objectives,
+(4) using custom convergence criteria and 
+(5) modifying the pulses after every iteration (for amplitude constraints).
+These are all critical features which \krotov{} has.
+Secondly, GOAT~\cite{machnes_gradient_2015} is a new promising algorithm for quantum optimal control, but has no Python package available yet and the MATLAB implementation has a steep learning curve.
+If or when the GOAT Python implementation becomes available it would be interesting to compare the feature set and the actual algorithm by testing comparing the performance on the same optimization objective.
+
+The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which are presented in \Cref{sec:future-work}.
+If all else fails one could always use more computing power.
+
+\section{Conclusion of Thesis}
+In this thesis, we have demonstrated that Krotov's method efficiently realises the \(\ket{0}\rightarrow\ket{1}\) evolution for various pulse lengths when supplying guess pulses close to \(\pi\)-pulses.
+It can also find non-trivial solutions for shorter pulse lengths when an amplitude constraints is present.
+\krotov{} also realises a \(\ket{0}\rightarrow\ket{2}\) evolution for various pulse lengths.
 This proves that \krotov{} has potential to be used for non-trivial systems.
 
+Finally and most importantly, we have shown that \krotov{} allows to find an optimal pulse solution that allows to control a coupled system composed by a qubit and a resonator, such that the qubit state is dynamically transferred to the resonator by the solution pulse.
+This procedure is the basis for encoding qubit quantum information into an error correcting code such as a cat code.
 As the method could realise the transfer for arbitrary qubit states, there is good reason to conclude that \krotov{} has the potential to be a valid tool in realising QEC with cat codes.
-Even though it can be slow the pulses only need to be found once in order to be used for encoding.
-Although many challenges are still unsolved, this proof of concept gives confidence for further research into using \krotov{} for encoding pulse optimization.
+Even though finding the optimal solution is computationally heavy, the pulses only need to be found once in order to be used for encoding.
+Although many challenges are still unsolved, this proof of concept gives confidence for further research into using \krotov{} for finding encoding pulses.
 
-\section{Future work}
+\section{Future work}%
 \label{sec:future-work}
-As stated in the previous chapter, there are many ways to extend this work and solve these problems.
+As stated in the previous dicussions, there are many ways to extend this work.
 Suggestions for future work are to:
 \begin{itemize}
     \item fix the unrealistic sample rate,
     \item include dissipation/noise,
     \item penalize undesired states,
     \item perform ensemble optimization for different phases of the coupling pulses
-    \item use the dispersive regime coupling term,
-    \item implement a problem-specific system propagator using Cython for speedup and
+    \item implement a problem-specific system propagator using Cython\footnote{More info: \url{https://krotov.readthedocs.io/en/latest/09_howto.html\#how-to-maximize-numerical-efficiency}.} for speedup and
     \item find pulses for other bosonic codes.
 \end{itemize}
 To encourage the reproduction of these results and further research a link to the source code is given in \Cref{sec:jupyter}.

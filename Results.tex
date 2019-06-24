@@ -1,33 +1,35 @@
 \documentclass[main.tex]{subfiles}
 \begin{document}
 
-\chapter{Results}
-The results of the numerical simulations will be presented in this chapter.
-For both optimization targets the optimized pulses, their properties and the final evolved state will be presented.
+\chapter{Results of Simulations}
+The results of the numerical simulations will be presented and discussed in this chapter.
+First for the qubit state evolution and then for the cat code encoding.
 
-\section{Qubit State Transfers}
+\section{Qubit State Control}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figs/3d-optim-ge.png}
     \caption{Fidelity during optimizations for every pulse length (ns). The different colors help distinguish the lines.}\label{fig:3d-optim-ge}
 \end{figure}
 \subsection{%
-	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer
+	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state evolution
 }
 
-In \Cref{fig:3d-optim-ge} the fidelity during all optimization runs are plotted.
+In \Cref{fig:3d-optim-ge} the fidelity during all optimizations (with pulse lengths from \ns{4.25} to \ns{30}) are plotted.
+The ``starting fidelity'' is the fidelity which is obtained with the guess pulses while the ``optimized fidelity'' is the fiedlity obtained with the optimized pulses.
 For pulse lengths longer than \SI{15}{\nano\second} the fidelity starts at values close to the goal (\(F>0.9\)) and the number of iterations is relatively low (less than 85 iterations).
 In contrast, pulses shorter than \SI{15}{\nano\second} start at lower fidelities while the number of iterations are roughly one order of magnitude larger with no clear pattern with respect to the pulse length.
 
-To give a more detailed picture, the starting fidelity and optimized fidelity is plotted over pulse length in \Cref{fig:fidelity-length-ge}.
+To give a more detailed picture, the starting fidelity and optimized fidelity are plotted over pulse length in \Cref{fig:fidelity-length-ge}.
 The optimizations where the fidelity goal was not reached, pulse lengths equal to and below \SI{10.50}{\nano\second}, are marked with stars.
 
 \tikzfig{figs/fidelity-length-ge}{%
-Fidelity of first and last iteration of every pulse length.
+Starting fidelity (green) and optimized fidelity (black) of pulse lengths from 4.25 ns to 30 ns.
 }{fig:fidelity-length-ge}{\textwidth}{15em}
 
 Further analysis is done on pulses with lengths \SI{4.25}{\nano\second}, \SI{6.0}{\nano\second}, \SI{8.0}{\nano\second}, \SI{10.0}{\nano\second}, \SI{20.0}{\nano\second} and \SI{30.0}{\nano\second}.
 The optimized pulse shapes \(\text{Re}(\Omega)\) and \(\text{Im}(\Omega)\) are plotted in \Cref{fig:pulse_shape} together with the guess pulses. Pulses longer than \ns{20} require only fine adjustments to the Blackman guess pulse while shorter pulses have an imaginary part which is maximized for the whole duration of the pulse.
+In order to gain insight into the shape of the pulse solution, we analyse its spectral content by performing a Fourier analysis.
 
 \begin{figure}[ht]
 \centering
@@ -56,7 +58,7 @@ Short pulses (\(<\)\ns{10}) change substantially from the starting Blackman shap
 \label{fig:pulse_shape}
 \end{figure}
 
-The spectrum of \(\Omega(t)\) in the lab frame (\(\Omega(t)\ex^{i\omega_q t}\)) is shown in \Cref{fig:pulse_spectrum}.
+The spectrum of the control pulse \(\Omega(t)\) in the lab frame (\(\Omega(t)\ex^{i\omega_q t}\)) is shown in \Cref{fig:pulse_spectrum}.
 For all pulse lengths there is a peak centered roughly at \(\omega_q\) with a quickly decaying end in positive direction (towards \(\omega_q+K_q\)).
 Following the trend, it can be observed that the width of the peak becomes narrower for longer pulses.
 For the highest pulse length \ns{30} there is almost no support at \(\omega_{q}+K_q\) nor \(\omega_{q}-K_q\).
@@ -67,7 +69,6 @@ Frequency spectrum of the complex pulses in \Cref{fig:pulse_shape}. The vertical
 
 The time evolution of the system under the optimized pulses are visualized by plotting the occupation of the states over time, \Cref{fig:qubit_occupation},
 and the projection of the state on the Bloch sphere over time, \Cref{fig:bloch_evolution}.
-A quick explanation of how the Bloch sphere is used for visualization is given in \Cref{sec:bloch-sphere}
 %, and a Hinton diagram of the final state, \Cref{fig:hinton}.
 
 \begin{figure}[ht]
@@ -85,10 +86,10 @@ A quick explanation of how the Bloch sphere is used for visualization is given i
 		\hfill
 	\fi%
 }
-\caption{Energy level occupation over time for different lengths of optimized pulses.}\label{fig:qubit_occupation}
+\caption{Energy level occupation over time during the \(\ket{0}\rightarrow\ket{1}\) evolution for different lengths of optimized pulses.}\label{fig:qubit_occupation}
 \end{figure}
 
-For short pulse lengths there is not enough time for the transfer from \(\ket{0}\) to \(\ket{1}\),
+For short pulse lengths there is not enough time for the evolution from \(\ket{0}\) to \(\ket{1}\),
 but for a pulse length of roughly \ns{10.0} the goal is reached.
 \Cref{fig:qubit_occupation} \textbf{(b)} shows a little rise in occupation of \(\ket{2}\) around \ns{7.5}. 
 \begin{figure}[ht]
@@ -133,9 +134,9 @@ This can be clearly seen in \Cref{fig:bloch_evolution} \textbf{(d)} for a pulse 
 	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{2}\)}}{0 -> 2} state transfer
 }
 Once again all optimization runs are shown in \Cref{fig:3d-optim-gf}.
-All runs start at almost zero fidelity while pulse lengths from \ns{30} and up reach the fidelity goal of \(F > 0.99999\).
-The number of iterations are relatively low down to \ns{30} and for shorter pulses the iterations fluctuate.
-Note that for pulse lengths shorter than \ns{22} the optimization stopped after the first iteration due to \(\Delta F < \num{e-09}\).
+All runs start at almost zero fidelity while pulse lengths longer than \ns{30} reach the fidelity goal of \(F > 0.99999\).
+The number of iterations is relatively low for pulses longer than \ns{30} while for shorter pulses the iterations fluctuate.
+Note that for pulse lengths shorter than \ns{22} the optimization stopped after the first iteration due to \(\Delta F < \num{e-09}\), therefore those results have been ommitted.
 
 \begin{figure}
     \centering
@@ -144,17 +145,17 @@ Note that for pulse lengths shorter than \ns{22} the optimization stopped after 
 	\label{fig:3d-optim-gf}
 \end{figure}
 
-In \Cref{fig:fidelity-length-gf} the fidelity is shown with respect to pulse length and here it is seen that the fidelity goal is reached for pulses down to \ns{30}.
+In \Cref{fig:fidelity-length-gf} the fidelity is shown with respect to the pulse length and it is seen that the fidelity goal is reached for pulses longer than and including \ns{30}.
 
 \tikzfig{figs/fidelity-length-gf}{
-Fidelity of first and last iteration of every pulse length.
+Starting fidelity (green) and optimized fidelity (black) of pulse lengths from 22 ns to 55 ns.
 }{fig:fidelity-length-gf}{0.8\textwidth}{15em}
 
 The optimized pulses are shown in \Cref{fig:pulse_shape_gf}.
-For all pulse lengths the pulses have roughly the same shape with a quick rise and a short plateau, then oscillations until the end. 
-The longest pulse at \ns{55} has more oscillations than, but instead they are lower in amplitude.
-To get some insight, the frequency spectrum, \Cref{fig:pulse_spectrum_gf}, shows large support at \(\omega_q\) and \(\omega_q+K_q\), while for longer pulses a peak at \(\omega_q-K_q\) disappears.
-Just as the previous state transfer, the peaks narrow for longer pulse lengths.
+For all pulse lengths the pulses have roughly the same shape, with a quick rise and a short plateau, then oscillations until the end. 
+The longest pulse at \ns{55} has more oscillations than shorter ones, but instead they are lower in amplitude.
+To get some insight, the frequency spectrum, \Cref{fig:pulse_spectrum_gf}, shows large support at \(\omega_q\) and \(\omega_q+K_q\). For longer pulses, the peak at \(\omega_q-K_q\) disappears.
+Just as the previous state evolution, the peaks narrow for longer pulse lengths.
 
 \begin{figure}[ht]
 \centering
@@ -188,9 +189,9 @@ Oscillations appear in all solutions.}%
 Frequency spectrum of the complex pulses in \Cref{fig:pulse_shape_gf}. The vertical lines indicate (from left to right) \(\omega_{q}-K_q\), \(\omega_{q}\), \(\omega_{q}+K_q\) (all divided by \(2\pi\)).
 }{fig:pulse_spectrum_gf}{\textwidth}{18em}
 
-The occupation dynamics in \Cref{fig:qubit_occupation_gf} show a slow oscillation in all pulse lengths for all states.
+The occupation dynamics in \Cref{fig:qubit_occupation_gf} show a slow oscillation for all pulse lengths for all states.
 Further, the occupation probability of \(\ket{1}\) rises to about 0.75 until the middle-point of the pulse and then falls to zero in the end, while \(\ket{2}\) starts to rise at the point of the population inversion.
-For the shorter pulse lengths it can be seen that there isn't enough time to realise the transfer.
+For the shorter pulse lengths it can be seen that there isn't enough time to realise the evolution.
 
 \begin{figure}[ht]
 \centering
@@ -207,7 +208,7 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 		\hfill
 	\fi%
 }
-\caption{Energy level occupation over time for different lengths of optimized pulses.}%
+\caption{Energy level occupation over time during the \(\ket{0}\rightarrow\ket{2}\) evolution for different lengths of optimized pulses.}%
 \label{fig:qubit_occupation_gf}
 \end{figure}
 
@@ -232,7 +233,8 @@ For the shorter pulse lengths it can be seen that there isn't enough time to rea
 
 \clearpage{}
 \section{Cat Code Encoding}
-The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (totalling at roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \Cref{eq:total-fidelity}).
+We now present the main results of this thesis: the optimization of pulses for encoding a cat state in a resonator from a coupled qubit.
+The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (corressponding to roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \Cref{eq:total-fidelity}).
 The individual fidelities for the 6 initial states are shown in \Cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
 
 \begin{table}[ht]
@@ -252,9 +254,9 @@ The individual fidelities for the 6 initial states are shown in \Cref{tab:cat-fi
     \end{tabular}
 \end{table}
 
-Further to see how well the qubit was mapped to the cat code basis, multiple states spread around the Bloch sphere were transferred with the pulse.
-The corresponding fidelities are shown on the Bloch sphere in \Cref{fig:bloch-fid} where we can se an asymmetry with larger fidelities toward \((\ket{0}+i\ket{1})/\sqrt{2}\).
-All in all the minimum fidelity of any of the states is 0.998996.
+To corroborate how well the qubit was mapped to the cat code basis, multiple states spread around the Bloch sphere were transferred with the pulse solution.
+The corresponding fidelities are shown on the Bloch sphere in \Cref{fig:bloch-fid}, where we can see an asymmetry with larger fidelities toward \((\ket{0}+i\ket{1})/\sqrt{2}\).
+All in all the minimum fidelity among all of the transferred states is 0.998996.
 
 \begin{figure}[ht]
 	\centering
@@ -267,7 +269,7 @@ All in all the minimum fidelity of any of the states is 0.998996.
 		\includegraphics[width=0.45\textwidth]{figs/bloch_fid_high.png}
 	}
 	\caption{%
-	The fidelities of many simulated state transfers shown on the Bloch sphere.
+	The fidelities of every simulated state transfer shown on the Bloch sphere.
 	There is an asymmetry in the fidelity with higher fidelity towards the state \((\ket{0}+i\ket{1})/\sqrt{2}\).
 	}%
 	\label{fig:bloch-fid}
@@ -275,8 +277,8 @@ All in all the minimum fidelity of any of the states is 0.998996.
 
 
 The pulse shapes of the qubit and resonator are shown in \Cref{fig:cat-pulse-shape}.
-Comparing the resonator and qubit we can see that the resonator pulse has rapid oscillations throughout the whole pulse while the qubit exhibits some small quick oscillation at sparse times.
-The spectrum of the pulse is shown in \Cref{cat-pulse-spectrum} and gives us some insight into the pulse shapes.
+Comparing the resonator and qubit, we can see that the resonator pulse has rapid oscillations throughout the whole pulse while the qubit exhibits some small quick oscillation at sparse times.
+The spectrum of the pulse is shown in \Cref{fig:cat-pulse-spectrum} and gives us some insight into the pulse shapes.
 The qubit control pulse shows a wide peak at \(\omega_q\), two small peaks at \(\omega_r\) and \(2\omega_r-\omega_q\) and two barely noticable peaks at \(\frac{1}{4}\omega_r\) and \(\frac{1}{2}\omega_r\). 
 The resonator pulse has one wide peak at \(\omega_r\), a smaller one at \(\omega_q\) and an even smaller peak at \(2\omega_r-\omega_q\).
 
@@ -346,17 +348,20 @@ Looking at the dynamical behaviour one can see that common for all transfers is 
 	\label{fig:cat-qubit-occupation}
 \end{figure}
 
-One interesting measure we can look at is the maximum occupation of the 8 resonator states.
-This can give us information about the the validity of the Hilbert space truncation.
+One interesting measure we can look at is the maximum occupation of the 8 resonator states, to which the resonator Hilbert space was truncated.
+This can give us information about the validity of the Hilbert space truncation.
 In \Cref{fig:cat-max-occ} the maximum reached occupation probability are plotted for all states.
 This is done for all the 6 state transfers.
 Looking only at the odd states there is a clear downward trend for higher states, with \(\ket{7}\) only reaching circa 0.2 of occupation probability during the \(\ket{0}\) transfer.
 \(\ket{6}\) is in the 0.2–0.3 occupation range for all transfers.
-The dynamics of the resonator are provided in \Cref{sec:resonator-occupation} for further analysis.
+This shows that the chosen truncation is appriopriate, but ideally a somewhat larger space should be used.
+The dynamics of the resonator level occupation are provided in \Cref{sec:resonator-occupation} for further analysis.
 
-\tikzfig{figs/cat_max_occ}{asda}{fig:cat-max-occ}{0.8\textwidth}{20em}
+\tikzfig{figs/cat_max_occ}{%
+Maximum occupation of the Fock basis states for all six state transfers.
+}{fig:cat-max-occ}{0.8\textwidth}{20em}
 
-Finally we can plot the Wigner function of the final resonator states and compare it with the target states.
+Finally, we can plot the Wigner function of the final resonator states, and compare it with the target states.
 This is done in \Cref{fig:cat-resonator-wigner} where the final states have been transformed back into the lab frame.
 As is evident from the plots they are close to the target states shown in \Cref{fig:cat-resonator-wigner-targets}.
 
@@ -374,7 +379,7 @@ As is evident from the plots they are close to the target states shown in \Cref{
 		\fi%
 	}
 	\caption{%
-	Wigner function of final state (lab frame) of the resonator for all state transfers.
+	Wigner function of the final state (lab frame) of the resonator for all state transfers.
 	The final resonator states are close to the target states shown in \Cref{fig:cat-resonator-wigner-targets}.
 	}%
 	\label{fig:cat-resonator-wigner}

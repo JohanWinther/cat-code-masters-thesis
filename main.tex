@@ -84,10 +84,9 @@
 	tick align = outside,
 	yticklabel style={/pgf/number format/fixed}
 }
-\newlength\figureheight
-\newlength\figurewidth
+\newlength\figureheight{}
+\newlength\figurewidth{}
 
-\usepackage{lipsum}\setlipsumdefault{1-3} % Package used to put in placeholder text. Remove it.
 
 % Shortcut commands
 \usepackage{shortcut-commands}
@@ -105,13 +104,13 @@
 
 % You should scale the figure according to textwidth and or paperheight.
 \coverfigure{\includegraphics[width=\textwidth,height=0.4\paperheight,keepaspectratio]{figures/cat_state_funny}}
-\covercaption{Wigner function of a cat state.}
+\covercaption{Wigner function of a ``cat state''.}
 
 \firstabstract{
   \subfile{Abstract}
 }
 %\secondabstract{swedish}{} % Optional
-\keywords{krotov's method, quantum optimal control, cat code}
+\keywords{krotov's method, quantum optimal control, cat code, quantum computing}
 
 \preface{
 This master's thesis came to fruition when I studied the course Quantum Optics and Quantum Informatics at Chalmers University of Technology.
@@ -177,16 +176,15 @@ I hope that my small contribution can be used in any future endeavours.
 
  % Sets up page numbering for the rest of the document.
 % Highly recommended to put contents into subfiles, or use \input.
-%\subfile{ExampleIntroduction}
 \subfile{Introduction}
-%\clearpage{}
-%\subfile{Theory}
 \clearpage{}
 \subfile{Method}
 \clearpage{}
-\subfile{Results}
+\subfile{q01}
 \clearpage{}
-\subfile{Discussion}
+\subfile{q02}
+\clearpage{}
+\subfile{Cat}
 \clearpage{}
 \subfile{Conclusion}
 
