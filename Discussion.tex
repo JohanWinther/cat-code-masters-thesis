@@ -2,37 +2,38 @@
 \begin{document}
 
 \chapter{Discussion}
-In this chapter the methods, results and analyses will be discussed, first for the qubit state transfers and secondly for the cat code encodings.
+In this chapter the methods, results and analyses will be discussed
 
 \section{Qubit State Transfers}
 %\subsection{%
 %	\texorpdfstring{\boldmath{\(\ket{0}\rightarrow\ket{1}\)}}{0 -> 1} state transfer
 %}
-We start by looking at the \(\ket{0}\rightarrow\ket{1}\) transfer.
+We start by looking at the \(\ket{0}\rightarrow\ket{1}\) evolution.
 As the system was set up to realise a \(\pi\)-rotation for a Blackman pulse with length \(T=6\sigma = 6\times\ns{3} = \ns{18}\), it is no suprise that the starting fidelity is almost unity down to pulse lengths of \ns{18}.
-Shorter than that, the amplitude constraint affects the starting pulse; it is maximised but starts to become shorter.
+Shorter than that, the amplitude constraint affects the starting pulse; as it becomes shorter the amplitude is maximised.
 This explains the drop in starting fidelity all the way down to \ns{4.25}.
 Further, for pulse lengths shorter than \ns{10.75} the optimization cannot reach the fidelity goal of \(F > 0.99999\) which is expected as the amplitude constraint means that there just is not enough time to realise the state transfer.
 This is supported by the fact that the imaginary part is maximised for pulse lengths shorter than \ns{10.75}.
 It can be assumed that the optimization is trying to compensate for the shorter pulse time.
 
-One possible reason for the fluctuations in the number of iterations for the pulse lengths which did not reach the fidelity goal is that the steepness around the (assumed) local minima could differ significantly from each other.
-This is very much in contrast to the low and steady number of iterations needed when the fidelity goal is reached.
-Even though the increase in pulse length should increase the number of possible solutions, increasing the chance of reaching the fidelity goal, the fast convergence is most probably due to the fact that the initial guess pulse brings the state so close to the target.
+One possible reason for the fluctuations in the number of iterations for the pulse lengths which did not reach the fidelity goal is that the steepness around the (assumed) local minima could differ significantly for different pulse lengths.
+This is very much in contrast with the low and steady number of iterations needed when the fidelity goal is reached.
+Even though the increase in pulse length should increase the number of possible solutions, increasing the chance of reaching the fidelity goal, the fast convergence is most probably due to the fact that the initial guess pulse brings the state close to the target.
 One might consider exploring this solution space, however it could potentially be infinite in size.
-This is not needed to use the optimized pulse shapes as any solution which realises the transfer should be good enough.
+For tthe purpose of realising the defined state evolution, this is not needed in practice as any solution which realises the transfer should be good enough.
 
-With the previous statement in mind, the fact that the solutions found for pulse lengths shorter than \ns{18} show a small increase in the \(\ket{2}\) population after the population inversion could point to a need to penalize this state.
+With the previous statements in mind, the fact that the solutions found for pulse lengths shorter than \ns{18} show a small increase in the \(\ket{2}\) population after the population inversion could point to a need to penalize this state.
 That is because if the state is too occupied during the transfer one cannot be sure that the states above that will remain unoccupied.
-This could be checked by simulating the system using the optimized pulses, but with a larger truncated Hilbert space.
+This hypothesis could be checked by simulating the system using the optimized pulses, but with a larger truncated Hilbert space.
 If the final state reaches the target, the truncation is a good approximation.
 \krotov{} suggests to add dissipation to the states which should be penalized as there is currently no support for state-dependent constraints.
 However this also increases the computation time as the Hamiltonian needs to either be expressed as a Liouvillian or propagated with collapse terms in the master equation.
+We therefore leave this analysis for future studies.
 
 The spectrum of the pulse shapes somewhat explains the ``strategy'' of the optimization.
-For the longer pulse lengths there is no problem in keeping the pulse frequency mostly around the first transition frequency, only driving the qubit to \(\ket{0}\).
-As the pulses become shorter the peak becomes wider, but the solutions try to keep the amplitude at the second transition frequency \(\omega_r+\kappa_q\) low to keep the qubit from going into \(\ket{2}\).
-Eventually for short enough pulses this level becomes a little bit occupied, as stated before, but then drops to zero.
+For the long pulse lengths there is no problem in keeping the pulse frequency mostly around the first transition frequency, only driving the qubit to \(\ket{1}\).
+As the pulses become shorter the peak becomes wider, but the solutions try to keep the amplitude at the second transition frequency \(\omega_r+K_q\) low to prevent the qubit from going into \(\ket{2}\).
+Eventually, for short enough pulses this level becomes a little bit occupied which can be seen in \Cref{fig:qubit_occupation_gf}, but then drops to zero.
 Perhaps the solution tries to ``take a shortcut'' through \(\ket{2}\), which may be a viable strategy, but if that is the case then one needs to set \(N_q = 4\) and penalize \(\ket{3}\) to make sure that the truncation is a valid approximation.
 
 In conclusion, \krotov{} has no problem finding a solution to this simple state transformation.
@@ -41,53 +42,53 @@ In conclusion, \krotov{} has no problem finding a solution to this simple state 
 %}
 Now we continue with the \(\ket{0}\rightarrow\ket{2}\) transfer.
 The ``strategy'' for all pulse lengths in this case is to first invert the population and then at the halfway point start simultaneously driving the second transition level to start pumping to \(\ket{2}\).
-The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(\kappa_q\), which is also visible in the frequency spectrum.
-While the peak at \(\omega_q+\kappa_q\) was expected, the peak at \(\omega_q-\kappa_q\) for pulse lengths shorter than \ns{29} is a suprise with no clear explanation as to why.
+The pulse shapes also reflects this as the oscillation that starts after the plateau has a frequency of \(K_q\), which is also visible in the frequency spectrum.
+While the peak at \(\omega_q+K_q\) was expected, the peak at \(\omega_q-K_q\) for pulse lengths shorter than \ns{29} is a suprise with no clear explanation.
 It is also not clear why the solutions drive harder at this frequency the shorter the pulse length.
 
 For this optimization the initial guess pulses were very far from any solution, with the fidelity almost starting at zero for all pulse lengths.
-The fidelity goal \(F > 0.99999\) was reached down to \(T = \ns{30}\) which is a bit longer than the \(\ket{0}\rightarrow\ket{1}\) transfer.
-Looking at the occupation dynamics and pulse shapes could give a clue as to why this is the case.
-One reason could be that there needs to be enough periods of oscillations to drive to \(\ket{2}\), which is not the case for the \(\ket{0}\rightarrow\ket{1}\) transfer where the integral of the pulse shape is of importance.
-Further, it appears that the fidelity drops in the same way as the \(\ket{0}\rightarrow\ket{1}\) transfer for shorter pulse lengths.
+The fidelity goal \(F > 0.99999\) was reached down to \(T = \ns{30}\), which is sightly longer than the \(\ket{0}\rightarrow\ket{1}\) evolution.
+Looking at the occupation dynamics and pulse shapes could give hints as to why this is the case.
+One reason could be that there needs to be enough periods of oscillations to drive to \(\ket{2}\), which is not the case for the \(\ket{0}\rightarrow\ket{1}\) evolution where the integral of the pulse shape is of importance.
+Further, it appears that the fidelity drops in the same way as for the \(\ket{0}\rightarrow\ket{1}\) evolution for shorter pulse lengths.
 However we cannot draw any conclusions for pulse lenghts shorter than \ns{22}.
 Perhaps with a low \(\Delta F\) one might reach a solution that follows the trend, but this is only speculation.
 
-The number of iterations also fluctuate for pulse lengths which don't reach the fidelity goal, just as the \(\ket{0}\rightarrow\ket{1}\) transfer.
+The number of iterations also fluctuates for pulse lengths which do not reach the fidelity goal, just as for the \(\ket{0}\rightarrow\ket{1}\) evolution.
 
-Interestingly, for both transfers the optimization converges quickly to a relatively high fidelity while the majority of the time is spent fine-tuning the pulse shapes.
-This could be a side-effect of the static step size.
-While the number of iterations were large, each iteration step was faster than 1 second, so the total optimization might not be a problem.
-This optimization time could potentially grow exponentially for larger Hilbert spaces though.
+Interestingly, for both transfers the optimization converges quickly to a relatively high fidelity, while the majority of the time is spent fine-tuning the pulse shapes.
+This could be a side-effect of the static step size, which could be dynamically changed for faster convergence.
 
-To conclude, \krotov{} can also be used to optimize for somewhat more complicated transfers than the simple qubit rotation.
+To conclude, \krotov{} can also be successfully used to optimize for somewhat more complicated transfers than the simple qubit rotation.
 
-\section{Cat code encoding}
+\section{Cat Code Encoding}
 The six simultaneous objective optimization ended with a total fidelity of \(F = 0.999234\) and the individual fidelities all over \(0.9989000\).
-The simulations also showed that a spread of states around the Bloch sphere also were larger than this latter fidelity.
-This supports the validity of the method as a means to obtain one pulse to encode all six states.
+The simulations also showed that the transfers of states evenly spread around the Bloch sphere all had a minimal fidelity above \(0.9989000\) for the transferred states.
+This supports the validity of the method as a mean to obtain one pulse to encode all six states.
 There is no clear reason for why there is a bias in the fidelities for states closer to \((\ket{0}+i\ket{1})/\sqrt{2}\).
 One reason could be that the guess pulses introduce a bias and this bias is still left if the convergence is due to \(\Delta F\).
+Another reason could be due to numerical errors.
 
-Even though the fidelity goal of \(F > 0.999999\) was not reached it could be possible to reach by decreasing \(\Delta F\).
+Even though the fidelity goal of \(F > 0.999999\) was not reached it could be possible to reach this fidelity goal by decreasing \(\Delta F\).
 Note however that there is no guarantee that such a solution exists.
 
-Looking at the pulse shapes, \cref{fig:cat-pulse-shape}, doesn't give much insight however the spectrum shows some interesting phenomena.
+Looking at the pulse shapes, \Cref{fig:cat-pulse-shape}, does not give much insight. However, the spectrum shows some interesting phenomena.
 The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
 However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
 The width of the resonance peaks for the qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state of the qubit (resonator).
 Consequently, during different times of the pulse the system needs to be driven at a range of frequencies.
 Further research is needed to explain the characteristics of the solution.
 
-The only discernable ``strategy'' found, judging by the qubit dynamics in \cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
+The only discernable ``strategy'' found, judging by the qubit dynamics in \Cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
 This is in the same essence as the cat state generation strategy presented in~\cite{haroche_exploring_2006}.
-However, further analysis of the resonator and qubit dynamics and interactions could bring a further understanding.
+However, further analysis of the resonator and qubit dynamics and interactions could bring a deeper understanding.
 
-One possible problem with the chosen coupling factor is that it is at the upper edge of the dispersive regime with \(g/\Delta\approx 0.11\).
-This could mean that the rotating wave approximation does not hold and more terms are needed to accurately model the real Hamiltonian.
-However, as this is because we want short pulse lengths it becomes a trade-off in computational time versus accuracy.
+As a perspective of this work, it would be interesting to analyse the limitations of the rotating wave approximation, that we used to derive the Hamiltonian in \Cref{eq:cat-hamiltonian-rotating}
+Indeed, the chosen coupling factor is at the edge of the dispersive regime with \(g/\Delta\approx 0.11\) and the rotating wave approximation breaks down for anything other than \(g/\Delta \ll 1\).
+This choice was made due to the fact that a larger coupling factor requires less time to realise the transfer. As there was limited time to perform the optimizations, we could use shorter pulse lengths to trade away computational time for less accuracy.
+We expect the solution to hold, but further accurate solutions might be found within a more general model.
 
-Another consequency of the large coupling factor is that the final state is not robust with respect to small changes in the pulses, as can be seen from the fact that the fidelity goal is reached in the last fraction of a nanosecond.
+Another consequence of the large coupling factor is that the final state is not robust with respect to small changes in the pulses, as can be seen from the fact that the fidelity goal is reached in the last fraction of a nanosecond.
 The large coupling will force the qubit and resonator to induce oscillations in each other.
 These oscillations are probably dependent on the phase of the coupling pulses.
 As the \krotov{} package already provides a way to optimize ensemble objectives with different parameters in each Hamiltonian~\cite{goerz_robustness_2014} for robustness, this could be used to optimize for the average of different phase shifts.
@@ -98,17 +99,17 @@ One way could be to add a mechanism for optimizing pulse shapes with points spar
 Thus one could implement the time-dependent coupling terms separately from the control terms.
 However if the forward propagation simulation is the most computationally intensive part this would not really help.
 
-As the previous experiments showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
+In conclusion, as the qubit transfer simulations showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
 Even though the underlying theory of the solution is not understood at this moment, Krotov's method proves itself to be able to optimize a state transfer in a qubit-resonator coupled system to a fidelity \(F > 0.9990\).
-Further experiments need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
+Further research need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
 
-\section{General discussion of \krotov{}}
+\section{Conclusive Discussion of the Use of \krotov{}}
 \label{sec:general}
 \krotov{} provides an easy-to-use interface for setting up the optimization problem.
 This is the strongest argument for using this package as the features are unrivaled compared to other optimization packages.
 Firstly, QuTiP~\cite{johansson_qutip_2013} can optimize with the GRAPE and CRAB algorithms, but there are no provided interfaces for
 (1) saving optimizations to a file,
-(2) continuing optimization efter they are stopped,
+(2) continuing optimization after they are stopped,
 (3) optimizing for multiple control fields and objectives,
 (4) using custom convergence criteria and 
 (5) modifying the pulses after every iteration (for amplitude constraints).
@@ -116,7 +117,7 @@ These are all critical features which \krotov{} has.
 Secondly, GOAT~\cite{machnes_gradient_2015} is a new promising algorithm for quantum optimal control, but has no Python package available yet and the MATLAB implementation has a steep learning curve.
 If or when the GOAT Python implementation becomes available it would be interesting to compare the feature set and the actual algorithm by testing comparing the performance on the same optimization objective.
 
-The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which will be presented in \cref{sec:future-work}.
-If all else fails one could always throw more compute at it.
+The slow convergence of the optimization could pose a problem for larger systems, however there are some techniques for speeding up the optimization which will be presented in \Cref{sec:future-work}.
+If all else fails one could always use more computing power.
 
 \end{document}

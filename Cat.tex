@@ -1,0 +1,265 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Cat Code Encoding}
+For the cat code encoding, six simultaneous objectives were chosen to give encoding pulses which maps the six ``cardinal'' qubit states on the Bloch sphere to the corresponding cat code states in the resonator.
+These initial qubit states are
+\[ \ket{0}, \ket{1},\]
+\[ \frac{\ket{0}+\ket{1}}{\sqrt{2}}, \frac{\ket{0}-\ket{1}}{\sqrt{2}},\]
+\[ \frac{\ket{0}+i\ket{1}}{\sqrt{2}}, \frac{\ket{0}-i\ket{1}}{\sqrt{2}} \]
+with target state \(\ket{0}\).
+The resonator initial state is \(\ket{0}\) (in the Fock basis) and the corresponding target states are
+\[ \cat{}, \cat[i]{},\]
+\[ \frac{\cat{}+\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-\cat[i]{}}{\sqrt{2}},\]
+\[ \frac{\cat{}+i\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-i\cat[i]{}}{\sqrt{2}}. \]
+The hope is that by optimizing these six states the pulse shapes will approximate the unitary in \Cref{eq:cat-code-unitary}.
+
+\section{Simulation Setup}
+In this section the Hamiltonian and the optimization parameters will be presented.
+
+\subsection{Hamiltonian}
+In this simulation the coupled qubit-resonator system in \Cref{eq:hamiltonian-coupled} was used.
+As the operators \(\ad\) and \(\bd\) commute, the rewriting used in \Cref{eq:system-hamiltonian-rotating} was also used for the resonator.
+The rotating frame transformation is done here with respect to \(\omega_{r} \au\ad + \omega_{q} \bu\bd \).
+However, as the coupling term has no time dependence and does not commute with the operators \(\au\ad \) and \(\bu\bd \) there will still be a time dependence in the rotating frame
+\begin{equation}
+    g(\ad\bu + \au\bd) \rightarrow g(\ad\bu\ex^{i(\omega_q-\omega_r)t} + \au\bd\ex^{-i(\omega_q-\omega_r)t}).
+    \label{eq:coupling-term-rotating}
+\end{equation}
+This was a problem because \krotov{} expects \(\Ham_d\) to be time independent.
+There is a way to ``simulate'' the coupling term~\eqref{eq:coupling-term-rotating} by inserting it as an external time dependent pulse, and omitting it from optimization, which was done in this case.
+The coupling term was then split into a real and imaginary part which is, as stated before, required by \krotov{}.
+
+The final Hamiltonian provided to \krotov{} was then
+\begin{equation}
+    \begin{split}
+        \Ham &= \underbrace{K_r/2(\au)^2\ad^2 +K_q/2\qty(\bu\bd)^2}_{\Ham_d} + \\
+        &+\underbrace{\text{Re}\qty[\Omega_r(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega_r(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} + \underbrace{\text{Re}\qty[\Omega_q(t)]}_{u_2(t)}\underbrace{(\bd + \bu)}_{\Ham_2} + \underbrace{\text{Im}\qty[\Omega_q(t)]}_{u_3(t)}\underbrace{i(\bd - \bu)}_{\Ham_3} +\\
+        &+\underbrace{\qty[\cos((\omega_q-\omega_r)t)]}_{u_4(t)}\underbrace{g(\ad\bu + \au\bd)}_{\Ham_4} + \underbrace{\qty[\sin((\omega_q-\omega_r)t)]}_{u_5(t)}\underbrace{ig(\ad\bu - \au\bd)}_{\Ham_5}
+        \label{eq:cat-hamiltonian-rotating}
+    \end{split}
+\end{equation}
+The parameters of this system are presented in \Cref{tab:ham-params}.
+These were chosen to resemble the physical values measured in~\cite{ofek_extending_2016}, except for \(g\) which was chosen at relatively large value to reduce the pulse length needed to realise the transfer.
+\begin{table}[H]
+    \caption{Hamiltonian parameters}%
+    \label{tab:ham-params}
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    Param. & Value\\ \midrule
+    \(\omega_q/(2\pi)\) & \SI{6.2815}{\giga\hertz} \\
+    \(K_q/(2\pi)\) & \SI{297}{\mega\hertz} \\
+    \(\omega_r/(2\pi)\) & \SI{8.3056}{\giga\hertz} \\
+    \(K_r/(2\pi)\) & \SI{4.5}{\kilo\hertz} \\
+    \(g/(2\pi)\) & \SI{0.225}{\giga\hertz} \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+The truncated Hilbert space size for the resonator was chosen to be \( N_r = 8 \) with the mean photon number \(\alpha = 2\).
+Due to the large system size, the qubit's truncated Hilbert space size was set to \(N_q = 2\).
+
+\subsection{Optimization Setup}
+The optimization was setup in the same way as the previous simulation, however due to the rapid oscillations at \(|\omega_q-\omega_r|\) (due to the coupling pulse) a finer time discretization of \SI{24}{\giga\samples\per\second} was chosen.
+The step size was chosen as \(\lambda = \frac{1}{\frac{1}{2}A_{m}}\) and the pulse length \(T = \ns{60}\) to allow the coupling to affect the system.
+Further, convergence criteria was chosen as \(F>0.999999\) or \(\Delta F < \num{e-06}\).
+Another important step in optimizing in the rotating frame was to convert the target states into the rotating frame in order for the final states to be correct in the lab frame.
+Initial guess pulses were chosen to be the same Blackman pulses in the setup for the \(\ket{0}\rightarrow\ket{2}\) evolution.
+
+\section{Results}
+We now present the main results of this thesis: the optimization of pulses for encoding a cat state in a resonator from a coupled qubit.
+The cat encoding optimization reached the convergence criteria of \(\Delta F < \num{e-6}\) after 2389 iterations (corressponding to roughly 41 hours and 28 minutes) with a fidelity \(F = 0.999234\), (recall the fidelity measure for multiple objectives in \Cref{eq:total-fidelity}).
+The individual fidelities for the 6 initial states are shown in \Cref{tab:cat-fidelities}, where we can see that all individual fidelities are above 0.999000.
+
+\begin{table}[ht]
+    \caption{Fidelities for the individual state transfers (ordered from highest to lowest).}%
+    \label{tab:cat-fidelities}
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    State & \(F\)\\ \midrule
+	\((\ket{0}+i\ket{1})/\sqrt{2}\) & 0.99939453 \\
+	\((\ket{0}-\ket{1})/\sqrt{2}\) & 0.99932348 \\
+	\((\ket{0}+\ket{1})/\sqrt{2}\) & 0.99930147 \\
+    \(\ket{0}\) & 0.99920509 \\
+	\(\ket{1}\) & 0.99918837 \\
+	\((\ket{0}-i\ket{1})/\sqrt{2}\) & 0.99899637 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+To corroborate how well the qubit was mapped to the cat code basis, multiple states spread around the Bloch sphere were transferred with the pulse solution.
+The corresponding fidelities are shown on the Bloch sphere in \Cref{fig:bloch-fid}, where we can see an asymmetry with larger fidelities toward \((\ket{0}+i\ket{1})/\sqrt{2}\).
+All in all the minimum fidelity among all of the transferred states is 0.998996.
+
+\begin{figure}[ht]
+	\centering
+	\subcaptionbox{Side view of Bloch sphere.}{
+		\centering
+		\includegraphics[width=0.45\textwidth]{figs/bloch_fid_low.png}
+	}%
+	\subcaptionbox{Top view of Bloch sphere.}{
+		\centering
+		\includegraphics[width=0.45\textwidth]{figs/bloch_fid_high.png}
+	}
+	\caption{%
+	The fidelities of every simulated state transfer shown on the Bloch sphere.
+	There is an asymmetry in the fidelity with higher fidelity towards the state \((\ket{0}+i\ket{1})/\sqrt{2}\).
+	}%
+	\label{fig:bloch-fid}
+\end{figure}
+
+
+The pulse shapes of the qubit and resonator are shown in \Cref{fig:cat-pulse-shape}.
+Comparing the resonator and qubit, we can see that the resonator pulse has rapid oscillations throughout the whole pulse while the qubit exhibits some small quick oscillation at sparse times.
+The spectrum of the pulse is shown in \Cref{fig:cat-pulse-spectrum} and gives us some insight into the pulse shapes.
+The qubit control pulse shows a wide peak at \(\omega_q\), two small peaks at \(\omega_r\) and \(2\omega_r-\omega_q\) and two barely noticable peaks at \(\frac{1}{4}\omega_r\) and \(\frac{1}{2}\omega_r\). 
+The resonator pulse has one wide peak at \(\omega_r\), a smaller one at \(\omega_q\) and an even smaller peak at \(2\omega_r-\omega_q\).
+
+\begin{figure}[ht]
+\centering
+\subcaptionbox{Qubit control pulse shape.}{
+		\centering
+		\setlength\figureheight{20em}
+		\setlength\figurewidth{\textwidth}
+		\input{figs/cat_pulse_shape_60,0_q.tikz}
+}
+\subcaptionbox{Resonator control pulse shape.}{
+		\centering
+		\setlength\figureheight{20em}
+		\setlength\figurewidth{\textwidth}
+		\input{figs/cat_pulse_shape_60,0_r.tikz}
+}
+\caption{%
+Optimized pulse shapes of \textbf{(a)} \(\Omega_q(t)\) and \textbf{(b)} \(\Omega_r(t)\).
+The real and imaginary parts of the pulse are shown in blue and orange respectively.
+The resonator shows rapid oscillations compared to the qubit.
+}%
+\label{fig:cat-pulse-shape}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\subcaptionbox{Qubit control pulse spectrum. The black vertical are located at \(n\omega_r\) where \(n=(0.25,0.5,1)\).}{
+			\centering
+			\setlength\figureheight{20em}
+			\setlength\figurewidth{\textwidth}
+			\input{figs/cat_pulse_spectrum_qubit_60,0.tikz}
+	}
+	\subcaptionbox{Resonator control pulse spectrum.}{
+			\centering
+			\setlength\figureheight{20em}
+			\setlength\figurewidth{\textwidth}
+			\input{figs/cat_pulse_spectrum_res_60,0.tikz}
+	}
+	\caption{%
+	Spectrum of optimized pulses \textbf{(a)} \(\Omega_q(t)\) and \textbf{(b)} \(\Omega_r(t)\) (in the lab frame).
+	}%
+	\label{fig:cat-pulse-spectrum}
+\end{figure}
+
+The dynamics of the qubit is shown in \Cref{fig:cat-qubit-occupation} for all state transfers.
+Here we see that there is always a rapid oscillation present in the occupation probability.
+Looking at the dynamical behaviour one can see that common for all transfers is for the qubit to stay somewhat close to an equal superposition between \(\ket{0}\) and \(\ket{1}\) and then at circa \ns{50} evolve to \(\ket{0}\).
+
+
+\begin{figure}[ht]
+	\centering
+	\foreach \n/\capn [count=\ni] in {{0}/{\ket{0}},{5}/{\ket{1}},{3}/{(\ket{0}+\ket{1})/\sqrt{2}},{1}/{(\ket{0}-\ket{1})/\sqrt{2}},{2}/{(\ket{0}+i\ket{1})/\sqrt{2}},{4}/{(\ket{0}-i\ket{1})/\sqrt{2}}}{
+		\subcaptionbox{Transfer of \(\capn{}\)}{
+			\centering
+			\setlength\figureheight{15em}
+			\setlength\figurewidth{0.45\textwidth}
+			\input{figs/cat_qubit_occ_60,0_\n.tikz}
+		}%
+		\ifnum\ni=6%
+				%
+		\else%
+			\hfill
+		\fi%
+	}
+	\caption{Qubit level occupation over time for the 6 state transfers. \(\ket{0}\) and \(\ket{1}\) are shown in blue and orange respectively.}%
+	\label{fig:cat-qubit-occupation}
+\end{figure}
+
+One interesting measure we can look at is the maximum occupation of the 8 resonator states, to which the resonator Hilbert space was truncated.
+This can give us information about the validity of the Hilbert space truncation.
+In \Cref{fig:cat-max-occ} the maximum reached occupation probability are plotted for all states.
+This is done for all the 6 state transfers.
+Looking only at the odd states there is a clear downward trend for higher states, with \(\ket{7}\) only reaching circa 0.2 of occupation probability during the \(\ket{0}\) transfer.
+\(\ket{6}\) is in the 0.2–0.3 occupation range for all transfers.
+This shows that the chosen truncation is appriopriate, but ideally a somewhat larger space should be used.
+The dynamics of the resonator level occupation are provided in \Cref{sec:resonator-occupation} for further analysis.
+
+\tikzfig{figs/cat_max_occ}{%
+Maximum occupation of the Fock basis states for all six state transfers.
+}{fig:cat-max-occ}{0.8\textwidth}{20em}
+
+Finally, we can plot the Wigner function of the final resonator states, and compare it with the target states.
+This is done in \Cref{fig:cat-resonator-wigner} where the final states have been transformed back into the lab frame.
+As is evident from the plots they are close to the target states shown in \Cref{fig:cat-resonator-wigner-targets}.
+
+\begin{figure}[ht]
+	\centering
+	\foreach \n/\capn [count=\ni] in {{0}/{\ket{0}},{5}/{\ket{1}},{3}/{(\ket{0}+\ket{1})/\sqrt{2}},{1}/{(\ket{0}-\ket{1})/\sqrt{2}},{2}/{(\ket{0}+i\ket{1})/\sqrt{2}},{4}/{(\ket{0}-i\ket{1})/\sqrt{2}}}{
+		\subcaptionbox{Transfer of \(\capn{}\)}{
+			\centering
+			\includegraphics[width=0.30\textwidth]{figs/cat_wigner_60,0_\n.png}
+		}%
+		\ifnum\ni=6%
+				%
+		\else%
+			\hfill
+		\fi%
+	}
+	\caption{%
+	Wigner function of the final state (lab frame) of the resonator for all state transfers.
+	The final resonator states are close to the target states shown in \Cref{fig:cat-resonator-wigner-targets}.
+	}%
+	\label{fig:cat-resonator-wigner}
+\end{figure}
+
+\section{Discussion}
+The six simultaneous objective optimization ended with a total fidelity of \(F = 0.999234\) and the individual fidelities all over \(0.9989000\).
+The simulations also showed that the transfers of states evenly spread around the Bloch sphere all had a minimal fidelity above \(0.9989000\) for the transferred states.
+This supports the validity of the method as a mean to obtain one pulse to encode all six states.
+There is no clear reason for why there is a bias in the fidelities for states closer to \((\ket{0}+i\ket{1})/\sqrt{2}\).
+One reason could be that the guess pulses introduce a bias and this bias is still left if the convergence is due to \(\Delta F\).
+Another reason could be due to numerical errors.
+
+Even though the fidelity goal of \(F > 0.999999\) was not reached it could be possible to reach this fidelity goal by decreasing \(\Delta F\).
+Note however that there is no guarantee that such a solution exists.
+
+Looking at the pulse shapes, \Cref{fig:cat-pulse-shape}, does not give much insight. However, the spectrum shows some interesting phenomena.
+The qubit control pulse spectrum shows a large peak at the qubit resonance frequency \(\omega_q\), as expected, and the same with the resonator and its' resonance frequency \(\omega_r\).
+However there is no clear explanation for the peak at \(2\omega_r-\omega_q\) and the peaks of the resonator appearing in the qubit spectrum and vice versa.
+The width of the resonance peaks for the qubit (resonator) could perhaps be explained by the resonator (qubit) inducing a resonance shift dependent on the state of the qubit (resonator).
+Consequently, during different times of the pulse the system needs to be driven at a range of frequencies.
+Further research is needed to explain the characteristics of the solution.
+
+The only discernable ``strategy'' found, judging by the qubit dynamics in \Cref{fig:cat-qubit-occupation}, is to put the qubit in a superposition which will drive the resonator into the desired state using the coupling.
+This is in the same essence as the cat state generation strategy presented in~\cite{haroche_exploring_2006}.
+However, further analysis of the resonator and qubit dynamics and interactions could bring a deeper understanding.
+
+As a perspective of this work, it would be interesting to analyse the limitations of the rotating wave approximation, that we used to derive the Hamiltonian in \Cref{eq:cat-hamiltonian-rotating}
+Indeed, the chosen coupling factor is at the edge of the dispersive regime with \(g/\Delta\approx 0.11\) and the rotating wave approximation breaks down for anything other than \(g/\Delta \ll 1\).
+This choice was made due to the fact that a larger coupling factor requires less time to realise the transfer. As there was limited time to perform the optimizations, we could use shorter pulse lengths to trade away computational time for less accuracy.
+We expect the solution to hold, but further accurate solutions might be found within a more general model.
+
+Another consequence of the large coupling factor is that the final state is not robust with respect to small changes in the pulses, as can be seen from the fact that the fidelity goal is reached in the last fraction of a nanosecond.
+The large coupling will force the qubit and resonator to induce oscillations in each other.
+These oscillations are probably dependent on the phase of the coupling pulses.
+As the \krotov{} package already provides a way to optimize ensemble objectives with different parameters in each Hamiltonian~\cite{goerz_robustness_2014} for robustness, this could be used to optimize for the average of different phase shifts.
+
+Lowering the coupling factor could help mitigate both these issues, however, as stated earlier it is a trade-off.
+We can perhaps try to speed up the optimization.
+One way could be to add a mechanism for optimizing pulse shapes with points sparser than the simulation time grid.
+Thus one could implement the time-dependent coupling terms separately from the control terms.
+However if the forward propagation simulation is the most computationally intensive part this would not really help.
+
+In conclusion, as the qubit transfer simulations showed that \krotov{} could optimize simple non-coupled qubits (resonators) with a high fidelity and reasonable physical intuition, this gives support to the validity of the cat code encoding pulses.
+Even though the underlying theory of the solution is not understood at this moment, Krotov's method proves itself to be able to optimize a state transfer in a qubit-resonator coupled system to a fidelity \(F > 0.9990\).
+Further research need to be done to assess the performance of the pulses in a physical environment, such as including noise which is a significant factor.
+
+\end{document}

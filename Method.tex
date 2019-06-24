@@ -4,10 +4,8 @@
 
 \chapter{Method}
 The pulses will be optimized using Krotov's method~\cite{reich_monotonically_2012}, a gradient-based optimization algorithm available publicly as a ready-to-use Python package~\cite{goerz_krotov:_2019}.
-
-The algorithm used for this thesis is called Krotov's method and will be presented in the Method chapter.
 In this chapter Krotov's method for quantum optimal control will be briefly introduced and an implementation as a Python package.
-Then the numerical experiments will be explained.
+Then the numerical simulatons will be explained.
 
 \section{Krotov's Method for Quantum Optimal Control}
 Krotov's method for quantum control fundamentally relies on the variational principle to minimize a functional
@@ -15,15 +13,15 @@ Krotov's method for quantum control fundamentally relies on the variational prin
 that depends on the pulse shapes and the quantum states of the system evolved under these pulse shapes \cite{goerz_krotov:_2019}.
 A detailed explanation of this functional can be found in \cite{reich_monotonically_2012}.
 However a quick summary of how the method works will be presented here.
-Starting with some guess pulse shapes, the initial state is forward propagated in time using a Hamiltonian of the same form as \cref{eq:optimal-control-hamiltonian} and the value of the functional is calculated.
+Starting with some guess pulse shapes, the initial state is forward propagated in time using a Hamiltonian of the same form as \Cref{eq:optimal-control-hamiltonian}, and the value of the functional is calculated.
 Then changes to the pulse shapes which will decrease the value of the functional are calculated, by propagating states with these new pulse shapes, and these updates become the new pulse shapes.
 This continues until convergence is reached.
 
 The underlying mathematical principles of Krotov's method will not be adressed in the thesis, as that is outside the scope.
 Therefore the method will be treated as a black box function provided by the Python package which will be presented in the next section.
 
-\subsection{Krotov: the Python package}
-A Python implementation of the Krotov's method is available at~\cite{goerz_krotov:_2019} which provides an abstraction layer for doing optimizations.
+\section{Krotov: the Python Package}
+A Python implementation of the Krotov's method is available at~\cite{goerz_krotov:_2019}, where an abstraction layer for doing optimizations is provided.
 The package will be referred to as \krotov{}.
 The reason \krotov{} was chosen is primarily because it allows for optimization of multiple objectives simultaneously.
 This is necessary in order to create a single encoding pulse which will realise the state transfer into the cat code basis for any arbitrary state.
@@ -33,7 +31,7 @@ That means it can leverage all the useful features of that package, which is als
 The package provides a set of submodules which are used to setup the optimization problem.
 The important modules will be presented here.
 
-The \texttt{objectives} module describes the goal of the optimization, be it a state-to-state transfer or a quantum gate.
+The \texttt{objectives} module describes the goal of the optimization, be it a state-to-state evolution or a quantum gate.
 It is used to specify the initial and target states, the Hamiltonian and the initial guess pulses.
 
 The \texttt{functionals} module provides a set of functionals which can be used for Krotov's method.
@@ -41,168 +39,22 @@ In this work the functional \texttt{chis\_ss} has been chosen for all optimizati
 
 In the \texttt{convergence} module, help functions for the stopping criteria are provided for the optimization.
 It exposes values such as the overlap of the forward propagated state and target state \(\braket{\psi(T)}{\psi^{\text{tar}}}\) during the optimization which can be used to check when convergence is reached.
-The stopping criteria chosen for this thesis is either a minimum fidelity~\cite{ofek_extending_2016}
+The stopping criteria chosen for this thesis is either when a minimum fidelity is obtained, the fiedlity being given by~\cite{ofek_extending_2016}
 \begin{equation}
     F = \frac{1}{S}|\sum_{k=1}^{S} \braket{\psi_k(T)}{\psi_{k}^{\text{tar}}}|^2,
     \label{eq:total-fidelity}
 \end{equation}
 where \(S\) is the number of (simultaneous) state transfers we want to realise, or when the change in fidelity between iterations \(\Delta F\) falls below a specified value (where a local minimum can be assumed to have been reached).
-The values of these will be specified in~\cref{sec:optimization-experiments}
+The values of these will be specified in~\Cref{sec:optimization-simulations}
 
 Finally, the \texttt{optimization} module is used to setup the whole optimization.
 It is possible to choose the time discretization, convergence criteria, optimization functional, and a function which will run after every iteration.
-Also the step size \(1/\lambda\) of the pulse updates can be chosen which is further explained in~\cite{goerz_krotov:_2019}.
+Also the step size \(1/\lambda\) of the pulse updates can be chosen, which is further explained in~\cite{goerz_krotov:_2019}.
 Note however that although a large step size could achieve faster convergence, it can also lead to numerical instability.
 
-\section{Optimization Experiments}
-\label{sec:optimization-experiments}
-In this chapter the numerical optimization experiments are presented and motivated.
-The first experiment was used to assess the viability of the method, while the last one is a proof of concept for encoding states into the cat code basis.
-All optimizations were run on a Lenovo Yoga 520-14IKB PC with an Intel(R) Core(TM) i7-8550 CPU running Windows 10.
-
-\subsection{Qubit state transfers}
-In this experiment, the optimization was run to realise the state transfer \(\ket{0}\rightarrow\ket{1}\) and then \(\ket{0}\rightarrow\ket{2}\).
-The first transfer should be close to the ideal solution of a \(\pi\)-pulse, while the second is non-trivial.
-Therefore they are suitable goals to test the method and package.
-
-\subsubsection{Hamiltonian}
-The anharmonic resonator (qubit) in~\cref{eq:resonator-hamiltonian} was chosen as it is a simple model for a physical qubit.
-As stated earlier such a system will be referred to as a qubit even though it has more than two energy levels.
-To induce transitions between the states of the qubit, control pulse terms were added to~\cref{eq:resonator-hamiltonian}
-\begin{equation}
-    \Ham = \omega_{q} \au\ad + \frac{\kappa_q}{2} (\au)^2\ad^2 + \Omega(t)\ex^{-i\omega_{q}t}\ad + \Omega^*(t)\ex^{i\omega_{q}t}\au
-    \label{eq:system-hamiltonian}
-\end{equation}
-where \( \Omega(t) \) is the complex amplitude of the control pulse.
-Looking at the Hamiltonian above it can be argued that it can be written in the form in \cref{eq:optimal-control-hamiltonian}, which is needed by \krotov{}, with \( u_0(t) = \Omega(t)\ex^{i\omega_{q}t} \) and \( u_1(t) = \Omega^*(t)\ex^{-i\omega_{q}t} \).
-However, there are two problems that need to be adressed.
-Firstly, the oscillating factors require an unnecessarily fine time discretization of the pulses.
-Secondly, the Krotov package expects real-valued pulse amplitudes \( \qty{u_i(t)} \) as inputs.
-The first problem was avoided by transforming the Hamiltonian into the interaction picture with respect to \(\omega_{q} \au\ad \)
-%Now \cref{eq:system-hamiltonian} transforms\footnote{Full derivation is shown in \cref{sec:appendix-interaction-picture}} into
-\begin{equation}
-    \Ham \rightarrow~ \frac{\kappa_q}{2}(\au)^2\ad^2 + \Omega(t)\ad + \Omega^*(t)\au.
-    \label{eq:krotov-hamiltonian-rotating}
-\end{equation}
-Now the pulse amplitudes were \( u_0(t) = \Omega(t) \) and \( u_1(t) = \Omega^*(t) \), i.e.\ the envelope of the physical control pulse which varies significantly slower than the actual pulse.
-The second problem was easily fixed with a rearrangment of the terms
-\[ \Omega(t)\ad + \Omega^*(t)\au = \bigg[\text{Re}\qty[\Omega(t)]+i\text{Im}\qty[\Omega(t)]\bigg]\ad + \bigg[\text{Re}\qty[\Omega(t)]-i\text{Im}\qty[\Omega(t)]\bigg]\au = \]
-\[ = \text{Re}\qty[\Omega(t)]\qty(\ad + \au) + \text{Im}\qty[\Omega(t)]i\qty(\ad - \au). \]
-For intuition, \( \qty(\ad + \au) \) and \( i\qty(\ad - \au) \) correspond to Bloch sphere rotations around the x-axis and y-axis respectively. 
-Thus the final Hamiltonian became
-\begin{equation}
-    \Ham = \underbrace{\kappa_q/2(\au)^2\ad^2}_{\Ham_d} + \underbrace{\text{Re}\qty[\Omega(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} .
-    \label{eq:system-hamiltonian-rotating}
-\end{equation}
-
-The parameters of the qubit were chosen to model real superconducting qubits with \( \kappa_q = 2\pi\times\SI{297}{\mega\hertz} \) (and \( \omega_{q} = 2\pi\times\SI{6.2815}{\giga\hertz} \)).
-The system Hamiltonian in \cref{eq:system-hamiltonian-rotating} was simulated with a truncated Hilbert space size conveniently chosen to be \( N_q = 3 \).
-A smaller truncated Hilbert space, and consequently smaller matrices, requires less computations but could possibly be a poor approximation of the Hamiltonian.
-Thus the solutions of the optimization were analysed with this in mind.
-
-\subsubsection{Optimization Setup}
-As the long-term goal is to use this method in physical systems some constraints were added.
-To simulate the constraints of physical \textbf{a}rbitrary \textbf{w}aveform \textbf{g}enerators a maximum sample rate of \SI{4}{\giga\samples\per\second} was chosen.
-Recall that the physcal pulses oscillate at \( \omega_{q} = \SI{6.2815}{\giga\hertz} \), a rate which \SI{4}{\giga\samples\per\second} can impossibly resolve.
-Although AWGs with higher sample rates than \SI{4}{\giga\samples\per\second} exist, they are expensive.
-However, rotating frame transformation permits the use of a relatively low rate AWG to generate the pulse envelopes \( \Omega(t) \) and a high rate tone generator to create a carrier signal at \( \omega_{q} \), with these signals later combined in a mixer.
-Further, due to the noise sensitivity of superconducting systems an amplitude constraint is needed to keep the system cool enough.
-To set a realistic maximum amplitude \( A_m \) some derivation was required.
-First the maximum amplitude was chosen with the assumption that a gaussian pulse
-\begin{equation}
-    g(t) = \frac{\pi/2}{\sigma\sqrt{2\pi}} \ex^{-\frac{1}{2}\qty(\frac{t}{\sigma})^2}
-\end{equation}
-with \( \sigma = \ns{3} \) can physically realise a \(\pi\)-rotation \( \ket{0} \rightarrow \ket{1} \) in a planar transmon qubit.
-The problem with gaussian pulses however is that they don't go to zero at the edges.
-To fix this \krotov{} provides a function for generating Blackman pulses.
-A Blackman pulse with a total length of \(6\sigma\) is a good approximation of a Gaussian pulse, with the added benefit of going to zero at the edges.
-However, due to the approximation, the integral of the Blackman pulse will not exactly be equal to the integral of the corresponding gaussian pulse, which is needed to realise the \(\pi\)-rotation.
-This can be fixed by using a prefactor \(C\) which can be calculated by solving
-\begin{equation}
-    C \int_0^{6\sigma}\frac{1}{\sqrt{2\pi}\sigma} B(t) = \int_0^{6\sigma}g(t-3\sigma)\id t
-\end{equation}
-where \(B(t)\) is the Blackman pulse.
-This is now used to determine the maximum amplitude
-\begin{equation}
-    A(\sigma) = \frac{C}{\text{max}(\sigma,3)\sqrt{2\pi}}
-\end{equation}
-with \(A_m = A(\sigma = 3)\). 
-This axmplitude constraint is enforced by calling a function after every iteration which limits all pulse shape values \(|\Omega| < A_m\).
-Conveniently, the Blackman pulse was also used as the initial guess pulse with \(u_0(t) = A(T/6)B(t),\, u_1(t)=0\).
-
-Another constraint was added so that the edges of the pulses were always zero.
-This was done with a switch-on/switch-off of \ns{2}.
-This ramp shape is half a Blackman pulse and is provided by \krotov{}'s \texttt{flattop} function.
-
-For the \(\ket{0}\rightarrow\ket{1}\) state transfer pulse shapes were optimized with varying lengths from \SI{4.25}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-07}\).
-The step size was chosen as \(\lambda = \frac{1}{\frac{1}{2}A_{m}}\).
-The reason for optimizing for various pulse lengths was that faster pulse changes gives a broader support in the frequency spectrum which can ultimately induce transitions in other levels.
-Therefore the optimization needs to find a solution which circumvents this problem.
-
-Lastly, for the \(\ket{0}\rightarrow\ket{2}\) state transfer pulse shapes were optimized with varying lengths from \SI{22}{\nano\second} to \SI{30}{\nano\second} with convergence criteria \(F>0.99999\) or \(\Delta F < \num{e-09}\).
-The low \(\Delta F\) was needed because the changes were very small in the beginning of the optimization.
-The step size was chosen as \(\lambda = \frac{1}{2A_{m}}\) due to slow convergence.
-In contrast to the \(\ket{0}\rightarrow\ket{1}\) state transfer both initial guess pulses were chosen to be Blackman pulses \(u_0(t) = u_1(t) = A(T/6)B(T)\).
-
-\subsection{Cat code encoding}
-For the cat code encoding, six simultaneous objectives were chosen to give encoding pulses which maps the six ``cardinal'' states on the Bloch sphere to the corresponding resonator states.
-These initial qubit states are
-\[ \ket{0}, \ket{1},\]
-\[ \frac{\ket{0}+\ket{1}}{\sqrt{2}}, \frac{\ket{0}-\ket{1}}{\sqrt{2}},\]
-\[ \frac{\ket{0}+i\ket{1}}{\sqrt{2}}, \frac{\ket{0}-i\ket{1}}{\sqrt{2}} \]
-with target state \(\ket{0}\),
-and the resonator initial state is \(\ket{0}\) (in the Fock basis) with target states
-\[ \cat{}, \cat[i]{},\]
-\[ \frac{\cat{}+\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-\cat[i]{}}{\sqrt{2}},\]
-\[ \frac{\cat{}+i\cat[i]{}}{\sqrt{2}}, \frac{\cat{}-i\cat[i]{}}{\sqrt{2}}. \]
-The hope is that by optimizing these six states the pulse shapes will approximate the unitary in \cref{eq:cat-code-unitary}.
-
-\subsubsection{Hamiltonian}
-In this experiment the coupled qubit-resonator system in \cref{eq:hamiltonian-coupled} was used.
-As the operators \(\ad\) and \(\bd\) commute, the rewrite used in \cref{eq:system-hamiltonian-rotating} was also used for the resonator.
-The rotating frame transformation is done with respect to \(\omega_{r} \au\ad + \omega_{q} \bu\bd \).
-However as the coupling term has no time dependence and does not commute with the operators there will still be a time dependence in the rotating frame
-\begin{equation}
-    g(\ad\bu + \au\bd) \rightarrow g(\ad\bu\ex^{i(\omega_q-\omega_r)t} + \au\bd\ex^{-i(\omega_q-\omega_r)t}).
-\end{equation}
-This was a problem because \krotov{} expects \(\Ham_d\) to be time independent.
-There is a way to ``simulate'' the coupling term by inserting it as an external time dependent pulse and omit it from optimization which was done in this case.
-The coupling term was then split into a real and imaginary part which is, as stated before, required by \krotov{}.
-
-The final Hamiltonian provided to \krotov{} was then
-\begin{equation}
-    \begin{split}
-        \Ham &= \underbrace{\kappa_r/2(\au)^2\ad^2 +\kappa_q/2\qty(\bu\bd)^2}_{\Ham_d} + \\
-        &+\underbrace{\text{Re}\qty[\Omega_r(t)]}_{u_0(t)}\underbrace{(\ad + \au)}_{\Ham_0} + \underbrace{\text{Im}\qty[\Omega_r(t)]}_{u_1(t)}\underbrace{i(\ad - \au)}_{\Ham_1} + \underbrace{\text{Re}\qty[\Omega_q(t)]}_{u_2(t)}\underbrace{(\bd + \bu)}_{\Ham_2} + \underbrace{\text{Im}\qty[\Omega_q(t)]}_{u_3(t)}\underbrace{i(\bd - \bu)}_{\Ham_3} +\\
-        &+\underbrace{\qty[\cos((\omega_q-\omega_r)t)]}_{u_4(t)}\underbrace{g(\ad\bu + \au\bd)}_{\Ham_4} + \underbrace{\qty[\sin((\omega_q-\omega_r)t)]}_{u_5(t)}\underbrace{ig(\ad\bu - \au\bd)}_{\Ham_5}
-        \label{eq:cat-hamiltonian-rotating}
-    \end{split}
-\end{equation}
-The parameters of this system is presented in \cref{tab:ham-params}.
-These were chosen to resemble the physical values measured in~\cite{ofek_extending_2016} except for \(g\) which was chosen at relatively large value to reduce the pulse length needed to realise the transfer.
-\begin{table}[H]
-    \caption{Hamiltonian parameters}%
-    \label{tab:ham-params}
-    \centering
-    \begin{tabular}{@{}ll@{}}
-    \toprule
-    Param. & Value\\ \midrule
-    \(\omega_q/(2\pi)\) & \SI{6.2815}{\giga\hertz} \\
-    \(\kappa_q/(2\pi)\) & \SI{297}{\mega\hertz} \\
-    \(\omega_r/(2\pi)\) & \SI{8.3056}{\giga\hertz} \\
-    \(\kappa_r/(2\pi)\) & \SI{4.5}{\kilo\hertz} \\
-    \(g/(2\pi)\) & \SI{0.225}{\giga\hertz} \\
-    \bottomrule
-    \end{tabular}
-\end{table}
-The truncated Hilbert space size for the resonator was chosen to be \( N_r = 8 \) with the mean photon number \(\alpha = 2\).
-Due to the large system size, the qubit's truncated Hilbert space size was set to \(N_q = 2\).
-
-\subsubsection{Optimization setup}
-The optimization was setup in the same way as the previous experiment, however due to the rapid oscillations at \(|\omega_q-\omega_r|\) a finer time discretization of \SI{24}{\giga\samples\per\second} was chosen.
-The step size was chosen as \(\lambda = \frac{1}{\frac{1}{2}A_{m}}\) and the pulse length \(T = \ns{60}\) to allow the coupling to affect the system.
-Further, convergence criteria was chosen as \(F>0.999999\) or \(\Delta F < \num{e-06}\).
-Another important step in optimizing in the rotating frame was to convert the target states into the rotating frame in order for the final states to be correct in the lab frame.
-Initial guess pulses were chosen to be a Blackman pulse corresponding to a \(\pi\)-rotation of the qubit in the previous experiment.
+\section{Hardware and Operating System}
+All simulations and optimizations were run on a Lenovo Yoga 520-14IKB PC with an Intel(R) Core(TM) i7-8550 CPU running Windows 10.
+On the software side, they were run through a Jupyter notebook running Python 3.6.7 installed on Ubuntu 18.04.2 under \href{https://docs.microsoft.com/en-us/windows/wsl/faq}{Windows Subsystem for Linux (WSL)}.
+The source code is given in \Cref{sec:jupyter}.
 
 \end{document}

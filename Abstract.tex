@@ -2,14 +2,16 @@
 \begin{document}
 Quantum computing has gained a lot of interest in recent years and commercial products are just now entering the market.
 However one of the main challenges in realising a quantum computer is noise and one key technology to remedy this is quantum error correction (QEC).
-One way of performing QEC is to store the quantum information of a qubit in a resonator as cat codes.
-To do this one needs to apply encoding pulses to the coupled qubit-resonator system in order to perform a state transfer.
+One way of performing QEC exploits the storage of the quantum information of a qubit in a resonator as cat codes.
+To do this one needs to apply encoding pulses to the coupled qubit-resonator system in order to perform a state transfer from the qubit to the resonator.
 These pulses need to be numerically obtained by simulation.
 
-This thesis studies the potential of using Krotov's method (gradient-based) to numerically optimize encoding pulses for encoding arbitrary qubit states in cat codes.
-The Python package Krotov, a package for quantum optimal control using the method, is first used to perform state transfers \(\ket{0}\) to \(\ket{1}\) and \(\ket{0}\) to \(\ket{2}\) of an anharmonic resonator.
-It is shown that, assuming a maximum drive amplitude and no dissipation, the method can realise a \(\ket{0}\) to \(\ket{1}\) transfer with fidelity \( F > 0.99999\) with a total pulse length of only \ns{10.75}.
-For the \(\ket{0}\) to \(\ket{2}\) transfer a total pulse length of \ns{30} is needed to reach the same fidelity.
-It is also shown that the method can optimize pulses which realise the encoding of arbitrary qubit states to cat codes.
+This thesis studies the potential of using a gradient-based optimization method, the so called Krotov's method, to numerically optimize encoding pulses for encoding arbitrary qubit states in cat codes.
+The Python package Krotov, a package for quantum optimal control using the method, is first used to perform state evolution from \(\ket{0}\) to \(\ket{1}\) and \(\ket{0}\) to \(\ket{2}\) of an anharmonic resonator in order to familiarise with the package and optimal control in general.
+It is shown that, assuming a maximum drive amplitude and no dissipation, the method can realise a \(\ket{0}\) to \(\ket{1}\) evolution with fidelity \( F > 0.99999\) and a total pulse length of only \ns{10.75}.
+For the \(\ket{0}\) to \(\ket{2}\) evolution a total pulse length of \ns{30} is needed to reach the same fidelity.
+Finally, the Krotov is used to optimize pulses for transferring qubit states into the resonator as cat codes.
+The transfer of six states were simultaneously optimized in order to approximate a unitary which transfers an arbitrary qubit state into the resonator as a cat code.
+Using mostly experimentally realistic parameters, it is shown that the method can optimize pulses which realise the encoding of arbitrary qubit states to cat codes with a fidelity of at least \( F > 0.998900\).
 Although plenty of challenges still remain to prove this can be done in experiments, the results points to the Krotov package as a viable tool for encoding pulse optimization.
 \end{document}
